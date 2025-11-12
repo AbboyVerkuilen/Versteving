@@ -107,6 +107,7 @@ In Figuur 4 is ook aangegeven dat in het lineaire elastische deel:
 E = \frac{\sigma}{\epsilon}
 \]
 
+
 waar \(E\) de elasticiteitsmodulus is.
 
 ---
