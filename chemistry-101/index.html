@@ -412,6 +412,17 @@ footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);f
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
 @media (max-width:720px){.topbar .tb-hide{display:none}.topbar{padding:10px 16px;gap:10px}.brand span{display:none}}
+/* ---------- series additions ---------- */
+.courses{position:relative}
+.courses summary{list-style:none;cursor:pointer}
+.courses summary::-webkit-details-marker{display:none}
+.courses .menu{position:absolute;right:0;top:calc(100% + 10px);background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:8px;width:300px;box-shadow:var(--shadow);z-index:70;max-height:70vh;overflow:auto}
+.courses .menu a{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:8px 10px;border-radius:10px;color:var(--soft);text-decoration:none;font-size:13.5px;line-height:1.35}
+.courses .menu a b{font-family:var(--mono);color:var(--gold);font-weight:600}
+.courses .menu a small{display:block;color:var(--muted);font-size:11.5px}
+.courses .menu a:hover{background:rgba(255,255,255,.05)}
+.courses .menu a.cur{background:rgba(244,195,90,.1);color:#fff}
+@media (max-width:640px){.courses .menu{position:fixed;left:12px;right:12px;width:auto;top:64px}}
 </style>
 </head>
 <body>
@@ -422,6 +433,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);f
     <span>The <i>Invisible</i> World</span>
   </a>
   <div class="spacer"></div>
+  <details class="courses"><summary class="tb-btn">Chem 101 <span class="tb-hide">· courses</span> ▾</summary><nav class="menu" aria-label="All courses"><a href="../chemistry-101/index.html" class="cur"><b>101</b><span>The Invisible World<small>Atoms, bonds &amp; reactions</small></span></a><a href="../chemistry-102/index.html" class=""><b>102</b><span>The Counting Problem<small>The mole &amp; quantities</small></span></a><a href="../chemistry-103/index.html" class=""><b>103</b><span>Ghost Light<small>Light, orbitals &amp; the nucleus</small></span></a><a href="../chemistry-104/index.html" class=""><b>104</b><span>The Shape of Things<small>Bonding, shape &amp; forces</small></span></a><a href="../chemistry-105/index.html" class=""><b>105</b><span>Under Pressure<small>Gases, phases &amp; solutions</small></span></a><a href="../chemistry-106/index.html" class=""><b>106</b><span>The Energy Ledger<small>Thermochemistry &amp; entropy</small></span></a><a href="../chemistry-107/index.html" class=""><b>107</b><span>The Balance<small>Kinetics &amp; equilibrium</small></span></a><a href="../chemistry-108/index.html" class=""><b>108</b><span>Proton Wars<small>Acids, bases &amp; buffers</small></span></a><a href="../chemistry-109/index.html" class=""><b>109</b><span>The Electron Market<small>Redox &amp; electrochemistry</small></span></a><a href="../chemistry-110/index.html" class=""><b>110</b><span>The Carbon Code<small>Organic &amp; biochemistry</small></span></a></nav></details>
   <a class="evidence-pill" href="#prologue" title="Clues collected"><span class="dots" id="ev-dots"></span><span><b id="ev-count">0</b>/9 <span class="tb-hide">clues</span></span></a>
   <a class="tb-btn" href="#training"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg><span class="tb-hide">Flashcards</span><span class="badge" id="due-badge">0</span></a>
 </header>
@@ -1117,6 +1129,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);f
         <p>Electrons hold the crowd of molecules together, and their attractions decide whether something is solid, liquid or gas. Electron clouds stop your hand going through the table. The outer electrons give every family in the periodic table its personality. Bonds are electrons given or shared. Water is sticky because Ola hogs the electrons. Reactions are electrons rearranging, and they only happen when collisions are hard enough to shift them. Acids work by handing over a proton left behind when an electron is gone. And the energy of life is stored in, and released from, the arrangement of electrons in sugar.</p>
         <p>The nucleus decides <em>what</em> an atom is. The electrons decide <em>what it does</em>. Almost everything you will ever learn in chemistry is a new chapter in the electron's story. Case closed… for now.</p>
       </div>
+      <a class="btn primary" style="margin-top:30px" href="../chemistry-102/index.html">Next: Chemistry 102 · The Counting Problem →</a>
     </div>
   </div>
 </section>
@@ -1186,7 +1199,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);f
 </section>
 </main>
 
-<footer><div class="wrap">The Invisible World · Chemistry 101 · Made as a single page, with every visual drawn live in your browser.<br>Your progress, notes and flashcard boxes are stored only on this device.</div></footer>
+<footer><div class="wrap">The Invisible World · Chemistry 101 · Made as a single page, with every visual drawn live in your browser.<br>Your progress, notes and flashcard boxes are stored only on this device. · <a href="../chemistry-102/index.html">Next course →</a></div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
@@ -2542,6 +2555,7 @@ function interrogation() {
 /* =========================================================
    NAVIGATION, REVEALS, INIT
    ========================================================= */
+document.addEventListener('click', e => { const d = document.querySelector('.courses'); if (d && d.open && !d.contains(e.target)) d.open = false; });
 function nav() {
   const prog = $('#progress');
   const onScroll = () => { const h = document.documentElement; prog.style.width = (h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight) * 100) + '%'; };

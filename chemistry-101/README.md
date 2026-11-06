@@ -1,5 +1,7 @@
 # The Invisible World · Chemistry 101
 
+The first course of a ten-part series (Chemistry 101–110). See [`chemistry-src/README.md`](../chemistry-src/README.md) for the full series overview and how to rebuild the pages.
+
 A standalone, single-file webpage (`index.html`) that teaches introductory chemistry as a detective story. Open it in any modern browser; no build step or server needed (only the web fonts load from Google Fonts).
 
 - **Nine case files**: particles, atoms, the periodic table, bonding, water, reactions, rates, acids & bases, and energy/life. Each one opens with a mystery and ends with a clue.

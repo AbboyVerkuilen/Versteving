@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proton Wars · Chemistry 108</title>
+<meta name="description" content="You sprinkle vinegar on your chips, yet the acid in a car battery would burn through your skin. Your blood never turns sour, and the oceans are slowly becoming more acidic. A mystery about the tiniest particle in chemistry, fought over everywhere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f4c35a'/%3E%3Cellipse cx='32' cy='32' rx='28' ry='10' fill='none' stroke='%235ce1e6' stroke-width='3'/%3E%3Cellipse cx='32' cy='32' rx='28' ry='10' fill='none' stroke='%235ce1e6' stroke-width='3' transform='rotate(60 32 32)'/%3E%3Cellipse cx='32' cy='32' rx='28' ry='10' fill='none' stroke='%235ce1e6' stroke-width='3' transform='rotate(120 32 32)'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#07080f; --bg2:#0b0d19; --panel:#10132a; --panel2:#151937; --panel3:#1b2044;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.15);
+  --text:#eeedf7; --soft:#c9c8dc; --muted:#8f8eab;
+  --gold:#f4c35a; --gold2:#ffdf9a; --cyan:#5ce1e6; --pink:#ff6b9a; --green:#6fe3a0;
+  --violet:#a78bfa; --red:#ff5d5d; --blue:#6b8cff; --orange:#ff9f5a;
+  --r:20px; --r-sm:12px;
+  --display:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 30px 80px -30px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.7;overflow-x:hidden;
+  background-image:radial-gradient(1200px 800px at 85% -10%,rgba(92,225,230,.07),transparent 60%),radial-gradient(900px 700px at -10% 30%,rgba(167,139,250,.06),transparent 60%);}
+::selection{background:rgba(244,195,90,.35)}
+a{color:var(--cyan)}
+img,svg,canvas{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;letter-spacing:-.01em;line-height:1.12;margin:0}
+p{margin:0 0 1.1em}
+em{font-style:italic;color:var(--gold2)}
+.mono{font-family:var(--mono)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- top bar ---------- */
+.topbar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:16px;padding:12px 22px;
+  background:linear-gradient(to bottom,rgba(7,8,15,.92),rgba(7,8,15,.6));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-family:var(--display);font-size:19px;white-space:nowrap}
+.brand svg{width:26px;height:26px}
+.brand i{font-style:italic;color:var(--gold)}
+.topbar .spacer{flex:1}
+.evidence-pill{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;border:1px solid var(--line2);border-radius:999px;font-size:13px;color:var(--soft);text-decoration:none;background:rgba(255,255,255,.03)}
+.evidence-pill .dots{display:flex;gap:4px}
+.evidence-pill .dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);transition:.4s}
+.evidence-pill .dots span.on{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.tb-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:transparent;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:.2s;white-space:nowrap}
+.tb-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tb-btn .badge{background:var(--gold);color:#1a1300;border-radius:999px;font-size:11px;padding:1px 7px;font-weight:700}
+.progress{position:fixed;left:0;top:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--gold),var(--pink));z-index:60;width:0}
+
+/* ---------- rail ---------- */
+.rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:6px}
+.rail a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);font-size:12px;font-family:var(--mono);height:22px}
+.rail a b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line2);font-weight:400;font-size:10px;transition:.3s;background:var(--bg)}
+.rail a span{opacity:0;transform:translateX(-6px);transition:.25s;white-space:nowrap;background:var(--panel);padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
+.rail a:hover span,.rail a.active span{opacity:1;transform:none}
+.rail a.active b{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 0 4px rgba(92,225,230,.12)}
+.rail a.solved b{background:var(--gold);color:#1a1300;border-color:var(--gold)}
+@media (max-width:1180px){.rail{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:110px 20px 80px}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:900px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-size:clamp(48px,9vw,124px);font-weight:300;margin:22px 0 18px;letter-spacing:-.03em}
+.hero h1 em{font-weight:500;background:linear-gradient(100deg,var(--gold2),var(--gold) 40%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.hero .lede{font-size:clamp(17px,2vw,21px);color:var(--soft);max-width:640px;margin:0 auto 34px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--text);text-decoration:none;font-weight:600;font-size:15px;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.35)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:linear-gradient(180deg,#ffd77c,var(--gold));color:#1a1300;border-color:transparent;box-shadow:0 10px 30px -8px rgba(244,195,90,.6)}
+.btn.primary:hover{box-shadow:0 14px 40px -8px rgba(244,195,90,.8)}
+.btn.small{padding:8px 14px;font-size:13px}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.btn.on{border-color:var(--cyan);color:var(--cyan);background:rgba(92,225,230,.08)}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint i{width:1px;height:40px;background:linear-gradient(var(--gold),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- layout ---------- */
+main{position:relative}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.narrow{max-width:760px}
+section.chapter{padding:120px 0 60px;position:relative}
+section.chapter + section.chapter::before{content:"";position:absolute;top:0;left:50%;width:1px;height:80px;background:linear-gradient(transparent,var(--line2),transparent)}
+@media (max-width:640px){.wrap{padding:0 16px}section.chapter{padding:84px 0 40px}body{font-size:16px}}
+
+.case-head{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:end;margin-bottom:46px}
+.case-num{font-family:var(--display);line-height:.8}
+.case-num span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.case-num b{font-weight:300;font-size:clamp(90px,14vw,170px);color:transparent;-webkit-text-stroke:1px rgba(244,195,90,.55);letter-spacing:-.04em}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.case-head h2{font-size:clamp(34px,5.4vw,62px);font-weight:400}
+.case-head h2 em{font-weight:500}
+@media (max-width:640px){.case-head{grid-template-columns:1fr;gap:8px}.case-num b{font-size:84px}}
+
+.story{font-size:18.5px;color:var(--soft);max-width:760px}
+.story p:first-of-type::first-letter{font-family:var(--display);font-size:3.4em;float:left;line-height:.9;padding:6px 10px 0 0;color:var(--gold)}
+.story strong{color:var(--text);font-weight:600}
+.story .aside{font-size:15px;color:var(--muted);border-left:2px solid var(--line2);padding-left:16px}
+@media (max-width:640px){.story{font-size:17px}}
+
+/* ---------- characters ---------- */
+.avatar{display:inline-block;vertical-align:middle;flex:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
+.cast{display:flex;flex-wrap:wrap;gap:14px;margin:34px 0}
+.cast-card{display:flex;gap:14px;align-items:center;padding:12px 18px 12px 12px;border:1px solid var(--line);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01))}
+.cast-card b{display:block;font-family:var(--display);font-size:18px;font-weight:500;line-height:1.2}
+.cast-card small{color:var(--muted);font-size:12.5px;line-height:1.3;display:block}
+.dialogue{margin:28px 0;display:flex;flex-direction:column;gap:14px;max-width:760px}
+.line{display:flex;gap:14px;align-items:flex-start}
+.line.right{flex-direction:row-reverse;text-align:left}
+.bubble{position:relative;background:var(--panel2);border:1px solid var(--line);padding:12px 18px;border-radius:18px;font-size:16px;color:var(--soft);max-width:560px}
+.line:not(.right) .bubble{border-top-left-radius:4px}
+.line.right .bubble{border-top-right-radius:4px}
+.bubble b{color:var(--text);font-weight:600;font-size:13px;display:block;font-family:var(--mono);letter-spacing:.04em;margin-bottom:2px}
+.narrator{font-style:italic;color:var(--muted);text-align:center;font-family:var(--display);font-size:17px}
+
+/* ---------- mystery card ---------- */
+.mystery{position:relative;margin:0 0 48px;padding:30px 32px;border-radius:var(--r);background:
+  linear-gradient(135deg,rgba(244,195,90,.10),rgba(244,195,90,.02) 50%,rgba(255,107,154,.05)),var(--panel);border:1px solid rgba(244,195,90,.25);overflow:hidden}
+.mystery::before{content:"?";position:absolute;right:-10px;top:-40px;font-family:var(--display);font-size:240px;line-height:1;color:rgba(244,195,90,.06);font-style:italic}
+.mystery .tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.mystery .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.mystery h3{font-size:clamp(22px,2.8vw,30px);font-weight:400;max-width:780px;margin-bottom:18px;position:relative}
+.hunches{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+.hunch{padding:10px 16px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.25);cursor:pointer;font-size:14.5px;text-align:left;transition:.2s}
+.hunch:hover{border-color:var(--gold)}
+.hunch.picked{border-color:var(--gold);background:rgba(244,195,90,.14);color:var(--gold2)}
+.hunch:disabled{cursor:default}
+.hunch-note{margin-top:14px;font-size:14px;color:var(--muted);min-height:1.4em;position:relative}
+
+/* ---------- panels / labs ---------- */
+.lab{margin:56px 0;border-radius:24px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;position:relative}
+.lab::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(92,225,230,.35),transparent 30%,transparent 70%,rgba(244,195,90,.3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.lab-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 24px;border-bottom:1px solid var(--line)}
+.lab-head h3{font-size:22px;font-weight:500}
+.lab-head .label{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:2px}
+.lab-body{padding:24px}
+.lab-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px}
+@media (max-width:860px){.lab-grid{grid-template-columns:1fr}.lab-body{padding:16px}.lab-head{padding:16px}}
+.stage{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#12173a,#06070f 75%);border:1px solid var(--line)}
+.stage canvas{width:100%;height:100%}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.hint{font-size:13.5px;color:var(--muted)}
+.readout{font-family:var(--mono);font-size:13px;color:var(--soft)}
+.readout b{color:var(--text);font-weight:600}
+.side-panel{display:flex;flex-direction:column;gap:14px}
+.info-card{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(0,0,0,.2)}
+.info-card h4{font-size:24px;margin-bottom:6px}
+.info-card .meta{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--soft)}
+
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:var(--track,linear-gradient(90deg,var(--blue),var(--cyan),var(--gold),var(--red)))}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--track,linear-gradient(90deg,var(--blue),var(--cyan),var(--gold),var(--red)))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;margin-top:-8px;box-shadow:0 0 0 5px rgba(255,255,255,.12),0 4px 12px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 5px rgba(255,255,255,.12)}
+input[type=range]:focus-visible{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(92,225,230,.5)}
+.slider-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.slider-row label{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:3px;background:rgba(0,0,0,.25);flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:7px 14px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--soft);font-weight:500}
+.seg button.on{background:var(--text);color:#0a0b14}
+
+/* ---------- lenses ---------- */
+.lenses{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:56px 0}
+.lens{padding:22px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.035),transparent);position:relative;overflow:hidden}
+.lens .lt{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
+.lens .lt svg{width:28px;height:28px;padding:5px;border-radius:9px;background:rgba(255,255,255,.06)}
+.lens.macro .lt{color:var(--gold)} .lens.micro .lt{color:var(--cyan)} .lens.symbol .lt{color:var(--pink)}
+.lens p{font-size:15px;color:var(--soft);margin:0}
+.lens .formula{font-family:var(--mono);font-size:17px;color:var(--text);display:block;margin:6px 0 10px;padding:8px 12px;background:rgba(0,0,0,.3);border-radius:8px;border:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+@media (max-width:860px){.lenses{grid-template-columns:1fr}}
+
+/* ---------- miracle ---------- */
+.miracle{display:grid;grid-template-columns:140px 1fr;gap:26px;align-items:center;margin:56px 0;padding:28px;border-radius:24px;
+  background:radial-gradient(500px 200px at 0% 0%,rgba(111,227,160,.12),transparent 70%),radial-gradient(500px 240px at 100% 100%,rgba(92,225,230,.08),transparent 70%),var(--panel);border:1px solid rgba(111,227,160,.22)}
+.miracle .art{width:140px;height:140px}
+.miracle .tag{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--green);margin-bottom:8px;display:block}
+.miracle h3{font-size:26px;margin-bottom:10px}
+.miracle p{color:var(--soft);font-size:16px;margin-bottom:.6em}
+.miracle p:last-child{margin:0}
+@media (max-width:640px){.miracle{grid-template-columns:1fr;padding:20px}.miracle .art{width:100px;height:100px}}
+
+/* ---------- practice blocks ---------- */
+.practice{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:56px 0 30px}
+@media (max-width:860px){.practice{grid-template-columns:1fr}}
+.block{padding:24px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.block .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.block h4{font-size:21px;margin-bottom:6px}
+.block .why{font-size:13px;color:var(--muted);margin-bottom:16px}
+.q{margin-bottom:20px}
+.q:last-child{margin-bottom:0}
+.q p.qt{font-weight:500;color:var(--text);margin-bottom:10px;font-size:16px;line-height:1.5}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:11px 14px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.2);cursor:pointer;font-size:14.5px;transition:.15s;line-height:1.45}
+.opt:hover:not(:disabled){border-color:var(--violet);background:rgba(167,139,250,.08)}
+.opt.right{border-color:var(--green);background:rgba(111,227,160,.12);color:#d8ffe8}
+.opt.wrong{border-color:var(--red);background:rgba(255,93,93,.1);color:#ffd9d9;text-decoration:line-through;text-decoration-color:rgba(255,93,93,.6)}
+.opt:disabled{cursor:default}
+.fb{font-size:14px;margin-top:10px;padding:10px 14px;border-radius:10px;display:none;line-height:1.55}
+.fb.show{display:block}
+.fb.good{background:rgba(111,227,160,.08);color:#bff5d6;border:1px solid rgba(111,227,160,.25)}
+.fb.bad{background:rgba(255,93,93,.07);color:#ffd2d2;border:1px solid rgba(255,93,93,.22)}
+textarea{width:100%;min-height:120px;resize:vertical;background:rgba(0,0,0,.3);border:1px solid var(--line2);border-radius:12px;color:var(--text);padding:12px 14px;font:inherit;font-size:15px;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--violet)}
+.model{display:none;margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);font-size:14.5px;color:var(--soft)}
+.model.show{display:block}
+.saved{font-size:12px;color:var(--muted);font-family:var(--mono)}
+
+.coldcase{margin:0 0 48px;padding:20px 24px;border-radius:18px;border:1px dashed rgba(92,225,230,.35);background:rgba(92,225,230,.04)}
+.coldcase .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;display:block}
+
+/* ---------- verdict ---------- */
+.verdict{margin:30px 0 0;border-radius:24px;border:1px solid var(--line2);overflow:hidden;background:var(--panel)}
+.verdict-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 26px}
+.verdict-top .t{font-family:var(--display);font-size:24px}
+.verdict-top .t small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.verdict-body{display:none;padding:0 26px 26px}
+.verdict.open .verdict-body{display:block;animation:rise .6s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.clue{display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:14px;background:linear-gradient(90deg,rgba(244,195,90,.16),rgba(244,195,90,.03));border:1px solid rgba(244,195,90,.35);margin-top:16px}
+.clue svg{flex:none;width:38px;height:38px}
+.clue b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block}
+.clue span{font-family:var(--display);font-size:19px;color:var(--text);line-height:1.35}
+.stamp{display:inline-block;font-family:var(--mono);font-weight:600;letter-spacing:.2em;font-size:12px;color:var(--green);border:2px solid var(--green);padding:4px 10px;border-radius:6px;transform:rotate(-4deg)}
+
+/* ---------- evidence board ---------- */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:40px 0}
+@media (max-width:760px){.board{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.board{grid-template-columns:1fr}}
+.ev{position:relative;padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--panel);text-decoration:none;color:inherit;display:flex;gap:14px;align-items:flex-start;transition:.3s;overflow:hidden}
+.ev:hover{border-color:var(--line2);transform:translateY(-2px)}
+.ev .ico{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.ev .ico svg{width:28px;height:28px}
+.ev b{display:block;padding-right:46px;font-size:14.5px;font-weight:600;line-height:1.35;margin-bottom:4px}
+.ev small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45}
+.ev .n{position:absolute;right:12px;top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.ev.solved{border-color:rgba(244,195,90,.45);background:linear-gradient(160deg,rgba(244,195,90,.12),var(--panel) 60%)}
+.ev.solved .n{color:var(--gold)}
+.ev.solved .ico{border-color:rgba(244,195,90,.5)}
+
+/* ---------- zoom ---------- */
+.zoom-stage{height:min(72vh,620px)}
+@media (max-width:640px){.zoom-stage{height:440px}}
+.zoom-hud{position:absolute;left:20px;top:18px;right:20px;display:flex;justify-content:space-between;gap:10px;pointer-events:none;flex-wrap:wrap}
+.zoom-hud .lvl{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:rgba(0,0,0,.45);padding:6px 10px;border-radius:8px;border:1px solid var(--line)}
+.zoom-hud .scale{font-family:var(--mono);font-size:12px;color:var(--text);background:rgba(0,0,0,.45);padding:6px 10px;border-radius:8px;border:1px solid var(--line)}
+.zoom-cap{position:absolute;left:20px;right:20px;bottom:18px;pointer-events:none;max-width:560px}
+.zoom-cap h4{font-size:clamp(24px,3vw,34px);text-shadow:0 2px 20px rgba(0,0,0,.8)}
+.zoom-cap p{margin:6px 0 0;color:var(--soft);font-size:15px;text-shadow:0 2px 12px rgba(0,0,0,.9);background:rgba(0,0,0,.35);padding:8px 12px;border-radius:10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px;padding:0 4px}
+.ticks span{cursor:pointer}
+.ticks span.on{color:var(--gold)}
+
+/* ---------- periodic table ---------- */
+.ptable{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:3px}
+.el{aspect-ratio:1;border-radius:5px;border:1px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:var(--sans);position:relative;padding:0;transition:transform .15s,opacity .3s,box-shadow .2s;min-width:0}
+.el .z{position:absolute;top:2px;left:3px;font-size:7px;opacity:.7;font-family:var(--mono)}
+.el .s{font-weight:700;font-size:clamp(9px,1.25vw,15px);line-height:1}
+.el:hover{transform:scale(1.25);z-index:3;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.el.dim{opacity:.18}
+.el.sel{outline:2px solid #fff;z-index:2}
+.el.gap{animation:gapglow 1.6s infinite}
+@keyframes gapglow{50%{box-shadow:0 0 0 3px var(--gold),0 0 24px var(--gold)}}
+.el.ph{background:none;border:1px dashed var(--line2);cursor:default;color:var(--muted)}
+.el.ph:hover{transform:none;box-shadow:none}
+.ptable .blank{aspect-ratio:1}
+.ptable .sep{grid-column:1/-1;height:8px}
+.fam-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.fam-btns button{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);background:transparent;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--soft)}
+.fam-btns button i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.fam-btns button.on{border-color:#fff;color:#fff}
+.pt-card{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;margin-top:18px}
+.pt-big{width:110px;height:110px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;font-weight:700}
+.pt-big .s{font-size:44px;line-height:1;font-family:var(--display)}
+.pt-big .z{position:absolute;top:8px;left:10px;font-size:12px;font-family:var(--mono);font-weight:400}
+.pt-big .n{font-size:11px;font-weight:500;margin-top:4px}
+@media (max-width:640px){.ptable{gap:1.5px}.el .z{display:none}.el{border-radius:3px}.pt-card{grid-template-columns:80px 1fr}.pt-big{width:80px;height:80px}.pt-big .s{font-size:32px}}
+
+/* ---------- builder ---------- */
+.builder-ctrl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stepper{border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center;background:rgba(0,0,0,.2)}
+.stepper .nm{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px}
+.stepper .nm i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.stepper .v{font-family:var(--display);font-size:34px;line-height:1.2}
+.stepper .bt{display:flex;gap:6px;justify-content:center}
+.stepper button{width:36px;height:32px;border-radius:9px;border:1px solid var(--line2);background:rgba(255,255,255,.05);cursor:pointer;font-size:18px;line-height:1}
+.stepper button:hover{border-color:#fff}
+.missions{display:grid;gap:6px;margin-top:4px}
+.mission{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--soft)}
+.mission i{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line2);flex:none;display:grid;place-items:center;font-style:normal;font-size:11px}
+.mission.done{color:var(--green)}
+.mission.done i{background:var(--green);border-color:var(--green);color:#03210f}
+
+/* ---------- balance ---------- */
+.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;padding:20px 10px;font-family:var(--display);font-size:clamp(22px,3vw,32px)}
+.term{display:flex;flex-direction:column;align-items:center;gap:6px}
+.term .coef{display:flex;align-items:center;gap:6px}
+.term .coef button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line2);background:rgba(255,255,255,.05);cursor:pointer;font-family:var(--sans);font-size:15px}
+.term .coef b{font-family:var(--mono);font-size:22px;color:var(--gold);min-width:24px;text-align:center}
+.term .f{white-space:nowrap}
+.term .mols{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;max-width:200px;min-height:40px}
+.eq .op{color:var(--muted)}
+.tally{display:grid;gap:8px;max-width:560px;margin:10px auto 0}
+.tally-row{display:grid;grid-template-columns:44px 1fr 44px 1fr 44px;gap:10px;align-items:center;font-family:var(--mono);font-size:13px}
+.tally-row .bar{height:12px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.tally-row .bar i{position:absolute;top:0;bottom:0;border-radius:6px;transition:width .35s}
+.tally-row .bar.l i{right:0}
+.tally-row .el-n{text-align:center;font-weight:600}
+.tally-row .cnt{text-align:center}
+.balanced-banner{text-align:center;margin-top:16px;font-family:var(--display);font-size:22px;min-height:34px}
+.balanced-banner.ok{color:var(--green)}
+
+/* ---------- pH ---------- */
+.ph-wrap{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.ph-wrap{grid-template-columns:1fr}}
+.ph-scale{position:relative;height:16px;border-radius:8px;background:linear-gradient(90deg,#e0193f,#ee3f73 20%,#b54ec0 38%,#7d55d8 50%,#3f7be0 60%,#2fb7a4 72%,#56c95a 84%,#e8d838)}
+.ph-items{position:relative;height:112px;margin:6px 34px 0}
+.ph-item{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--muted);cursor:pointer;background:none;border:0;padding:0;width:66px;text-align:center;line-height:1.2}
+.ph-item::before{content:"";width:1px;height:12px;background:var(--line2)}
+.ph-item:hover,.ph-item.on{color:var(--text)}
+.ph-item.low{top:40px}
+.ph-item.low::before{height:52px}
+.ph-big{font-family:var(--display);font-size:64px;line-height:1}
+@media (max-width:640px){.ph-items{margin:6px 26px 0;height:134px}.ph-item{width:60px;font-size:10.5px}.ph-item:not(.k-top):not(.k-low){display:none}.ph-item.k-top{top:0}.ph-item.k-top::before{height:12px}.ph-item.k-low{top:40px}.ph-item.k-low::before{height:52px}
+  .zoom-cap h4{font-size:22px}.zoom-cap p{font-size:13px;padding:6px 10px}.zoom-hud .lvl{font-size:10px}}
+
+/* ---------- molecule viewer ---------- */
+.mol-stage{height:420px;cursor:grab;touch-action:none}
+.mol-stage:active{cursor:grabbing}
+@media (max-width:640px){.mol-stage{height:320px}}
+
+/* ---------- journey ---------- */
+.journey-steps{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.journey-steps button{flex:1;min-width:110px;padding:10px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.2);cursor:pointer;font-size:12.5px;text-align:left;line-height:1.3;color:var(--soft)}
+.journey-steps button b{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em}
+.journey-steps button.on{border-color:var(--green);color:#fff;background:rgba(111,227,160,.08)}
+
+/* ---------- finale ---------- */
+.finale{text-align:center;padding:140px 0 100px;position:relative;overflow:hidden}
+.finale h2{font-size:clamp(40px,7vw,88px);font-weight:300}
+.reveal-stage{margin:40px auto 0;max-width:900px}
+.culprit{display:none;margin-top:40px}
+.culprit.show{display:block;animation:rise 1s ease}
+.culprit .big{display:flex;justify-content:center;margin:20px 0}
+.culprit h3{font-size:clamp(38px,6vw,72px);font-weight:400;margin-bottom:16px}
+.clue-chain{display:grid;gap:10px;text-align:left;max-width:760px;margin:30px auto}
+.clue-chain div{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:baseline;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-size:15px;color:var(--soft)}
+.clue-chain div b{font-family:var(--mono);color:var(--gold);font-size:12px}
+.clue-chain div.missing{opacity:.35}
+
+/* ---------- training ---------- */
+.training{padding-bottom:120px}
+.fc-wrap{display:grid;grid-template-columns:1fr 280px;gap:24px}
+@media (max-width:860px){.fc-wrap{grid-template-columns:1fr}}
+.fc{perspective:1400px;height:300px;cursor:pointer;outline:none}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line2)}
+.fc-front{background:radial-gradient(400px 200px at 50% 0%,rgba(92,225,230,.12),transparent),var(--panel2)}
+.fc-back{background:radial-gradient(400px 200px at 50% 100%,rgba(244,195,90,.14),transparent),var(--panel3);transform:rotateY(180deg)}
+.fc-face .tag{position:absolute;top:18px;left:22px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.fc-face .box{position:absolute;top:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.fc-face .txt{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);line-height:1.35;max-width:560px}
+.fc-back .txt{font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--soft)}
+.fc-face .flip-hint{position:absolute;bottom:16px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+.fc-rate{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;visibility:hidden}
+.fc-rate.show{visibility:visible}
+.fc-rate .btn.r1{border-color:rgba(255,93,93,.5)} .fc-rate .btn.r2{border-color:rgba(244,195,90,.5)} .fc-rate .btn.r3{border-color:rgba(111,227,160,.6)}
+.boxes{display:flex;gap:8px;align-items:flex-end;height:110px;margin:12px 0 6px}
+.boxes div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.boxes div i{width:100%;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--violet),rgba(167,139,250,.3));min-height:3px;transition:height .4s}
+select{background:var(--panel2);color:var(--text);border:1px solid var(--line2);border-radius:10px;padding:8px 10px;font:inherit;font-size:13px;width:100%}
+.final-q{min-height:280px}
+.conf{display:none;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.conf.show{display:flex}
+.conf span{font-size:13px;color:var(--muted);margin-right:4px}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.result-grid div{padding:14px;border-radius:14px;border:1px solid var(--line);text-align:center;background:rgba(0,0,0,.2)}
+.result-grid b{display:block;font-family:var(--display);font-size:32px}
+.result-grid small{color:var(--muted);font-size:12px}
+.strategies{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.strategies div{padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--panel)}
+.strategies b{display:block;font-size:14px;margin-bottom:4px}
+.strategies small{display:block;font-size:12.5px;color:var(--muted);line-height:1.5}
+@media (max-width:900px){.strategies{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.strategies{grid-template-columns:1fr}.result-grid b{font-size:24px}}
+
+footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:13px;text-align:center}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,40px);opacity:0;z-index:80;display:flex;gap:12px;align-items:center;padding:12px 20px 12px 14px;border-radius:999px;background:#1d1a0d;border:1px solid var(--gold);color:var(--gold2);font-size:14px;box-shadow:0 20px 50px rgba(0,0,0,.6);transition:.5s cubic-bezier(.2,.8,.2,1);pointer-events:none;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+@media (max-width:720px){.topbar .tb-hide{display:none}.topbar{padding:10px 16px;gap:10px}.brand span{display:none}}
+
+/* ---------- series additions ---------- */
+.courses{position:relative}
+.courses summary{list-style:none;cursor:pointer}
+.courses summary::-webkit-details-marker{display:none}
+.courses .menu{position:absolute;right:0;top:calc(100% + 10px);background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:8px;width:300px;box-shadow:var(--shadow);z-index:70;max-height:70vh;overflow:auto}
+.courses .menu a{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:8px 10px;border-radius:10px;color:var(--soft);text-decoration:none;font-size:13.5px;line-height:1.35}
+.courses .menu a b{font-family:var(--mono);color:var(--gold);font-weight:600}
+.courses .menu a small{display:block;color:var(--muted);font-size:11.5px}
+.courses .menu a:hover{background:rgba(255,255,255,.05)}
+.courses .menu a.cur{background:rgba(244,195,90,.1);color:#fff}
+.art svg{width:100%;height:100%}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.kv div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(0,0,0,.2)}
+.kv small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kv b{font-family:var(--display);font-size:24px;font-weight:500;line-height:1.3;display:block}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.next-course{display:inline-flex;margin-top:30px}
+.big-read{font-family:var(--display);font-size:clamp(28px,4vw,44px);line-height:1.1}
+.svg-stage{width:100%;height:100%}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl td,.tbl th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);font-weight:400;text-transform:uppercase}
+.grid-btns{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.grid-btns button{padding:10px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.2);cursor:pointer;font-size:13px;color:var(--soft);text-align:left;line-height:1.3}
+.grid-btns button.on{border-color:var(--gold);color:#fff;background:rgba(244,195,90,.1)}
+.grid-btns button b{display:block;font-family:var(--display);font-size:18px;color:var(--text);font-weight:500}
+@media (max-width:640px){.courses .menu{position:fixed;left:12px;right:12px;width:auto;top:64px}}
+</style>
+</head>
+<body>
+<script>
+(function(){
+'use strict';
+function phColor(p) { const S = [[0, '#e0193f'], [2.8, '#ee3f73'], [5.3, '#b54ec0'], [7, '#7d55d8'], [8.4, '#3f7be0'], [10, '#2fb7a4'], [11.8, '#56c95a'], [14, '#e8d838']]; for (let i = 0; i < S.length - 1; i++) if (p <= S[i + 1][0]) return mix(S[i][1], S[i + 1][1], (p - S[i][0]) / (S[i + 1][0] - S[i][0])); return S[S.length - 1][1]; }
+function drawBeaker(ctx, x, y, w, h, fill, col, t) {
+  ctx.save(); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + h - 10); ctx.quadraticCurveTo(x, y + h, x + 10, y + h); ctx.lineTo(x + w - 10, y + h); ctx.quadraticCurveTo(x + w, y + h, x + w, y + h - 10); ctx.lineTo(x + w, y); ctx.strokeStyle = 'rgba(223,231,255,.6)'; ctx.lineWidth = 2.5; ctx.stroke(); ctx.clip();
+  const ly = y + h * (1 - fill); const g = ctx.createLinearGradient(0, ly, 0, y + h); g.addColorStop(0, rgba(col, .85)); g.addColorStop(1, rgba(shade(col, -.3), .95)); ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x, ly);
+  for (let i = 0; i <= 20; i++) ctx.lineTo(x + w * i / 20, ly + Math.sin(t * 2 + i * .8) * 1.5); ctx.lineTo(x + w, y + h); ctx.lineTo(x, y + h); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(x + 6, y, 8, h); ctx.restore();
+}
+const COURSE = {
+  id: '108', title: 'Proton Wars', brand: 'Proton <i>Wars</i>',
+  eyebrow: 'Chemistry 108 · Acids, bases, titrations & buffers', titleHTML: 'Proton <em>Wars</em>',
+  lede: 'You sprinkle vinegar on your chips, yet the acid in a car battery would burn through your skin. Your blood never turns sour, and the oceans are slowly becoming more acidic. A mystery about the tiniest particle in chemistry, fought over everywhere.',
+  accent: ['#ff6b9a', '#6fe3a0'],
+  cast: {
+    Ar: { name: 'Svante', full: 'Arrhenius', color: '#f4c35a', title: 'Nearly failed his PhD; won the Nobel Prize', sym: 'Ar' },
+    So: { name: 'Søren', full: 'Sørensen', color: '#ff6b9a', title: 'Invented pH in a beer laboratory', sym: 'pH' },
+    buf: { name: 'Buffy', full: 'Buffer', color: '#6fe3a0', title: 'Soaks up acid and base alike', sym: '⇄' }
+  },
+  prologue: {
+    short: 'The Sour Riddle', kicker: 'The case begins', titleHTML: 'The Sour <em>Riddle</em>',
+    story: `<p>A bottle of vinegar and a bottle of hydrochloric acid can contain exactly the same number of acid molecules per litre. One goes on your chips; the other eats through metal. Why?</p>
+      <p>Your stomach holds acid strong enough to dissolve a zinc nail. Your blood, a few centimetres away, must stay between pH 7.35 and 7.45, and even a sprint flooding it with acid barely moves the needle. Meanwhile the oceans, vast as they are, have measurably soured since the Industrial Revolution.</p>
+      <p>In Chemistry 101 you learned that acids give away <strong>H⁺</strong>, a bare proton, and bases take it. Now it’s time to go deeper: how strongly, how many, how to count them, and how nature keeps the peace in a world of proton thieves.</p>`,
+    cast: [['p', 'sly'], ['H', 'shocked'], ['Ar', 'happy'], ['So', 'happy'], ['buf', 'happy']]
+  },
+  finale: {
+    q: 'Who rules the world of acids and bases?', lead: 'Strong and weak acids, a logarithmic scale, the drip of a burette, buffers and the souring sea. Every clue turns on one tiny particle passed from hand to hand.',
+    avatar: 'p', nameHTML: 'The <em>proton</em>, and who holds it',
+    html: `<p>Acidity isn’t about how many acid molecules there are, but how many <strong>protons (H⁺) are actually let go</strong>.</p>
+      <p>Strong acids release all their protons; weak acids cling to most of theirs, which is why vinegar is gentle. pH counts free protons in powers of ten, so dilution moves it one step per tenfold, and never past neutral. A titration counts protons exactly by neutralising them one for one. Buffers hold a reserve of both a weak acid and its partner, soaking up protons or releasing them to keep pH steady, in your blood and in the sea. But even the ocean’s buffer has limits, and the CO₂ we add is testing them.</p>
+      <p>A war over the smallest particle in chemistry, fought in every cell, every lake and every kitchen. Case closed.</p>`
+  },
+  cases: [
+    {
+      short: 'Strong & Weak', kicker: 'Acid strength & Ka', titleHTML: 'Strong & <em>Weak</em>', item: 'Vinegar on chips', ico: 'lemon', teaser: 'Why is it safe?',
+      clue: 'A strong acid releases all its protons in water; a weak acid releases only a small fraction (described by Ka). Strength is not the same as concentration.',
+      mystery: { q: 'Vinegar and hydrochloric acid, both at 0.1 mol/L, contain the same number of acid molecules. Yet the hydrochloric acid is about 100 times more acidic. Why?', h: ['Vinegar is diluted with water', 'HCl lets go of all its protons; acetic acid in vinegar lets go of only about 1 in 75', 'Vinegar contains a base'], a: 1, v: 'Hydrochloric acid is a <b>strong acid</b>: every HCl molecule gives its proton to water. Acetic acid is a <b>weak acid</b>: most molecules keep hold of their proton, and only about 1.3% let go at any moment. Fewer free H⁺ ions means a much higher pH: 2.9 for 0.1 M vinegar, 1.0 for 0.1 M HCl.' },
+      story: `<p>Danish chemist <strong>Johannes Brønsted</strong> and English chemist <strong>Thomas Lowry</strong> independently gave the modern definition in 1923: an <strong>acid</strong> is a proton donor and a <strong>base</strong> is a proton acceptor. In water, an acid hands its proton to a water molecule, making H₃O⁺ (hydronium, which we usually just write as H⁺).</p>
+        <p>But acids differ hugely in how <em>willing</em> they are to let go. A <strong>strong acid</strong> such as hydrochloric (HCl), sulfuric or nitric acid donates essentially every proton. A <strong>weak acid</strong> such as acetic acid (vinegar), citric acid (lemons) or carbonic acid (fizzy drinks) holds on to most of them: only a small fraction is split at any moment, in a dynamic equilibrium.</p>
+        <p>That fraction is captured by the <strong>acid dissociation constant</strong>, K<sub>a</sub>. For acetic acid it’s 1.8 × 10⁻⁵, a small number meaning mostly undissociated. Don’t confuse <em>strong</em> with <em>concentrated</em>: a dilute strong acid can be gentler than a concentrated weak one.</p>`,
+      lab: {
+        label: 'Dissociation viewer', title: '0.1 mol/L of acid in water: who lets go?',
+        head: '<div class="seg ac"></div>',
+        body: `<div class="lab-grid"><div class="stage" style="height:320px"><canvas class="c" aria-label="Acid molecules releasing protons in water"></canvas></div><div class="side-panel"><div class="kv"><div><small>pH</small><b class="ph"></b></div><div><small>Molecules split</small><b class="al"></b></div><div><small>Ka</small><b class="ka"></b></div></div><div class="info-card"><p class="tx" style="margin:0;font-size:14.5px;color:var(--soft)"></p></div><div class="legend"><span><i style="background:#eef3ff"></i>H (still attached)</span><span><i style="background:#ff6b9a"></i>H⁺ free proton</span><span><i style="background:#a78bfa"></i>A⁻ leftover ion</span></div></div></div>`,
+        init(root) {
+          const A = { hcl: ['Hydrochloric', 'HCl', 1e7, 'Strong acid: stomach acid, and in industry. Every molecule gives up its proton.'], cit: ['Citric (lemon)', 'C₆H₈O₇', 7.4e-4, 'Weak acid: the sourness of lemons and limes. About 1 in 12 lets go.'], ace: ['Acetic (vinegar)', 'CH₃COOH', 1.8e-5, 'Weak acid: about 1 molecule in 75 lets go. Gentle enough for your chips.'], car: ['Carbonic (soda)', 'H₂CO₃', 4.3e-7, 'Very weak: formed when CO₂ dissolves in water. Only about 1 in 500 splits.'] };
+          let cur = 'ace', M = []; const c = $('.c', root);
+          function show(k) { cur = k; const [nm, f, Ka] = A[k], C = .1; const h = Ka > 1 ? C : (-Ka + Math.sqrt(Ka * Ka + 4 * Ka * C)) / 2, al = h / C;
+            $('.ph', root).textContent = (-Math.log10(h)).toFixed(1); $('.al', root).textContent = al > .99 ? '100%' : (al * 100).toFixed(al < .01 ? 2 : 1) + '%'; $('.ka', root).innerHTML = Ka > 1 ? 'huge' : fmt(Ka, 1); $('.tx', root).innerHTML = `<b>${nm}</b> (${f}). ${A[k][3]}`;
+            M.forEach((m, i) => { m.split = i < Math.max(Ka > 1 ? M.length : 1, Math.round(al * M.length)); }); }
+          seg($('.ac', root), Object.keys(A).map(k => [k, A[k][0]]), cur, show);
+          animate(c, (dt, t) => { const { ctx, w, h } = fit(c); if (!M.length) { for (let i = 0; i < 36; i++) M.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * 50, vy: (Math.random() - .5) * 50, hx: 0, hy: 0, hvx: (Math.random() - .5) * 90, hvy: (Math.random() - .5) * 90, split: false, a: Math.random() * TAU }); show(cur); }
+            ctx.clearRect(0, 0, w, h);
+            if (A[cur][2] < 1 && Math.random() < dt * 2) { const sp = M.filter(m => m.split), un = M.filter(m => !m.split); if (sp.length && un.length) { const a = sp[Math.floor(Math.random() * sp.length)], b = un[Math.floor(Math.random() * un.length)]; a.split = false; b.split = true; b.hx = 0; b.hy = 0; } }
+            for (const m of M) { m.x += m.vx * dt; m.y += m.vy * dt; if (m.x < 10 || m.x > w - 10) m.vx *= -1; if (m.y < 10 || m.y > h - 10) m.vy *= -1; m.a += dt;
+              if (m.split) { m.hx += m.hvx * dt; m.hy += m.hvy * dt; const px = m.x + m.hx, py = m.y + m.hy; if (px < 4 || px > w - 4) m.hvx *= -1; if (py < 4 || py > h - 4) m.hvy *= -1; ball(ctx, '#a78bfa', m.x, m.y, 7); label(ctx, '−', m.x, m.y + 4, { align: 'center', font: '700 11px Inter', color: '#141625' }); glow(ctx, px, py, 14, '#ff6b9a', .8); ball(ctx, '#ff6b9a', px, py, 4); }
+              else { ball(ctx, '#a78bfa', m.x, m.y, 7); ball(ctx, '#eef3ff', m.x + Math.cos(m.a) * 9, m.y + Math.sin(m.a) * 9, 4); } } });
+        }
+      },
+      lenses: ['Vinegar tingles; hydrochloric acid burns. Same concentration, very different strength.', 'Strong acid molecules all split into H⁺ and A⁻. Weak acid molecules mostly stay whole, with only a few splitting at any moment.', 'HA ⇌ H⁺ + A⁻ &nbsp; Ka = [H⁺][A⁻] / [HA]', 'A large Ka means a strong acid. pKa = −log Ka; a smaller pKa means a stronger acid.'],
+      miracle: { ico: 'lemon', title: 'Ants fire acid', html: '<p>Formic acid, the simplest carboxylic acid, was first isolated in 1671 by distilling crushed ants. Its name comes from the Latin <i>formica</i>, ant. Wood ants spray it at attackers, and some birds deliberately rub ants on their feathers ("anting"), possibly to use the acid against parasites.</p><p>Formic acid is weak, but it is also what makes nettle stings and some ant bites smart.</p>', c1: '#ff9f5a', c2: '#ff6b9a' },
+      quiz: [
+        { q: 'What is the difference between a strong acid and a weak acid?', o: ['Strong acids are more concentrated', 'Strong acids dissociate completely in water; weak acids only partially', 'Weak acids have no protons', 'Strong acids are always hot'], a: 1, w: 'Strength is about how completely the acid releases its protons, not how much acid there is.' },
+        { q: 'Which acid has the largest Ka?', o: ['Carbonic acid', 'Acetic acid', 'Hydrochloric acid', 'Water'], a: 2, w: 'Hydrochloric acid is strong, with an enormous Ka.' }
+      ],
+      prompt: { p: 'Explain the difference between "strong" and "concentrated" for acids, with an example of each.', m: 'Concentration is how much acid is dissolved per litre; strength is what fraction of the acid molecules actually release their protons. Hydrochloric acid is strong: all molecules split, even when it is dilute. Acetic acid is weak: only about 1% split, even in concentrated vinegar. So a dilute strong acid and a concentrated weak acid can end up with similar pH.' }
+    },
+    {
+      short: 'The Power of Ten', kicker: 'pH & dilution', titleHTML: 'The Power of <em>Ten</em>', item: 'The watered-down acid', ico: 'drop', teaser: 'Can water neutralise it?',
+      clue: 'pH = −log[H⁺]. Diluting an acid tenfold raises the pH by one unit, but water alone can never push it past 7.',
+      mystery: { q: 'If you keep diluting an acid with more and more water, will it eventually become basic (above pH 7)?', h: ['Yes, with enough water', 'No: it approaches pH 7 but never passes it, because water itself provides H⁺ and OH⁻ equally', 'No: acids can never be diluted'], a: 1, v: 'Each tenfold dilution raises the pH by about one unit: 1, 2, 3… But water itself always contains a tiny equal amount of H⁺ and OH⁻ (10⁻⁷ mol/L each). As the acid’s own H⁺ becomes negligible, the pH <b>levels off at 7</b>. Only adding a base can take it beyond.' },
+      story: `<p>In 1909, at the Carlsberg brewery laboratory in Copenhagen, the Danish chemist <strong>Søren Sørensen</strong> was studying how acidity affects enzymes in brewing. The concentrations of H⁺ he dealt with were awkward numbers like 0.0000001 mol/L. He proposed a shortcut: the <strong>pH</strong>, the negative power of ten. 10⁻⁷ became simply pH 7.</p>
+        <p>So <strong>pH = −log₁₀[H⁺]</strong>. Lower pH means more H⁺. Each step of one is a factor of ten, so pH 3 has ten times more H⁺ than pH 4, and a thousand times more than pH 6.</p>
+        <p>Pure water isn’t just H₂O: a tiny fraction of molecules swap protons, making equal amounts of H⁺ and OH⁻: 10⁻⁷ mol/L each at 25 °C. Their product is always <strong>K<sub>w</sub> = [H⁺][OH⁻] = 10⁻¹⁴</strong>. That is why pH + pOH = 14, and why neutral is pH 7.</p>`,
+      lab: {
+        label: 'Dilution ladder', title: 'Keep adding water',
+        head: '<div class="controls" style="margin:0"><button class="btn primary small dil">Dilute ×10</button><button class="btn small ghost rs">Reset</button></div>',
+        body: `<div class="lab-grid"><div class="stage" style="height:330px"><canvas class="c" aria-label="Beaker of acid being diluted tenfold each step"></canvas></div><div class="side-panel"><div class="info-card"><canvas class="g" style="width:100%;height:200px" aria-label="pH after each dilution"></canvas></div><div class="kv"><div><small>[H⁺]</small><b class="h"></b></div><div><small>pH</small><b class="p"></b></div><div><small>Total volume</small><b class="v"></b></div></div></div></div>`,
+        init(root) {
+          let n = 0, shown = 1; const c = $('.c', root);
+          const ph = n => { const C = .1 / Math.pow(10, n), h = C / 2 + Math.sqrt(C * C / 4 + 1e-14); return -Math.log10(h); };
+          const vol = n => { const v = .01 * Math.pow(10, n); return v < 1 ? (v * 1000).toFixed(0) + ' mL' : v < 1000 ? fmt(v, 0) + ' L' : v < 1e6 ? fmt(v / 1000, 0) + ' m³ (' + ['a bathtub', 'a swimming pool', 'a lake'][Math.min(2, Math.floor(Math.log10(v) - 3))] + ')' : fmt(v / 1000, 0) + ' m³'; };
+          function upd() { const p = ph(n); $('.p', root).textContent = p.toFixed(2); $('.h', root).innerHTML = fmt(Math.pow(10, -p), 1) + ' M'; $('.v', root).textContent = vol(n);
+            const pts = []; for (let i = 0; i <= n; i++) pts.push([i, ph(i)]); plot($('.g', root), { x: [0, 10], y: [0, 8], xt: [0, 2, 4, 6, 8, 10], yt: [0, 1, 2, 3, 4, 5, 6, 7, 8], xl: 'number of ×10 dilutions', yl: 'pH', series: [{ pts, color: '#ff6b9a', dots: true }], hlines: [{ y: 7, color: '#6fe3a0', label: 'neutral' }] }); }
+          $('.dil', root).addEventListener('click', () => { if (n < 10) n++; if (n >= 7) toast('The pH creeps towards 7 but never crosses it.'); upd(); });
+          $('.rs', root).addEventListener('click', () => { n = 0; upd(); }); upd(); new ResizeObserver(upd).observe($('.g', root));
+          animate(c, (dt, t) => { const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h); shown += (ph(n) - shown) * Math.min(1, dt * 3); const col = phColor(shown), bw = Math.min(200, w * .45), bh = h * .7;
+            drawBeaker(ctx, w / 2 - bw / 2, h * .12, bw, bh, .55 + Math.min(.4, n * .04), col, t); label(ctx, 'pH ' + shown.toFixed(1), w / 2, h * .12 + bh + 30, { align: 'center', font: '500 26px Fraunces,serif', color: shade(col, .3) });
+            const k = Math.max(0, 22 - Math.round(n * 3)); for (let i = 0; i < k; i++) { const x = w / 2 - bw / 2 + 20 + ((i * 37) % (bw - 40)), y = h * .12 + bh * .5 + ((i * 53) % (bh * .45)); glow(ctx, x + Math.sin(t + i) * 4, y, 10, '#ff6b9a', .8); ball(ctx, '#ff6b9a', x + Math.sin(t + i) * 4, y, 3); }
+            label(ctx, n === 0 ? '0.1 M hydrochloric acid' : `diluted ${n === 1 ? '10' : '10' + String(n).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]).join('')} times`, w / 2, 20, { align: 'center', size: 11, color: '#c9c8dc' }); });
+        }
+      },
+      lenses: ['Squash concentrate is sour; diluted squash is pleasant; but no amount of water makes it bitter like soap.', 'Each tenfold dilution leaves one tenth as many H⁺ per litre. Water’s own H⁺ and OH⁻ eventually dominate.', 'pH = −log[H⁺] &nbsp; [H⁺][OH⁻] = 10⁻¹⁴', 'At 25 °C, pH + pOH = 14. Neutral: [H⁺] = [OH⁻] = 10⁻⁷ M.'],
+      miracle: { ico: 'flower', title: 'Hydrangeas are pH meters', html: '<p>The same hydrangea bush can grow blue flowers in acidic soil and pink ones in alkaline soil. The colour comes from a pigment that binds aluminium ions, and aluminium only dissolves in the soil water when it is acidic.</p><p>Gardeners change the colour on purpose, adding sulfur or aluminium sulfate for blue and lime for pink. It\'s a living, blooming indicator.</p>', c1: '#6b8cff', c2: '#ff6b9a' },
+      quiz: [
+        { q: 'A solution has pH 3. Its [H⁺] is…', o: ['3 mol/L', '0.001 mol/L', '0.3 mol/L', '1000 mol/L'], a: 1, w: 'pH = −log[H⁺], so [H⁺] = 10⁻³ = 0.001 M.' },
+        { q: 'You dilute an acid at pH 2 by a factor of 100. The new pH is about…', o: ['2', '3', '4', '200'], a: 2, w: 'Each ×10 dilution adds 1 to the pH. ×100 is two steps: pH 4.' }
+      ],
+      prompt: { p: 'Explain why pure water has a pH of exactly 7 at 25 °C.', m: 'A tiny fraction of water molecules pass a proton to each other, forming equal amounts of H⁺ and OH⁻. At 25 °C their product is always 10⁻¹⁴, and since they are equal, each is 10⁻⁷ mol/L. pH = −log(10⁻⁷) = 7. It’s neutral because the H⁺ and OH⁻ balance exactly.' }
+    },
+    {
+      short: 'The Titration', kicker: 'Neutralisation & titration curves', titleHTML: 'The <em>Titration</em>', item: 'The drink tester', ico: 'flask', teaser: 'How much acid?',
+      clue: 'In a titration, a base of known concentration is added drop by drop until it exactly neutralises the acid (the equivalence point). The volume used reveals how much acid there was.',
+      mystery: { q: 'Food inspectors need to know exactly how much acid is in a bottle of vinegar or juice. How do they measure it precisely?', h: ['They taste it against a sour scale', 'They add a base of known strength drop by drop until it is exactly neutralised, and measure how much was needed', 'They weigh the bottle'], a: 1, v: 'In a <b>titration</b>, a base of known concentration drips from a burette into the sample. Each OH⁻ neutralises one H⁺. At the <b>equivalence point</b>, the pH leaps and an indicator changes colour. From the volume of base used, a simple mole calculation gives the amount of acid, to within a fraction of a percent.' },
+      story: `<p>When an acid meets a base, protons meet hydroxide ions and they cancel: <strong>H⁺ + OH⁻ → H₂O</strong>. This <strong>neutralisation</strong> is the basis of one of chemistry’s most precise measurements.</p>
+        <p>In a <strong>titration</strong>, you put a measured volume of acid in a flask with a few drops of <strong>indicator</strong>, a dye that changes colour at a certain pH. A <strong>burette</strong>, a long glass tube with a tap and fine markings, delivers a base of known concentration drop by drop. At first the pH barely changes. Then, near the end, a single drop swings it dramatically: you’ve hit the <strong>equivalence point</strong>, where moles of base equal moles of acid.</p>
+        <p>The shape of the pH curve tells a story. Strong acid with strong base gives a sharp, symmetrical jump centred on pH 7. A weak acid gives a gentle slope first (a natural buffer forms), then a jump that ends <em>above</em> 7, because the leftover partner ion is itself slightly basic.</p>`,
+      lab: {
+        label: 'Virtual burette', title: '25 mL of 0.1 M acid + 0.1 M NaOH',
+        head: '<div class="controls" style="margin:0"><button class="btn primary small run">▶ Titrate</button><button class="btn small ghost rs">Reset</button></div>',
+        body: `<div class="pill-row" style="margin-bottom:12px"><div class="seg ac"></div><div class="seg ind"></div></div><div class="lab-grid"><div class="stage" style="height:360px"><canvas class="c" aria-label="Burette dripping base into a flask of acid with indicator"></canvas></div><div class="side-panel"><div class="info-card"><canvas class="g" style="width:100%;height:220px" aria-label="Titration curve: pH against volume of base"></canvas></div><div class="kv"><div><small>Base added</small><b class="v">0.0 mL</b></div><div><small>pH</small><b class="p"></b></div></div><p class="hint tx" style="font-size:13px"></p></div></div>`,
+        init(root) {
+          let acid = 'strong', ind = 'php', V = 0, run = false, pts = []; const Ka = 1.8e-5, Kw = 1e-14, c = $('.c', root);
+          function pH(V) { const nA = 2.5e-3, nB = .1 * V / 1000, Vt = (25 + V) / 1000;
+            if (acid === 'strong') { if (Math.abs(nB - nA) < 1e-9) return 7; return nB < nA ? -Math.log10((nA - nB) / Vt) : 14 + Math.log10((nB - nA) / Vt); }
+            if (nB === 0) return -Math.log10(Math.sqrt(Ka * .1)); if (nB < nA - 1e-9) return -Math.log10(Ka) + Math.log10(nB / (nA - nB)); if (Math.abs(nB - nA) < 1e-9) return 14 + Math.log10(Math.sqrt(Kw / Ka * nA / Vt)); return 14 + Math.log10((nB - nA) / Vt); }
+          const IND = { php: ['Phenolphthalein', p => p < 8.2 ? 'rgba(255,255,255,.12)' : mix('#f6d7f0', '#e0189a', clamp((p - 8.2) / 1.8, 0, 1)), '8.2–10'], mo: ['Methyl orange', p => p < 3.1 ? '#e8303a' : p > 4.4 ? '#f4c35a' : mix('#e8303a', '#f4c35a', (p - 3.1) / 1.3), '3.1–4.4'] };
+          const reset = () => { V = 0; pts = [[0, pH(0)]]; run = false; $('.run', root).textContent = '▶ Titrate'; };
+          seg($('.ac', root), [['strong', 'HCl (strong)'], ['weak', 'Vinegar (weak)']], acid, k => { acid = k; reset(); });
+          seg($('.ind', root), [['php', 'Phenolphthalein'], ['mo', 'Methyl orange']], ind, k => { ind = k; });
+          $('.run', root).addEventListener('click', () => { if (V >= 50) reset(); run = !run; $('.run', root).textContent = run ? '❚❚ Pause' : '▶ Titrate'; });
+          $('.rs', root).addEventListener('click', reset); reset();
+          const drops = [];
+          animate(c, (dt, t) => { if (run) { const near = Math.abs(V - 25) < 2.5; V = Math.min(50, V + dt * (near ? 1.2 : 5)); pts.push([V, pH(V)]); if (Math.random() < dt * (near ? 3 : 8)) drops.push({ y: 0 }); if (V >= 50) { run = false; $('.run', root).textContent = '↻ Again'; } }
+            const p = pH(V); $('.v', root).textContent = V.toFixed(1) + ' mL'; $('.p', root).textContent = p.toFixed(2);
+            $('.tx', root).innerHTML = V < 24 ? 'Each drop of OH⁻ neutralises some H⁺. Watch how little the pH moves at first.' : V < 26 ? `<b>Equivalence point!</b> At 25.0 mL, moles of base = moles of acid. ${acid === 'weak' ? 'For a weak acid the pH here is about 8.7, not 7, because the acetate ion left behind is slightly basic.' : 'The pH leaps through 7.'}` : `Excess base now. Indicator ${IND[ind][0].toLowerCase()} changes over pH ${IND[ind][2]}. ${ind === 'mo' && acid === 'weak' ? 'Methyl orange changes far too early for a weak acid. Choosing the right indicator matters!' : ''}`;
+            const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h); const bx = w / 2, by = 14, bh = h * .42;
+            ctx.strokeStyle = 'rgba(223,231,255,.6)'; ctx.lineWidth = 2; ctx.strokeRect(bx - 9, by, 18, bh); const lev = (1 - V / 50) * (bh - 6); ctx.fillStyle = 'rgba(160,200,255,.45)'; ctx.fillRect(bx - 7, by + bh - 3 - lev, 14, lev);
+            for (let i = 0; i <= 10; i++) { ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.fillRect(bx + 9, by + 3 + i * (bh - 6) / 10, i % 5 ? 4 : 8, 1); } label(ctx, '0', bx + 22, by + 8, { size: 9, color: '#8f8eab' }); label(ctx, '50 mL', bx + 22, by + bh, { size: 9, color: '#8f8eab' });
+            ctx.fillStyle = 'rgba(223,231,255,.5)'; ctx.fillRect(bx - 2, by + bh, 4, 22); ctx.fillRect(bx - 12, by + bh + 6, 24, 5);
+            const fy = by + bh + 34, fw = Math.min(170, w * .4), fh = h - fy - 12; for (const d of drops) { d.y += dt * 220; glow(ctx, bx, fy + d.y - 6, 6, '#a0c8ff', .8); } for (let i = drops.length - 1; i >= 0; i--) if (drops[i].y > fh * .4) drops.splice(i, 1);
+            const col = IND[ind][1](p); ctx.save(); ctx.beginPath(); ctx.moveTo(bx - 14, fy); ctx.lineTo(bx - 14, fy + fh * .3); ctx.lineTo(bx - fw / 2, fy + fh); ctx.lineTo(bx + fw / 2, fy + fh); ctx.lineTo(bx + 14, fy + fh * .3); ctx.lineTo(bx + 14, fy); ctx.strokeStyle = 'rgba(223,231,255,.6)'; ctx.lineWidth = 2; ctx.stroke(); ctx.clip(); ctx.fillStyle = col; ctx.fillRect(0, fy + fh * .5, w, h); ctx.restore();
+            const eqx = acid === 'strong' ? 7 : 8.72; plot($('.g', root), { x: [0, 50], y: [0, 14], xt: [0, 10, 20, 25, 30, 40, 50], yt: [0, 2, 4, 6, 7, 8, 10, 12, 14], xl: 'NaOH added (mL)', yl: 'pH', series: [{ pts, color: '#ff6b9a' }], vlines: [{ x: 25, color: 'rgba(244,195,90,.6)', label: 'equivalence' }], marks: V > 26 ? [{ x: 25, y: eqx, color: '#f4c35a', r: 4 }] : [] }); });
+        }
+      },
+      lenses: ['A flask that turns from clear to pink with a single drop; the label "acidity 5%" on a vinegar bottle.', 'OH⁻ ions from the burette mop up H⁺ ions in the flask one for one. When they run out, OH⁻ builds up and pH soars.', 'n<sub>acid</sub> = n<sub>base</sub> at equivalence &nbsp; (c × V)', 'For a 1:1 acid and base: c<sub>a</sub>V<sub>a</sub> = c<sub>b</sub>V<sub>b</sub>.'],
+      miracle: { ico: 'cup', title: 'Wine-makers titrate every batch', html: '<p>The tartness, stability and taste of wine depend on its "titratable acidity", measured exactly the way you just did it: a sample, an indicator (or pH meter), and a burette of sodium hydroxide. Too little acid and the wine tastes flat and spoils; too much and it is harsh.</p><p>Labs around the world run millions of titrations a year, on drinking water, medicines, blood and fuels. It is one of the oldest and most trusted measurements in chemistry.</p>', c1: '#b54ec0', c2: '#ff6b9a' },
+      quiz: [
+        { q: '25 mL of 0.1 M HCl is exactly neutralised by NaOH. How many mL of 0.1 M NaOH are needed?', o: ['12.5 mL', '25 mL', '50 mL', '0.1 mL'], a: 1, w: 'Same concentration, 1:1 ratio: equal volumes. 2.5 mmol acid needs 2.5 mmol base.' },
+        { q: 'Why is the pH at the equivalence point above 7 for vinegar titrated with NaOH?', o: ['Too much base was added', 'The acetate ion left behind is a weak base', 'Vinegar contains sugar', 'The indicator changes the pH'], a: 1, w: 'Acetate (CH₃COO⁻) takes protons from water, producing a little OH⁻: pH about 8.7.' }
+      ],
+      prompt: { p: 'Explain why a titration curve is flat at first and then suddenly jumps.', m: 'At first there is a large excess of acid. Each drop of base neutralises a tiny portion of it, so [H⁺] barely changes, and on the logarithmic pH scale it moves very little. Near the equivalence point, almost all the H⁺ is gone, so one drop of base changes [H⁺] by a huge factor, many powers of ten, and the pH leaps.' }
+    },
+    {
+      short: 'The Buffer', kicker: 'Buffers', titleHTML: 'The <em>Buffer</em>', item: 'The sprinter’s blood', ico: 'heart', teaser: 'Why doesn’t it sour?',
+      clue: 'A buffer contains a weak acid and its partner base. It absorbs added H⁺ or OH⁻, keeping pH almost constant, as in blood (carbonic acid / bicarbonate).',
+      mystery: { q: 'A sprinter’s muscles pour acid into their blood, yet blood pH stays between 7.35 and 7.45. How?', h: ['The heart filters acid out', 'Blood contains a buffer pair, carbonic acid and bicarbonate, that soaks up the extra H⁺', 'Sweat removes the acid'], a: 1, v: 'Blood is <b>buffered</b>. Bicarbonate ions (HCO₃⁻) grab extra H⁺ to become carbonic acid, which breaks down into CO₂ and water. You breathe the CO₂ out, which is part of why you pant after a sprint. Your lungs and kidneys fine-tune the buffer so pH barely moves.' },
+      story: `<p>Add a single drop of strong acid to a litre of pure water and the pH crashes from 7 to below 5. Add the same drop to a litre of blood and nothing measurable happens. The difference is a <strong>buffer</strong>.</p>
+        <p>A buffer is a mixture of a <strong>weak acid</strong> and its <strong>conjugate base</strong> (the ion left when it loses its proton), in similar amounts. Add H⁺, and the base mops it up: A⁻ + H⁺ → HA. Add OH⁻, and the acid neutralises it: HA + OH⁻ → A⁻ + H₂O. Either way, the free H⁺ concentration hardly changes.</p>
+        <p>In 1908 the American physician <strong>Lawrence Henderson</strong>, studying blood, wrote down the equation later refined by Karl Hasselbalch: <strong>pH = pKa + log([A⁻]/[HA])</strong>. A buffer works best when the two partners are equal, so that pH = pKa, and it fails only when one partner is used up.</p>`,
+      lab: {
+        label: 'Buffer duel', title: 'Pure water vs buffer: add acid or base',
+        head: '<div class="controls" style="margin:0"><button class="btn small acid">+ 1 mL acid</button><button class="btn small base">+ 1 mL base</button><button class="btn small ghost rs">Reset</button></div>',
+        body: `<div class="lab-grid"><div class="stage" style="height:300px"><canvas class="c" aria-label="Two beakers: pure water and a buffer"></canvas></div><div class="side-panel"><div class="info-card"><canvas class="g" style="width:100%;height:200px" aria-label="pH history for water and buffer"></canvas><div class="legend"><span><i style="background:#9fd6ff"></i>pure water</span><span><i style="background:#6fe3a0"></i>buffer</span></div></div><p class="hint tx" style="font-size:13px">Each click adds 1 mL of 1 M strong acid (HCl) or base (NaOH) to 100 mL of each liquid. The buffer holds 0.1 M acetic acid + 0.1 M acetate.</p></div></div>`,
+        init(root) {
+          let net = 0, hist = []; const pKa = 4.74;
+          const phW = n => { const Vt = (100 + Math.abs(n)) / 1000; if (n === 0) return 7; const c = Math.abs(n) * 1e-3 / Vt; return n > 0 ? -Math.log10(c / 2 + Math.sqrt(c * c / 4 + 1e-14)) : 14 + Math.log10(c / 2 + Math.sqrt(c * c / 4 + 1e-14)); };
+          const phB = n => { const HA = 10 + n, A = 10 - n; if (A <= 0) return phW(n - 10) ; if (HA <= 0) return phW(n + 10); return pKa + Math.log10(A / HA); };
+          const rec = () => { hist.push([hist.length, phW(net), phB(net)]); draw(); };
+          $('.acid', root).addEventListener('click', () => { net++; rec(); }); $('.base', root).addEventListener('click', () => { net--; rec(); }); $('.rs', root).addEventListener('click', () => { net = 0; hist = [[0, 7, pKa]]; draw(); });
+          hist = [[0, 7, pKa]];
+          function draw() { plot($('.g', root), { x: [0, Math.max(10, hist.length)], y: [0, 14], xt: [0, 5, 10, 15, 20], yt: [0, 2, 4, 6, 7, 8, 10, 12, 14], xl: 'mL added', yl: 'pH', series: [{ pts: hist.map(q => [q[0], q[1]]), color: '#9fd6ff', dots: true }, { pts: hist.map(q => [q[0], q[2]]), color: '#6fe3a0', dots: true }] }); }
+          draw(); new ResizeObserver(draw).observe($('.g', root));
+          const c = $('.c', root); let s1 = 7, s2 = pKa;
+          animate(c, (dt, t) => { const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h); s1 += (phW(net) - s1) * Math.min(1, dt * 4); s2 += (phB(net) - s2) * Math.min(1, dt * 4); const bw = Math.min(150, w * .3), bh = h * .62;
+            [[w * .27, s1, 'Pure water'], [w * .73, s2, 'Buffer']].forEach(([x, p, nm]) => { drawBeaker(ctx, x - bw / 2, h * .1, bw, bh, .7, phColor(p), t); label(ctx, nm, x, h * .1 + bh + 22, { align: 'center', size: 12, color: '#eeedf7', font: '600 12px Inter' }); label(ctx, 'pH ' + p.toFixed(2), x, h * .1 + bh + 44, { align: 'center', font: '500 20px Fraunces,serif', color: shade(phColor(p), .35) }); });
+            label(ctx, net === 0 ? 'nothing added yet' : `${Math.abs(net)} mL of 1 M ${net > 0 ? 'acid' : 'base'} added`, w / 2, 18, { align: 'center', size: 11, color: '#c9c8dc' });
+            if (Math.abs(net) >= 10) label(ctx, 'buffer capacity used up!', w * .73, h * .1 + bh / 2, { align: 'center', size: 12, color: '#ff6b9a', font: '600 12px Inter' }); });
+        }
+      },
+      dialogue: [['buf', 'happy', 'BUFFY · buffer', '“Throw protons at me and my bases catch them. Pull protons away and my acids hand over spares. Either way, I keep things steady.”'], ['p', 'sly', 'PROTON · H⁺', '“Annoying. But everyone has limits, Buffy. Run out of partners and I’ll get through.”']],
+      lenses: ['Blood stays at pH 7.4; antacid tablets settle a sour stomach; swimming pools are dosed with buffer to keep water stable.', 'The weak acid neutralises added base; the conjugate base neutralises added acid. Free H⁺ stays nearly constant.', 'pH = pKa + log([A⁻] / [HA])', 'The Henderson–Hasselbalch equation. Best buffering when [A⁻] = [HA], so pH = pKa.'],
+      miracle: { ico: 'heart', title: 'You breathe to control your pH', html: '<p>Your blood buffer is CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. When acid builds up, the equilibrium shifts left and more CO₂ forms; sensors in your brainstem detect the change and make you breathe faster to blow it off. Hold your breath and CO₂ accumulates, nudging your blood slightly acidic.</p><p>It is a buffer connected to a pair of lungs, adjusting breath by breath, every moment of your life.</p>', c1: '#ff5d5d', c2: '#6fe3a0' },
+      quiz: [
+        { q: 'What does a buffer contain?', o: ['A strong acid and a strong base', 'A weak acid and its conjugate base', 'Only water', 'Only salt'], a: 1, w: 'Both partners are needed: one to catch added H⁺, one to neutralise added OH⁻.' },
+        { q: 'When is a buffer no longer effective?', o: ['When it gets warm', 'When one of its partners (acid or conjugate base) is used up', 'Never', 'After one drop of acid'], a: 1, w: 'This limit is the buffer capacity: once a partner is used up, pH changes rapidly.' }
+      ],
+      prompt: { p: 'Explain how the bicarbonate buffer protects your blood when acid is added.', m: 'Blood contains bicarbonate ions (HCO₃⁻) and carbonic acid (H₂CO₃). If extra H⁺ enters, bicarbonate grabs it: HCO₃⁻ + H⁺ → H₂CO₃. So the free H⁺ hardly increases and pH stays near 7.4. The carbonic acid breaks into CO₂ and water, and the lungs breathe out the extra CO₂, restoring the balance.' }
+    },
+    {
+      short: 'The Souring Sea', kicker: 'Ocean acidification', titleHTML: 'The Souring <em>Sea</em>', item: 'The fading shells', ico: 'shell', teaser: 'Why are shells at risk?',
+      clue: 'CO₂ dissolving in seawater forms carbonic acid, lowering pH and using up the carbonate ions that shell-building creatures need.',
+      mystery: { q: 'Seawater is slightly basic (pH about 8.1). So why do scientists warn that rising CO₂ threatens the shells of sea creatures?', h: ['CO₂ makes the sea too warm for shells', 'Dissolved CO₂ forms carbonic acid, lowering pH and using up the carbonate ions needed to build shells', 'Plastic pollution dissolves shells'], a: 1, v: 'Since 1750 the ocean has absorbed about a quarter of our CO₂ emissions. CO₂ + H₂O makes <b>carbonic acid</b>, releasing H⁺. Surface pH has fallen from about 8.2 to 8.05, roughly <b>30% more H⁺</b>. Those extra protons react with carbonate (CO₃²⁻), turning it into bicarbonate, leaving less carbonate for corals, oysters and tiny snails to build their calcium carbonate shells.' },
+      story: `<p>The ocean is the planet’s biggest buffer. It holds about fifty times more carbon than the atmosphere, mostly as bicarbonate and carbonate ions. Its slightly basic pH, around 8.1, has stayed remarkably steady for millions of years.</p>
+        <p>But since the Industrial Revolution, humans have pumped hundreds of billions of tonnes of CO₂ into the air, and the sea has soaked up about a quarter of it. Each dissolved molecule makes carbonic acid: <strong>CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻</strong>. A drop of 0.1 pH units sounds tiny, but on a logarithmic scale it means about <strong>30% more hydrogen ions</strong>.</p>
+        <p>The ocean’s buffer responds the way any buffer does: carbonate ions (CO₃²⁻) catch the extra protons. But those same carbonate ions are the building blocks of shells and coral skeletons (CaCO₃). As carbonate becomes scarcer, building a shell costs more energy, and in the coldest waters, unprotected shells can begin to dissolve.</p>`,
+      lab: {
+        label: 'Ocean chemistry simulator', title: 'Turn up the CO₂',
+        body: `<div class="lab-grid"><div><div class="stage" style="height:320px"><canvas class="c" aria-label="Ocean surface absorbing CO2 and a sea snail shell dissolving"></canvas></div><div class="slider-row" style="margin-top:14px"><label>Atmospheric CO₂</label><input type="range" class="co" min="280" max="1000" value="420" style="--track:linear-gradient(90deg,#6fe3a0,#f4c35a,#ff5d5d)"><span class="readout"><b class="cv"></b></span></div><div class="pill-row yrs" style="margin-top:6px"></div></div>
+          <div class="side-panel"><div class="kv"><div><small>Surface pH</small><b class="p"></b></div><div><small>Extra H⁺</small><b class="hp" style="color:var(--pink)"></b></div><div><small>Carbonate left</small><b class="cb" style="color:var(--green)"></b></div></div><div class="info-card"><p class="tx" style="margin:0;font-size:14.5px;color:var(--soft)"></p></div></div></div>`,
+        init(root) {
+          let ppm = 420, shown = 8.05; const c = $('.c', root);
+          const pHf = p => 8.18 - .2 * Math.log2(p / 280), om = p => 3.5 * Math.pow(10, 1.6 * (pHf(p) - 8.18));
+          const Y = [['1750', 280], ['Today', 420], ['2100 low', 550], ['2100 high', 900]];
+          $('.yrs', root).innerHTML = Y.map(y => `<button class="btn small" data-v="${y[1]}">${y[0]}</button>`).join('');
+          $('.yrs', root).addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('.co', root).value = b.dataset.v; $('.co', root).dispatchEvent(new Event('input')); });
+          slider($('.co', root), v => { ppm = v; const p = pHf(v), o = om(v); $('.cv', root).textContent = v + ' ppm'; $('.p', root).textContent = p.toFixed(2); $('.hp', root).textContent = '+' + Math.round((Math.pow(10, 8.18 - p) - 1) * 100) + '%'; $('.cb', root).textContent = Math.round(o / 3.5 * 100) + '%';
+            $('.tx', root).innerHTML = v <= 300 ? 'Pre-industrial ocean: plenty of carbonate, shells form easily.' : o > 2 ? 'The pH has dropped and carbonate is scarcer. Shells can still form, but building them costs creatures more energy.' : o > 1 ? 'Carbonate is getting scarce. Corals and pteropods (sea butterflies) struggle; reefs grow more slowly than they erode.' : '<b style="color:var(--pink)">Corrosive water.</b> In cold polar seas, unprotected aragonite shells begin to dissolve.'; });
+          const rnd = seeded(4); const ions = Array.from({ length: 40 }, () => ({ x: rnd(), y: .35 + rnd() * .6, vx: (rnd() - .5) * .05, vy: (rnd() - .5) * .05 })); const co2 = Array.from({ length: 30 }, () => ({ x: rnd(), y: rnd() * .3, v: .03 + rnd() * .05 }));
+          animate(c, (dt, t) => { const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h); shown += (pHf(ppm) - shown) * Math.min(1, dt * 2); const sea = h * .32;
+            const g = ctx.createLinearGradient(0, sea, 0, h); g.addColorStop(0, rgba(mix('#2a7fd6', '#4a6a8a', (8.18 - shown) / .45), .8)); g.addColorStop(1, '#071a3a'); ctx.fillStyle = g; ctx.fillRect(0, sea, w, h - sea);
+            ctx.strokeStyle = 'rgba(160,210,255,.6)'; ctx.lineWidth = 2; ctx.beginPath(); for (let x = 0; x <= w; x += 6) ctx.lineTo(x, sea + Math.sin(x * .03 + t * 1.5) * 3); ctx.stroke();
+            const nC = Math.round((ppm - 200) / 800 * co2.length); co2.slice(0, nC).forEach(m => { m.y += m.v * dt; if (m.y > .36) { m.y = 0; m.x = Math.random(); } const x = m.x * w, y = m.y * h; ball(ctx, '#ff5d5d', x - 6, y, 3); ball(ctx, '#9aa3b8', x, y, 3.5); ball(ctx, '#ff5d5d', x + 6, y, 3); });
+            label(ctx, 'CO₂ in air: ' + ppm + ' ppm', 10, 18, { size: 11, color: '#c9c8dc' });
+            const nCarb = Math.round(om(ppm) / 3.5 * ions.length), nH = Math.round((Math.pow(10, 8.18 - shown) - 1) * 12) + 2;
+            ions.forEach((p, i) => { p.x += p.vx * dt; p.y += p.vy * dt; if (p.x < 0 || p.x > 1) p.vx *= -1; if (p.y < .36 || p.y > .98) p.vy *= -1; const x = p.x * w, y = p.y * h;
+              if (i < nCarb) { ball(ctx, '#9aa3b8', x, y, 3.5); [0, 2.1, 4.2].forEach(a => ball(ctx, '#ff5d5d', x + Math.cos(a + t) * 6, y + Math.sin(a + t) * 6, 2.8)); } else if (i < nCarb + nH) { glow(ctx, x, y, 10, '#ff6b9a', .7); ball(ctx, '#ff6b9a', x, y, 3); } });
+            const sx = w * .8, sy = h * .78, er = clamp((2.2 - om(ppm)) / 1.6, 0, 1), sc = 1 - er * .35;
+            ctx.save(); ctx.translate(sx, sy); ctx.scale(sc, sc); ctx.globalAlpha = 1 - er * .6; ctx.strokeStyle = '#f5ead8'; ctx.fillStyle = 'rgba(245,234,216,.25)'; ctx.lineWidth = 3; ctx.beginPath(); for (let a = 0; a < TAU * 2.6; a += .1) { const r = 2 + a * 3; ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r * .8); } ctx.stroke(); ctx.fill();
+            if (er > .2) { ctx.setLineDash([2, 4]); ctx.strokeStyle = 'rgba(255,107,154,.8)'; ctx.beginPath(); ctx.arc(0, 0, 40, 0, TAU); ctx.stroke(); } ctx.restore();
+            label(ctx, 'pteropod shell', sx, sy + 58, { align: 'center', size: 10, color: '#c9c8dc' }); label(ctx, 'grey+red trios: CO₃²⁻ · pink: H⁺', 10, h - 10, { size: 10, color: '#8f8eab' }); });
+        }
+      },
+      lenses: ['Coral reefs bleaching and eroding; oyster farms struggling to raise young oysters in corrosive water.', 'Extra H⁺ from carbonic acid combines with carbonate ions, leaving fewer CO₃²⁻ for building calcium carbonate.', 'CO₂ + H₂O + CO₃²⁻ → 2 HCO₃⁻', 'Each dissolved CO₂ effectively removes one carbonate ion from the water.'],
+      miracle: { ico: 'fish', title: 'Chalk cliffs are ancient shells', html: '<p>The White Cliffs of Dover are made almost entirely of the microscopic calcium carbonate plates of coccolithophores, tiny algae that lived in warm seas 70–100 million years ago. Each cubic centimetre of chalk holds millions of them.</p><p>Those algae locked CO₂ away as rock. It is a reminder that the ocean’s carbonate chemistry shapes not just today’s reefs, but the landscape itself, over millions of years.</p>', c1: '#e8ecf5', c2: '#5ca8ff' },
+      quiz: [
+        { q: 'Ocean pH falls from 8.2 to 8.1. Roughly how much has [H⁺] increased?', o: ['By 1%', 'By about 26%', 'By 10 times', 'Not at all'], a: 1, w: '10<sup>0.1</sup> ≈ 1.26, so about 26% more H⁺. On a log scale, small pH changes are big chemical changes.' },
+        { q: 'Why does more dissolved CO₂ make it harder for creatures to build shells?', o: ['CO₂ is poisonous to them', 'The extra H⁺ converts carbonate ions into bicarbonate, leaving less carbonate for CaCO₃', 'CO₂ makes the water warmer', 'Shells are made of CO₂'], a: 1, w: 'Shells need carbonate. Extra protons use it up.' }
+      ],
+      prompt: { p: 'Explain ocean acidification to a friend in four sentences, starting from car exhaust.', m: 'Burning fuel releases CO₂, and about a quarter of it dissolves in the ocean. There, CO₂ reacts with water to make carbonic acid, which releases H⁺ and lowers the pH. The extra H⁺ grabs carbonate ions, turning them into bicarbonate. With less carbonate around, corals, shellfish and plankton struggle to build their calcium carbonate shells and skeletons.' }
+    }
+  ],
+  extra: [
+    { c: 1, q: 'In the Brønsted–Lowry definition, a base is…', o: ['a proton donor', 'a proton acceptor', 'an electron donor', 'any salt'], a: 1, w: 'Acids donate H⁺; bases accept H⁺.' },
+    { c: 2, q: 'Which solution has the highest [H⁺]?', o: ['pH 1', 'pH 5', 'pH 7', 'pH 13'], a: 0, w: 'Lowest pH means most H⁺. pH 1 has 10,000 times more than pH 5.' },
+    { c: 3, q: 'At the equivalence point of a strong acid / strong base titration, the pH is…', o: ['1', '7', '10', '14'], a: 1, w: 'Only water and a neutral salt (like NaCl) remain.' },
+    { c: 4, q: 'A buffer has [A⁻] = [HA]. Its pH equals…', o: ['7', 'pKa', '14', '0'], a: 1, w: 'log(1) = 0, so pH = pKa.' },
+    { c: 5, q: 'What fraction of human CO₂ emissions has the ocean absorbed?', o: ['None', 'About a quarter', 'All of it', 'About 1%'], a: 1, w: 'Roughly 25–30%, which slows climate change but acidifies the sea.' }
+  ],
+  cards: [
+    [1, 'Brønsted–Lowry acid and base?', 'Acid: proton (H⁺) donor. Base: proton acceptor.'],
+    [1, 'Strong vs weak acid?', 'Strong: dissociates completely. Weak: dissociates only partially, in equilibrium.'],
+    [1, 'What does Ka tell you?', 'The acid dissociation constant: larger Ka means a stronger acid.'],
+    [1, 'Strong vs concentrated?', 'Strength: fraction dissociated. Concentration: amount per litre.'],
+    [2, 'Definition of pH?', 'pH = −log₁₀[H⁺].'],
+    [2, 'Ionic product of water?', 'Kw = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴ at 25 °C.'],
+    [2, 'pH + pOH = ?', '14 (at 25 °C).'],
+    [2, 'What happens to pH when an acid is diluted 10×?', 'It rises by about 1, but never past 7.'],
+    [3, 'What is a titration?', 'Adding a solution of known concentration until a reaction is exactly complete, to find an unknown amount.'],
+    [3, 'Equivalence point?', 'The point where moles of added base equal moles of acid.'],
+    [3, 'What is an indicator?', 'A dye that changes colour over a particular pH range.'],
+    [3, 'pH at equivalence for weak acid + strong base?', 'Above 7, because the conjugate base is slightly basic.'],
+    [4, 'What is a buffer?', 'A solution of a weak acid and its conjugate base that resists changes in pH.'],
+    [4, 'Henderson–Hasselbalch equation?', 'pH = pKa + log([A⁻]/[HA]).'],
+    [4, 'Main blood buffer?', 'Carbonic acid / bicarbonate (H₂CO₃ / HCO₃⁻).'],
+    [5, 'Ocean acidification chemistry?', 'CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻; extra H⁺ converts CO₃²⁻ to HCO₃⁻.'],
+    [5, 'Change in ocean surface pH since 1750?', 'About 8.2 → 8.05, roughly 30% more H⁺.']
+  ]
+};
+
+/* =========================================================
+   THE INVISIBLE WORLD · shared series engine
+   ========================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const TAU = Math.PI * 2;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PFX = 'iw' + COURSE.id + ':';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(PFX + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(PFX + k, JSON.stringify(v)); } catch (e) {} }
+};
+function seeded(seed) { let s = (seed * 2654435761) >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+function gauss() { return Math.sqrt(-2 * Math.log(Math.random() + 1e-9)) * Math.cos(TAU * Math.random()); }
+function hexRgb(h) { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function rgbHex(r, g, b) { return '#' + [r, g, b].map(v => clamp(Math.round(v), 0, 255).toString(16).padStart(2, '0')).join(''); }
+function shade(h, amt) { const [r, g, b] = hexRgb(h); return amt < 0 ? rgbHex(r * (1 + amt), g * (1 + amt), b * (1 + amt)) : rgbHex(r + (255 - r) * amt, g + (255 - g) * amt, b + (255 - b) * amt); }
+function mix(a, b, t) { const A = hexRgb(a), B = hexRgb(b); return rgbHex(lerp(A[0], B[0], t), lerp(A[1], B[1], t), lerp(A[2], B[2], t)); }
+function rgba(h, a) { const [r, g, b] = hexRgb(h); return `rgba(${r},${g},${b},${a})`; }
+function rampColor(stops, t) { t = clamp(t, 0, 1) * (stops.length - 1); const i = Math.min(stops.length - 2, Math.floor(t)); return mix(stops[i], stops[i + 1], t - i); }
+const sub = s => String(s).replace(/(\d+)/g, '<sub>$1</sub>');
+const fmt = (x, d = 2) => { if (!isFinite(x)) return '–'; const a = Math.abs(x); if (a !== 0 && (a >= 1e5 || a < 1e-3)) { const e = Math.floor(Math.log10(a)); return `${(x / Math.pow(10, e)).toFixed(d)} × 10<sup>${e}</sup>`; } return a !== 0 && a < 1 ? x.toLocaleString('en', { maximumSignificantDigits: d + 1 }) : x.toLocaleString('en', { maximumFractionDigits: d }); };
+
+const spriteCache = new Map();
+function sprite(color, r) {
+  r = Math.max(2, Math.round(r)); const key = color + '|' + r; let s = spriteCache.get(key); if (s) return s;
+  const d = 2, size = r * 2 * d + 2; s = document.createElement('canvas'); s.width = s.height = size;
+  const g = s.getContext('2d'), c = size / 2, R = r * d;
+  const gr = g.createRadialGradient(c - R * .35, c - R * .4, R * .05, c, c, R);
+  gr.addColorStop(0, '#ffffff'); gr.addColorStop(.2, shade(color, .35)); gr.addColorStop(.62, color); gr.addColorStop(1, shade(color, -.62));
+  g.fillStyle = gr; g.beginPath(); g.arc(c, c, R, 0, TAU); g.fill(); spriteCache.set(key, s); return s;
+}
+function ball(ctx, color, x, y, r) { if (r <= 0) return; ctx.drawImage(sprite(color, r), x - r, y - r, r * 2, r * 2); }
+function glow(ctx, x, y, r, color, a = 1) { if (r <= 0) return; const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, rgba(color, .55 * a)); g.addColorStop(.4, rgba(color, .18 * a)); g.addColorStop(1, rgba(color, 0)); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); }
+function fit(c) {
+  const r = c.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+  const w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  const ctx = c.getContext('2d'); ctx.setTransform(d, 0, 0, d, 0, 0); return { ctx, w: r.width, h: r.height };
+}
+function label(ctx, text, x, y, o = {}) { ctx.fillStyle = o.color || 'rgba(255,255,255,.75)'; ctx.font = o.font || `${o.size || 11}px "JetBrains Mono", monospace`; ctx.textAlign = o.align || 'left'; ctx.textBaseline = o.base || 'alphabetic'; ctx.fillText(text, x, y); }
+
+const animators = [];
+const visIO = new IntersectionObserver(es => es.forEach(e => animators.forEach(a => { if (a.el === e.target) a.vis = e.isIntersecting; })), { rootMargin: '120px' });
+function animate(el, fn) { const a = { el, fn, vis: false }; animators.push(a); visIO.observe(el); return a; }
+let lastT = performance.now();
+(function frame(t) { const dt = Math.min(.05, (t - lastT) / 1000); lastT = t; for (const a of animators) if (a.vis) { try { a.fn(dt, t / 1000); } catch (err) { console.error(err); a.vis = false; } } requestAnimationFrame(frame); })(lastT);
+function tween(dur, fn, done) { const t0 = performance.now(); (function step(t) { const k = clamp((t - t0) / dur, 0, 1); fn(k); if (k < 1) requestAnimationFrame(step); else if (done) done(); })(t0); }
+const ease = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+function toast(html) { const t = $('#toast'); t.innerHTML = html; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 3800); }
+const SVGNS = 'http://www.w3.org/2000/svg';
+function svgEl(tag, attrs = {}, parent) { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function seg(el, items, cur, onPick) { el.innerHTML = items.map(([k, t]) => `<button data-k="${k}" class="${k === cur ? 'on' : ''}">${t}</button>`).join(''); el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', el).forEach(x => x.classList.toggle('on', x === b)); onPick(b.dataset.k); }); }
+function slider(el, fn) { el.addEventListener('input', () => fn(+el.value)); fn(+el.value); }
+
+/* ---------- cast ---------- */
+const CAST = Object.assign({
+  H: { name: 'Hal', full: 'Hydrogen', color: '#dfe9ff', title: 'The Smallest Wanderer' },
+  He: { name: 'Helia', full: 'Helium', color: '#ffd36e', title: 'The Aloof Aristocrat' },
+  C: { name: 'Cass', full: 'Carbon', color: '#9aa3b8', title: 'The Builder of Life' },
+  N: { name: 'Nate', full: 'Nitrogen', color: '#6b8cff', title: 'The Sleepy Giant of the Air' },
+  O: { name: 'Ola', full: 'Oxygen', color: '#ff5d5d', title: 'The Electron Thief' },
+  Na: { name: 'Sid', full: 'Sodium', color: '#b38cff', title: 'The Reckless Giver' },
+  Cl: { name: 'Clo', full: 'Chlorine', color: '#6fe3a0', title: 'The Grabby Poison' },
+  Fe: { name: 'Ferro', full: 'Iron', color: '#e8925a', title: 'The Rusting Knight' },
+  Au: { name: 'Goldie', full: 'Gold', color: '#f4c35a', title: 'The Unbothered' },
+  e: { name: 'The Ghost', full: 'Electron', color: '#5ce1e6', title: 'The culprit of Chemistry 101', sym: 'e⁻' },
+  p: { name: 'Proton', full: 'Proton', color: '#ff5d5d', title: 'H⁺, the hot potato', sym: 'p⁺' },
+  n: { name: 'Neutron', full: 'Neutron', color: '#9aa3b8', title: '', sym: 'n⁰' }
+}, COURSE.cast || {});
+let avId = 0;
+function avatarSVG(el, mood = 'happy', size = 56) {
+  const c = CAST[el] || { color: '#999' }, id = 'av' + (avId++), sym = c.sym || el, ink = '#141625';
+  let face;
+  if (mood === 'happy') face = `<ellipse cx="25" cy="36" rx="2.6" ry="3.2" fill="${ink}"/><ellipse cx="39" cy="36" rx="2.6" ry="3.2" fill="${ink}"/><path d="M26 43 Q32 48.5 38 43" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  else if (mood === 'sly') face = `<path d="M21.5 36 q3.5 -2.6 7 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M35.5 36 q3.5 -2.6 7 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M27 44 Q34 47 39 42" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  else if (mood === 'shocked') face = `<circle cx="25" cy="36" r="3.4" fill="${ink}"/><circle cx="39" cy="36" r="3.4" fill="${ink}"/><ellipse cx="32" cy="45" rx="3" ry="3.6" fill="${ink}"/>`;
+  else face = `<path d="M22 37 h6 M36 37 h6" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/><path d="M28 44 h8" stroke="${ink}" stroke-width="2.2" stroke-linecap="round"/>`;
+  const orbit = c.orbit ? `<ellipse cx="32" cy="32" rx="31" ry="9" fill="none" stroke="${c.color}" stroke-opacity=".5" stroke-width="1.2" transform="rotate(-20 32 32)"/>` : '';
+  return `<svg viewBox="-2 -2 68 68" width="${size}" height="${size}" aria-hidden="true"><defs><radialGradient id="${id}" cx="36%" cy="30%" r="78%"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".22" stop-color="${shade(c.color, .25)}"/><stop offset=".7" stop-color="${c.color}"/><stop offset="1" stop-color="${shade(c.color, -.55)}"/></radialGradient></defs>${orbit}<circle cx="32" cy="32" r="27" fill="url(#${id})"/><text x="32" y="25" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="${sym.length > 2 ? 10 : 13}" fill="${ink}" fill-opacity=".8">${sym}</text><circle cx="20" cy="42" r="3" fill="#ff7aa8" opacity=".35"/><circle cx="44" cy="42" r="3" fill="#ff7aa8" opacity=".35"/>${face}</svg>`;
+}
+function renderAvatars(root = document) { $$('.avatar[data-el]', root).forEach(a => { if (a.dataset.done) return; a.innerHTML = avatarSVG(a.dataset.el, a.dataset.mood, +(a.dataset.size || 56)); a.dataset.done = 1; }); }
+const av = (el, mood = 'happy', size = 48) => `<span class="avatar" data-el="${el}" data-mood="${mood}" data-size="${size}"></span>`;
+
+/* ---------- icons (24px line set) ---------- */
+const P = {
+  eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  atom: '<circle cx="12" cy="12" r="1.8" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>',
+  pen: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
+  flask: '<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
+  scale: '<path d="M12 3v18M5 21h14M4 7h16"/><path d="M4 7l-3 7a3 3 0 0 0 6 0zM20 7l-3 7a3 3 0 0 0 6 0z"/>',
+  bread: '<path d="M4 11a4 4 0 0 1 2-7h12a4 4 0 0 1 2 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>',
+  balloon: '<ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16l-1 2h2zM12 18c0 2-2 2-2 4"/>',
+  cup: '<path d="M4 8h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 10h2a2 2 0 0 1 0 4h-2M8 2c0 2 2 2 2 4M12 2c0 2 2 2 2 4"/>',
+  star: '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  prism: '<path d="M12 4l8 15H4z"/><path d="M2 11l6 1M14 11l8-3M14 12l8 0M14 13l8 3"/>',
+  rad: '<circle cx="12" cy="12" r="2"/><path d="M12 10L8 3a10 10 0 0 0-5 8.5h7M12 10l4-7a10 10 0 0 1 5 8.5h-7M10.5 13.5L7 20a10 10 0 0 0 10 0l-3.5-6.5"/>',
+  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  magnet: '<path d="M6 3v9a6 6 0 0 0 12 0V3h-4v9a2 2 0 0 1-4 0V3z"/><path d="M6 7h4M14 7h4"/>',
+  drop: '<path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/>',
+  snow: '<path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M9 4l3 2 3-2M9 20l3-2 3 2"/>',
+  mountain: '<path d="M2 20l7-12 4 6 3-4 6 10z"/><path d="M8 10l1 1 1-1"/>',
+  flame: '<path d="M12 22c-4 0-7-2.7-7-6.5C5 10 12 8 10.5 2c4 2.5 8.5 6.5 8.5 13 0 4-3 7-7 7z"/>',
+  battery: '<rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 10v4M6 10v4M10 10v4"/>',
+  bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+  leaf: '<path d="M5 19c0-9 6-15 15-15 0 9-6 15-15 15z"/><path d="M5 19l9-9"/>',
+  dna: '<path d="M7 2c0 6 10 6 10 12s-10 6-10 8M17 2c0 6-10 6-10 12s10 6 10 8"/><path d="M8 6h8M8 18h8M9.5 10h5"/>',
+  bottle: '<path d="M10 2h4v4l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9l2-3z"/><path d="M8 13h8"/>',
+  lemon: '<circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14M7 7l10 10M17 7L7 17"/>',
+  wave: '<path d="M2 12c2.5-5 5-5 7.5 0s5 5 7.5 0 5-5 5 0"/>',
+  heart: '<path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/>',
+  fish: '<path d="M3 12c4-6 11-6 15 0-4 6-11 6-15 0z"/><path d="M18 12l4-4v8z"/><circle cx="8" cy="11" r=".8" fill="currentColor"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+  car: '<path d="M3 16v-4l2-5h14l2 5v4z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',
+  gem: '<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 18 3-18"/>',
+  chain: '<rect x="2" y="9" width="10" height="6" rx="3"/><rect x="12" y="9" width="10" height="6" rx="3"/>',
+  thermo: '<path d="M10 4a2 2 0 0 1 4 0v10a4 4 0 1 1-4 0z"/><path d="M12 9v7"/>',
+  gauge: '<path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-6"/>',
+  shell: '<path d="M12 20c-5 0-9-3-9-8 4 0 6 3 9 8zM12 20c5 0 9-3 9-8-4 0-6 3-9 8zM12 20V4M8 6l4-2 4 2"/>',
+  phone: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
+  key: '<circle cx="8" cy="12" r="4"/><path d="M12 12h9v3M18 12v3"/>',
+  ice: '<path d="M7 6h18l-2 22H9z" transform="scale(.75) translate(-1 -2)"/><path d="M6 10h12"/>',
+  candy: '<circle cx="12" cy="12" r="5"/><path d="M7 12l-5-3v6zM17 12l5-3v6z"/>',
+  flower: '<circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="5.5" r="3"/><circle cx="12" cy="18.5" r="3"/><circle cx="5.5" cy="12" r="3"/><circle cx="18.5" cy="12" r="3"/>',
+  wind: '<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h6"/>'
+};
+const ico = (k, size = 24, color = 'currentColor', sw = 1.8) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${P[k] || P.atom}</svg>`;
+const KEY = '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" fill="#f4c35a" fill-opacity=".15" stroke="#f4c35a"/><path d="M14 20a4 4 0 1 1 8 0 4 4 0 0 1-8 0zM22 20h8v3M27 20v3" stroke="#f4c35a" stroke-width="2" stroke-linecap="round"/></svg>';
+function artSVG(k, c1 = '#6fe3a0', c2 = '#5ce1e6') {
+  const id = 'ag' + (avId++);
+  return `<svg viewBox="0 0 140 140"><defs><radialGradient id="${id}" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="${c1}" stop-opacity=".45"/><stop offset="1" stop-color="${c2}" stop-opacity=".05"/></radialGradient></defs><circle cx="70" cy="70" r="62" fill="url(#${id})" stroke="${rgba(c1, .4)}"/>${[0, 1, 2].map(i => `<circle cx="70" cy="70" r="${66 + i * 0}" fill="none" stroke="${rgba(c2, .25)}" stroke-dasharray="2 ${6 + i * 4}" transform="rotate(${i * 40} 70 70)"/>`).join('')}<g transform="translate(34 34) scale(3)" fill="none" stroke="${shade(c1, .5)}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${P[k] || P.atom}</g></svg>`;
+}
+
+/* =========================================================
+   PAGE BUILDER
+   ========================================================= */
+const SERIES = [
+  ['101', 'The Invisible World', 'Atoms, bonds & reactions'], ['102', 'The Counting Problem', 'The mole & quantities'], ['103', 'Ghost Light', 'Light, orbitals & the nucleus'],
+  ['104', 'The Shape of Things', 'Bonding, shape & forces'], ['105', 'Under Pressure', 'Gases, phases & solutions'], ['106', 'The Energy Ledger', 'Thermochemistry & entropy'],
+  ['107', 'The Balance', 'Kinetics & equilibrium'], ['108', 'Proton Wars', 'Acids, bases & buffers'], ['109', 'The Electron Market', 'Redox & electrochemistry'], ['110', 'The Carbon Code', 'Organic & biochemistry']
+];
+const CASES = COURSE.cases; const NC = CASES.length; const pad = n => String(n).padStart(2, '0');
+function buildPage() {
+  const C = COURSE, i = SERIES.findIndex(s => s[0] === C.id), next = SERIES[i + 1];
+  const menu = SERIES.map(s => `<a href="../chemistry-${s[0]}/index.html" class="${s[0] === C.id ? 'cur' : ''}"><b>${s[0]}</b><span>${s[1]}<small>${s[2]}</small></span></a>`).join('');
+  let h = `<div class="progress" id="progress"></div>
+  <header class="topbar"><a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="6" fill="#f4c35a"/><g fill="none" stroke="#5ce1e6" stroke-width="2.5"><ellipse cx="32" cy="32" rx="28" ry="10"/><ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(120 32 32)"/></g></svg><span>${C.brand}</span></a><div class="spacer"></div>
+  <details class="courses"><summary class="tb-btn">Chem ${C.id} <span class="tb-hide">· courses</span> ▾</summary><nav class="menu" aria-label="All courses">${menu}</nav></details>
+  <a class="evidence-pill" href="#prologue" title="Clues collected"><span class="dots" id="ev-dots"></span><span><b id="ev-count">0</b>/${NC} <span class="tb-hide">clues</span></span></a>
+  <a class="tb-btn" href="#training">${ico('bread', 15)}<span class="tb-hide">Flashcards</span><span class="badge" id="due-badge">0</span></a></header>
+  <nav class="rail" id="rail" aria-label="Case files"><a href="#prologue" data-sec="prologue"><b>★</b><span>${C.prologue.short}</span></a>${CASES.map((c, k) => `<a href="#case${k + 1}" data-sec="case${k + 1}"><b>${k + 1}</b><span>${c.short}</span></a>`).join('')}<a href="#finale" data-sec="finale"><b>!</b><span>The Reveal</span></a><a href="#training" data-sec="training"><b>✎</b><span>Training Room</span></a></nav>
+  <section class="hero" id="top"><canvas id="hero-canvas" aria-hidden="true"></canvas><div class="hero-inner"><div class="eyebrow">${C.eyebrow}</div><h1>${C.titleHTML}</h1><p class="lede">${C.lede}</p><div class="cta-row"><a class="btn primary" href="#prologue">Open the first file ↓</a><a class="btn" href="#case1">Skip to case 1</a></div></div><div class="scroll-hint">SCROLL<i></i></div></section><main>
+  <section class="chapter" id="prologue"><div class="wrap"><header class="case-head reveal"><div class="case-num"><span>Prologue</span><b>00</b></div><div><p class="kicker">${C.prologue.kicker}</p><h2>${C.prologue.titleHTML}</h2></div></header>
+  <div class="story reveal">${C.prologue.story}</div><div class="board reveal" id="board"></div><p class="hint reveal" style="text-align:center">Each clue unlocks when you pass the <b>“Check your deductions”</b> questions in its case file. Progress is saved in this browser.</p>
+  <div class="cast reveal"><div style="width:100%;font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Persons of interest</div>${C.prologue.cast.map(([k, m]) => `<div class="cast-card">${av(k, m)}<div><b>${CAST[k].name} · ${CAST[k].full.toLowerCase()}</b><small>${CAST[k].title}</small></div></div>`).join('')}</div></div></section>`;
+  CASES.forEach((c, k) => {
+    const n = k + 1;
+    h += `<section class="chapter case" id="case${n}" data-case="${n}"><div class="wrap">
+    <header class="case-head reveal"><div class="case-num"><span>Case File</span><b>${pad(n)}</b></div><div><p class="kicker">${c.kicker}</p><h2>${c.titleHTML}</h2></div></header>
+    ${n > 1 ? `<div class="coldcase reveal" data-from="${n - 1}"></div>` : ''}<div class="mystery reveal" data-mystery="${n}"></div>
+    <div class="story reveal">${c.story}</div>
+    ${c.cast ? `<div class="cast reveal">${c.cast.map(([e, m, t, s]) => `<div class="cast-card">${av(e, m)}<div><b>${t}</b><small>${s}</small></div></div>`).join('')}</div>` : ''}
+    <div class="lab reveal" id="lab${n}"><div class="lab-head"><div><span class="label">Lab ${n} · ${c.lab.label}</span><h3>${c.lab.title}</h3></div>${c.lab.head || ''}</div><div class="lab-body">${c.lab.body}</div></div>
+    ${c.dialogue ? `<div class="dialogue reveal">${c.dialogue.map(([e, m, who, t], j) => `<div class="line ${j % 2 ? 'right' : ''}">${av(e, m, 56)}<div class="bubble"><b>${who}</b>${t}</div></div>`).join('')}</div>` : ''}
+    ${c.story2 ? `<div class="story reveal">${c.story2}</div>` : ''}
+    <div class="lenses reveal"><div class="lens macro"><div class="lt">${ico('eye')}Macro</div><p>${c.lenses[0]}</p></div><div class="lens micro"><div class="lt">${ico('atom')}Micro</div><p>${c.lenses[1]}</p></div><div class="lens symbol"><div class="lt">${ico('pen')}Symbolic</div><span class="formula">${c.lenses[2]}</span><p>${c.lenses[3]}</p></div></div>
+    <aside class="miracle reveal"><div class="art">${artSVG(c.miracle.ico, c.miracle.c1, c.miracle.c2)}</div><div><span class="tag">Everyday miracle</span><h3>${c.miracle.title}</h3>${c.miracle.html}</div></aside>
+    <div class="practice"><div class="block feynman" data-case="${n}"></div><div class="block quiz" data-case="${n}"></div></div><div class="verdict" data-case="${n}"></div></div></section>`;
+  });
+  h += `<section class="finale" id="finale"><canvas id="finale-canvas" style="position:absolute;inset:0;width:100%;height:100%;opacity:.7" aria-hidden="true"></canvas><div class="wrap narrow" style="position:relative"><div class="eyebrow">The reveal</div><h2 style="margin-top:18px">${C.finale.q}</h2><p class="story" style="margin:24px auto 0;text-align:center">${C.finale.lead}</p><div class="clue-chain" id="clue-chain"></div><button class="btn primary" id="reveal-btn">Name the culprit</button>
+  <div class="culprit" id="culprit"><div class="big">${av(C.finale.avatar, 'sly', 150)}</div><div class="eyebrow">The culprit is</div><h3>${C.finale.nameHTML}</h3><div class="story" style="margin:0 auto;text-align:left">${C.finale.html}</div>${next ? `<a class="btn primary next-course" href="../chemistry-${next[0]}/index.html">Next: Chemistry ${next[0]} · ${next[1]} →</a>` : `<p class="hint" style="margin-top:30px">That's the end of the series. You started unable to see atoms; now you can read the code of life.</p>`}</div></div></section>
+  <section class="chapter training" id="training"><div class="wrap"><header class="case-head reveal"><div class="case-num"><span>Training room</span><b>✎</b></div><div><p class="kicker">Make it stick</p><h2>The Detective's <em>Training</em> Room</h2></div></header>
+  <div class="story reveal"><p>Reading feels like learning, but most of it fades within days. What makes knowledge stay is <strong>pulling it back out of memory</strong>, again and again, with gaps in between. These cards come back sooner when you struggle and later when you know them.</p></div>
+  <div class="lab reveal"><div class="lab-head"><div><span class="label">Spaced repetition · Leitner boxes</span><h3>Flashcards</h3></div><span class="readout" id="fc-status"></span></div><div class="lab-body fc-wrap"><div><div class="fc" id="fc" tabindex="0" role="button" aria-label="Flashcard: press to flip"><div class="fc-inner"><div class="fc-face fc-front"><span class="tag" id="fc-tag"></span><span class="box" id="fc-box"></span><div class="txt" id="fc-q"></div><span class="flip-hint">click or press space to flip</span></div><div class="fc-face fc-back"><span class="tag">Answer</span><div class="txt" id="fc-a"></div></div></div></div>
+  <div class="fc-rate" id="fc-rate"><button class="btn small r1" data-r="1">✗ Didn't know <span class="mono" style="opacity:.5">1</span></button><button class="btn small r2" data-r="2">~ Shaky <span class="mono" style="opacity:.5">2</span></button><button class="btn small r3" data-r="3">✓ Knew it <span class="mono" style="opacity:.5">3</span></button></div></div>
+  <div class="side-panel"><div class="info-card"><div class="meta">DECK</div><select id="fc-filter" aria-label="Choose which case file to practise" style="margin-top:8px"></select><div class="meta" style="margin-top:16px">YOUR BOXES</div><div class="boxes" id="fc-boxes"></div><p class="hint" style="margin:6px 0 0;font-size:12.5px">Box 1 cards come back today. Box 5 cards come back in about a month.</p></div><button class="btn small ghost" id="fc-cram">Practise all now (cram mode)</button><button class="btn small ghost" id="fc-resetdeck" style="opacity:.7">Reset deck</button></div></div></div>
+  <div class="lab reveal"><div class="lab-head"><div><span class="label">Interleaved practice · confidence check</span><h3>The Final Interrogation</h3></div><button class="btn small" id="fi-start">New interrogation</button></div><div class="lab-body"><div class="final-q" id="fi"></div></div></div>
+  <h3 class="reveal" style="font-size:26px;margin-top:60px">How this page teaches you</h3><div class="strategies reveal">
+  <div><b>Retrieval practice</b><small>Every case ends with questions. Recalling an answer strengthens memory far more than re-reading.</small></div><div><b>Spaced repetition</b><small>Flashcards return just as you are about to forget them.</small></div><div><b>Interleaving</b><small>The Final Interrogation mixes topics, so you practise choosing which idea to use.</small></div><div><b>Pre-testing</b><small>Each mystery asks for your hunch first. Guessing before learning primes memory.</small></div>
+  <div><b>Dual coding</b><small>Every idea comes as words and a live picture.</small></div><div><b>Elaboration</b><small>“Explain it to a friend” prompts: the Feynman technique.</small></div><div><b>Concrete examples</b><small>Each abstract idea is tied to something you meet every day.</small></div><div><b>Metacognition</b><small>Rating your confidence shows whether you know it, or only think you do.</small></div></div></div></section></main>
+  <footer><div class="wrap">The Invisible World · Chemistry ${C.id}: ${C.title} · A single page, every visual drawn live in your browser.<br>Your progress, notes and flashcard boxes are stored only on this device.${next ? ` · <a href="../chemistry-${next[0]}/index.html">Next course →</a>` : ''}</div></footer><div class="toast" id="toast" role="status" aria-live="polite"></div>`;
+  document.body.innerHTML = h;
+  document.addEventListener('click', e => { const d = $('.courses'); if (d && d.open && !d.contains(e.target)) d.open = false; });
+}
+
+/* =========================================================
+   PRACTICE: evidence, mysteries, quizzes, prompts, verdicts
+   ========================================================= */
+let solved = new Set(store.get('solved', []));
+function markSolved(n) { if (solved.has(n)) return; solved.add(n); store.set('solved', [...solved]); updateEvidence(); toast(`${KEY.replace('<svg', '<svg width="26" height="26"')}<span>Clue ${n} of ${NC} acquired: <b>${CASES[n - 1].item}</b></span>`); const v = $(`.verdict[data-case="${n}"]`); if (v) refreshVerdict(v); }
+function updateEvidence() {
+  $('#ev-count').textContent = solved.size;
+  $('#ev-dots').innerHTML = CASES.map((_, i) => `<span class="${solved.has(i + 1) ? 'on' : ''}"></span>`).join('');
+  $$('.ev').forEach(e => { const n = +e.dataset.n; e.classList.toggle('solved', solved.has(n)); e.querySelector('small').innerHTML = solved.has(n) ? CASES[n - 1].clue : CASES[n - 1].teaser + ' <span style="color:var(--gold)">Unsolved</span>'; });
+  $$('#rail a').forEach(a => { const m = /^case(\d+)$/.exec(a.dataset.sec || ''); if (m) a.classList.toggle('solved', solved.has(+m[1])); });
+  const el = $('#clue-chain'); if (el) el.innerHTML = CASES.map((c, i) => `<div class="${solved.has(i + 1) ? '' : 'missing'}"><b>${pad(i + 1)}</b><span>${solved.has(i + 1) ? c.clue : '<i>Clue not yet collected. Solve case file ' + (i + 1) + '.</i>'}</span></div>`).join('');
+}
+function buildBoard() { $('#board').innerHTML = CASES.map((c, i) => `<a class="ev" href="#case${i + 1}" data-n="${i + 1}"><span class="ico" style="color:var(--gold)">${ico(c.ico, 28)}</span><span><b>${c.item}</b><small></small></span><span class="n">CLUE ${pad(i + 1)}</span></a>`).join(''); }
+let hunches = store.get('hunches', {});
+function buildMysteries() {
+  $$('[data-mystery]').forEach(m => {
+    const n = m.dataset.mystery, d = CASES[n - 1].mystery;
+    m.innerHTML = `<div class="tag">The mystery · Clue ${n}: ${CASES[n - 1].item}</div><h3>${d.q}</h3><div class="hunches">${d.h.map((h, i) => `<button class="hunch" data-i="${i}">${h}</button>`).join('')}</div><div class="hunch-note"></div>`;
+    const note = m.querySelector('.hunch-note');
+    const set = i => { $$('.hunch', m).forEach(b => b.classList.toggle('picked', +b.dataset.i === i)); note.innerHTML = 'Hunch logged. Read on and let the evidence decide. The answer is revealed when you <b>close the case</b> at the end of this file.'; };
+    if (hunches[n] != null) set(hunches[n]);
+    $$('.hunch', m).forEach(b => b.addEventListener('click', () => { hunches[n] = +b.dataset.i; store.set('hunches', hunches); set(+b.dataset.i); const v = $(`.verdict[data-case="${n}"]`); if (v) refreshVerdict(v); }));
+  });
+}
+const quizHTML = (q, idx) => `<div class="q" data-idx="${idx}"><p class="qt">${q.q}</p><div class="opts">${q.o.map((o, i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="fb"></div></div>`;
+function wireQuestion(qel, q, onRight) {
+  const fb = qel.querySelector('.fb'); let wrongOnce = false;
+  $$('.opt', qel).forEach(b => b.addEventListener('click', () => {
+    if (+b.dataset.i === q.a) { $$('.opt', qel).forEach(x => x.disabled = true); b.classList.add('right'); fb.className = 'fb show good'; fb.innerHTML = `<b>${wrongOnce ? 'Got it now.' : 'Correct.'}</b> ${q.w}`; onRight && onRight(!wrongOnce); }
+    else { wrongOnce = true; b.classList.add('wrong'); b.disabled = true; fb.className = 'fb show bad'; fb.innerHTML = '<b>Not quite.</b> Think again and pick another answer. Mistakes you correct are some of the best learning there is.'; }
+  }));
+}
+function buildQuizzes() {
+  $$('.quiz[data-case]').forEach(box => {
+    const n = +box.dataset.case, qs = CASES[n - 1].quiz;
+    box.innerHTML = `<div class="tag">${ico('pen', 14)} Retrieval practice</div><h4>Check your deductions</h4><p class="why">Answer from memory first. Answer all correctly to collect the clue.</p>` + qs.map(quizHTML).join('');
+    let right = 0; $$('.q', box).forEach((qel, i) => wireQuestion(qel, qs[i], () => { right++; if (right === qs.length) markSolved(n); }));
+    if (solved.has(n)) box.insertAdjacentHTML('beforeend', '<p class="hint" style="margin-top:14px"><span class="stamp">CLUE COLLECTED</span> &nbsp;Answering again is still great practice.</p>');
+  });
+}
+let notes = store.get('notes', {});
+function buildFeynman() {
+  $$('.feynman[data-case]').forEach(box => {
+    const n = box.dataset.case, Pp = CASES[n - 1].prompt;
+    box.innerHTML = `<div class="tag">${ico('pen', 14)} Elaboration · Feynman technique</div><h4>Explain it to a friend</h4><p class="why">${Pp.p}</p><textarea placeholder="Write it in your own words. Rough is fine; the effort is what counts." aria-label="Your explanation"></textarea><div class="controls" style="margin-top:10px"><button class="btn small">Compare with the detective's notes</button><span class="saved"></span></div><div class="model"><b style="color:var(--violet)">Detective's notes:</b> ${Pp.m}<br><span class="hint" style="font-size:12.5px">Anything you missed is exactly what to remember.</span></div>`;
+    const ta = box.querySelector('textarea'), saved = box.querySelector('.saved'), model = box.querySelector('.model');
+    ta.value = notes[n] || ''; if (ta.value) saved.textContent = 'saved on this device';
+    let t; ta.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { notes[n] = ta.value; store.set('notes', notes); saved.textContent = 'saved on this device'; }, 400); });
+    box.querySelector('.btn').addEventListener('click', () => { if (!ta.value.trim()) { saved.textContent = 'Write something first. Even one sentence helps.'; ta.focus(); return; } model.classList.add('show'); });
+  });
+}
+function refreshVerdict(v) {
+  const n = +v.dataset.case, d = CASES[n - 1].mystery, h = hunches[n];
+  v.querySelector('.hunch-res').innerHTML = h == null ? 'You didn\'t log a hunch for this one. Guessing first, even wrongly, makes the answer stick.' : (h === d.a ? `Your hunch, <b>“${d.h[h]}”</b>, was <b style="color:var(--green)">right</b>. Sharp detective work.` : `Your hunch was <b>“${d.h[h]}”</b>. Not quite, but having guessed first means this answer will stick far better.`);
+  v.querySelector('.clue-slot').innerHTML = solved.has(n) ? `<div class="clue">${KEY}<div><b>Clue ${n} collected</b><span>${CASES[n - 1].clue}</span></div></div>` : `<div class="clue" style="opacity:.55;filter:grayscale(1)">${KEY}<div><b>Clue ${n} locked</b><span>Answer the “Check your deductions” questions to collect it.</span></div></div>`;
+}
+function buildVerdicts() {
+  $$('.verdict[data-case]').forEach(v => {
+    const n = +v.dataset.case, d = CASES[n - 1].mystery;
+    v.innerHTML = `<div class="verdict-top"><div class="t"><small>Case file ${pad(n)}</small>Close the case</div><button class="btn primary small">Reveal the answer</button></div><div class="verdict-body"><p style="color:var(--muted);font-size:14px;margin-bottom:6px">${d.q}</p><p style="font-size:17px">${d.v}</p><p class="hint hunch-res"></p><div class="clue-slot"></div></div>`;
+    const btn = v.querySelector('.btn'); btn.addEventListener('click', () => { const open = v.classList.toggle('open'); btn.textContent = open ? 'Hide' : 'Reveal the answer'; refreshVerdict(v); });
+    refreshVerdict(v);
+  });
+}
+function bank() { const b = []; CASES.forEach((c, i) => c.quiz.forEach(q => b.push({ ...q, c: i + 1 }))); (COURSE.extra || []).forEach(q => b.push(q)); return b; }
+function buildColdCases() {
+  $$('.coldcase[data-from]').forEach(cc => {
+    const upto = +cc.dataset.from, pool = bank().filter(q => q.c <= upto), pick = pool[Math.floor(Math.random() * pool.length)];
+    cc.innerHTML = `<span class="tag">↺ Cold case review · from file ${pad(pick.c)}</span><p class="hint" style="margin:0 0 10px">A quick look back before the new case. Spacing out recall makes memories last.</p>` + quizHTML(pick, 0);
+    wireQuestion(cc.querySelector('.q'), pick);
+  });
+}
+
+/* =========================================================
+   FLASHCARDS & INTERROGATION
+   ========================================================= */
+function flashcards() {
+  const CARDS = COURSE.cards, DAY = 864e5, INT = [0, 0, 1, 3, 7, 30];
+  let deck = store.get('deck', {}); const card = $('#fc'), rate = $('#fc-rate'), sel = $('#fc-filter');
+  let queue = [], curr = null, filter = 'all', cram = false;
+  sel.innerHTML = `<option value="all">All case files (${CARDS.length} cards)</option>` + CASES.map((c, i) => `<option value="${i + 1}">File ${i + 1}: ${c.short} (${CARDS.filter(x => x[0] === i + 1).length})</option>`).join('');
+  const st = i => deck[i] || { box: 1, due: 0 }, inF = i => filter === 'all' || CARDS[i][0] == filter;
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function build() { queue = shuffle(CARDS.map((_, i) => i).filter(i => inF(i) && (cram || st(i).due <= Date.now()))); next(); }
+  function boxes() {
+    const counts = [0, 0, 0, 0, 0]; CARDS.forEach((_, i) => { if (inF(i)) counts[st(i).box - 1]++; }); const mx = Math.max(1, ...counts);
+    $('#fc-boxes').innerHTML = counts.map((c, i) => `<div><span>${c}</span><i style="height:${c / mx * 80 + 2}%"></i><span>Box ${i + 1}</span></div>`).join('');
+    const due = CARDS.filter((_, i) => st(i).due <= Date.now()).length; $('#due-badge').textContent = due; $('#due-badge').style.display = due ? '' : 'none';
+  }
+  function next() {
+    card.classList.remove('flipped'); rate.classList.remove('show'); boxes();
+    if (!queue.length) { curr = null; $('#fc-tag').textContent = 'All caught up'; $('#fc-box').textContent = ''; $('#fc-q').innerHTML = cram ? 'Cram session complete. Nicely done.' : 'No cards due right now. Come back tomorrow: the gap is what makes it stick.'; $('#fc-a').innerHTML = 'Spacing beats cramming.'; $('#fc-status').textContent = 'Nothing due'; return; }
+    curr = queue[0]; const C = CARDS[curr];
+    $('#fc-tag').textContent = `File ${C[0]} · ${CASES[C[0] - 1].short}`; $('#fc-box').textContent = `BOX ${st(curr).box}`;
+    setTimeout(() => { $('#fc-q').innerHTML = C[1]; $('#fc-a').innerHTML = C[2]; }, card.dataset.was ? 250 : 0); card.dataset.was = 1;
+    $('#fc-status').textContent = `${queue.length} card${queue.length > 1 ? 's' : ''} left in this session`;
+  }
+  function flip() { if (curr == null) return; card.classList.toggle('flipped'); if (card.classList.contains('flipped')) rate.classList.add('show'); }
+  function grade(g) {
+    if (curr == null || !card.classList.contains('flipped')) return;
+    let box = st(curr).box, due;
+    if (g === 1) { box = 1; due = Date.now(); } else if (g === 2) due = Date.now() + Math.max(6e5, INT[box] * DAY / 2); else { box = Math.min(5, box + 1); due = Date.now() + INT[box] * DAY; }
+    deck[curr] = { box, due }; store.set('deck', deck); queue.shift(); if (g === 1) queue.splice(Math.min(queue.length, 3), 0, curr); next();
+  }
+  card.addEventListener('click', flip); card.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); } });
+  document.addEventListener('keydown', e => { const a = document.activeElement; if (a !== card && !rate.contains(a)) return; if (['1', '2', '3'].includes(e.key)) grade(+e.key); });
+  rate.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { grade(+b.dataset.r); card.focus({ preventScroll: true }); } });
+  sel.addEventListener('change', () => { filter = sel.value; cram = false; build(); });
+  $('#fc-cram').addEventListener('click', () => { cram = true; build(); });
+  $('#fc-resetdeck').addEventListener('click', () => { if (!confirm('Reset all flashcard progress for this course?')) return; deck = {}; store.set('deck', deck); cram = false; build(); });
+  build();
+}
+function interrogation() {
+  const box = $('#fi'), B = bank(); let qs = [], i = 0, log = [];
+  function start() { const by = {}; B.forEach(q => (by[q.c] = by[q.c] || []).push(q)); qs = Object.values(by).map(a => a[Math.floor(Math.random() * a.length)]); qs = qs.concat(B.filter(q => !qs.includes(q)).sort(() => Math.random() - .5).slice(0, 10 - qs.length)).sort(() => Math.random() - .5); i = 0; log = []; show(); }
+  function show() {
+    if (i >= qs.length) return summary(); const q = qs[i]; let picked = null;
+    box.innerHTML = `<div class="meta" style="margin-bottom:10px">QUESTION ${i + 1} OF ${qs.length} · FROM CASE FILE ${pad(q.c)}</div><div style="height:4px;border-radius:4px;background:rgba(255,255,255,.06);margin-bottom:18px;overflow:hidden"><div style="height:100%;width:${i / qs.length * 100}%;background:linear-gradient(90deg,var(--violet),var(--gold))"></div></div><p class="qt" style="font-size:19px;font-family:var(--display);margin-bottom:14px">${q.q}</p><div class="opts">${q.o.map((o, k) => `<button class="opt" data-i="${k}">${o}</button>`).join('')}</div><div class="conf"><span>How sure are you?</span><button class="btn small" data-c="0">Just guessing</button><button class="btn small" data-c="1">Fairly sure</button><button class="btn small" data-c="2">Certain</button></div><div class="fb"></div><div class="controls" style="display:none" id="fi-next"><button class="btn primary small">${i === qs.length - 1 ? 'See my report' : 'Next question →'}</button></div>`;
+    const conf = box.querySelector('.conf');
+    $$('.opt', box).forEach(b => b.addEventListener('click', () => { if (conf.dataset.locked) return; picked = +b.dataset.i; $$('.opt', box).forEach(x => x.style.borderColor = x === b ? 'var(--violet)' : ''); conf.classList.add('show'); }));
+    $$('.conf .btn', box).forEach(b => b.addEventListener('click', () => {
+      if (conf.dataset.locked) return; conf.dataset.locked = 1; const ok = picked === q.a; log.push({ ok, conf: +b.dataset.c });
+      $$('.conf .btn', box).forEach(x => x.classList.toggle('on', x === b));
+      $$('.opt', box).forEach(x => { x.disabled = true; x.style.borderColor = ''; const k = +x.dataset.i; if (k === q.a) x.classList.add('right'); else if (k === picked) x.classList.add('wrong'); });
+      const fb = box.querySelector('.fb'); fb.className = 'fb show ' + (ok ? 'good' : 'bad'); fb.innerHTML = `<b>${ok ? 'Correct.' : 'Not this time.'}</b> ${q.w}`;
+      const nx = $('#fi-next'); nx.style.display = 'flex'; nx.querySelector('button').addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  function summary() {
+    const right = log.filter(l => l.ok).length, sure = log.filter(l => l.conf === 2), sr = sure.filter(l => l.ok).length, gs = log.filter(l => l.conf === 0), gr = gs.filter(l => l.ok).length;
+    const calib = sure.length && sr / sure.length < .75 ? 'When you felt <b>certain</b>, you were wrong more often than you expected. Those are exactly the ideas to revisit.' : gs.length && gr / gs.length > .6 ? 'Many of your <b>guesses</b> were right. You know more than you think!' : 'Your confidence matched your accuracy well. That\'s good self-knowledge, known as metacognition.';
+    box.innerHTML = `<h4 style="font-size:28px">Interrogation report</h4><div class="result-grid"><div><b>${right}/${log.length}</b><small>correct</small></div><div><b>${sure.length ? Math.round(sr / sure.length * 100) + '%' : '–'}</b><small>right when “certain”</small></div><div><b>${gs.length ? Math.round(gr / gs.length * 100) + '%' : '–'}</b><small>right when “guessing”</small></div></div><p style="color:var(--soft)">${calib}</p><p class="hint">Questions were shuffled across topics (interleaving). It feels harder than practising one topic at a time, which is exactly why it works.</p><button class="btn primary small" id="fi-again">Interrogate me again</button>`;
+    $('#fi-again').addEventListener('click', start);
+  }
+  $('#fi-start').addEventListener('click', start); start();
+}
+
+/* =========================================================
+   HERO & FINALE
+   ========================================================= */
+function hero() {
+  const c = $('#hero-canvas'), rnd = seeded(+COURSE.id), A = COURSE.accent || ['#5ce1e6', '#f4c35a'];
+  const cols = [A[0], A[1], '#ff6b9a', '#a78bfa', '#6fe3a0', '#dfe9ff'];
+  const Pt = Array.from({ length: 64 }, (_, i) => ({ x: rnd(), y: rnd(), z: .25 + rnd() * .75, vx: (rnd() - .5) * .012, vy: (rnd() - .5) * .012, c: cols[i % cols.length], ph: rnd() * TAU }));
+  let mx = -9999, my = -9999; const hs = $('.hero');
+  hs.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+  hs.addEventListener('pointerleave', () => { mx = my = -9999; });
+  animate(c, (dt, t) => {
+    const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h);
+    const cx = w * .5, cy = h * .47, R = Math.min(w * .46, h * .42);
+    glow(ctx, cx, cy, R * .5, A[1], .55); glow(ctx, cx, cy, R * .18, shade(A[1], .4), .9);
+    for (let k = 0; k < 3; k++) {
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(k * Math.PI / 3 + t * .03); ctx.beginPath(); ctx.ellipse(0, 0, R, R * .3, 0, 0, TAU); ctx.strokeStyle = rgba(A[0], .13); ctx.lineWidth = 1; ctx.stroke();
+      const a = (reduceMotion ? 1 : t) * (.55 + k * .18) + k * 2.1, ex = Math.cos(a) * R, ey = Math.sin(a) * R * .3;
+      for (let j = 1; j < 18; j++) { const aj = a - j * .035; ctx.fillStyle = rgba(A[0], .25 * (1 - j / 18)); ctx.beginPath(); ctx.arc(Math.cos(aj) * R, Math.sin(aj) * R * .3, 3 * (1 - j / 22), 0, TAU); ctx.fill(); }
+      glow(ctx, ex, ey, 26, A[0], 1); ball(ctx, A[0], ex, ey, 5); ctx.restore();
+    }
+    for (const p of Pt) {
+      if (!reduceMotion) { p.x += p.vx * dt * p.z; p.y += p.vy * dt * p.z; }
+      if (p.x < -.05) p.x = 1.05; if (p.x > 1.05) p.x = -.05; if (p.y < -.05) p.y = 1.05; if (p.y > 1.05) p.y = -.05;
+      p.sx = p.x * w; p.sy = p.y * h + Math.sin(t * .6 + p.ph) * 6 * p.z; const dx = p.sx - mx, dy = p.sy - my, d2 = dx * dx + dy * dy;
+      if (d2 < 22000) { const f = (1 - d2 / 22000) * 40; p.sx += dx / Math.sqrt(d2 + 1) * f; p.sy += dy / Math.sqrt(d2 + 1) * f; }
+    }
+    for (let i = 0; i < Pt.length; i++) for (let j = i + 1; j < Pt.length; j++) { const a = Pt[i], b = Pt[j], dx = a.sx - b.sx, dy = a.sy - b.sy, d = dx * dx + dy * dy; if (d < 13000) { ctx.strokeStyle = `rgba(200,210,255,${(1 - d / 13000) * .14 * Math.min(a.z, b.z)})`; ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke(); } }
+    for (const p of Pt) { ctx.globalAlpha = .35 + p.z * .6; ball(ctx, p.c, p.sx, p.sy, 2 + p.z * 6); } ctx.globalAlpha = 1;
+  });
+}
+function finale() {
+  const c = $('#finale-canvas'), rnd = seeded(77), A = COURSE.accent || ['#5ce1e6'];
+  const E = Array.from({ length: 90 }, () => ({ a: rnd() * TAU, r: .15 + rnd() * .85, s: (.05 + rnd() * .2) * (rnd() < .5 ? -1 : 1), tilt: rnd() * Math.PI }));
+  let boost = 0;
+  animate(c, (dt) => { const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h); boost = Math.max(0, boost - dt * .3); const cx = w / 2, cy = h * .35, R = Math.max(w, h) * .55;
+    for (const e of E) { if (!reduceMotion) e.a += e.s * dt * (1 + boost * 6); const x = cx + Math.cos(e.a) * e.r * R, y = cy + Math.sin(e.a) * e.r * R * .45 * Math.cos(e.tilt) + Math.sin(e.a) * e.r * R * .2 * Math.sin(e.tilt); ctx.globalAlpha = .25 + .5 * (1 - e.r); glow(ctx, x, y, 10 + boost * 10, A[0], 1); ball(ctx, A[0], x, y, 2); } ctx.globalAlpha = 1; });
+  $('#reveal-btn').addEventListener('click', () => { const cu = $('#culprit'); cu.classList.add('show'); boost = 1; $('#reveal-btn').style.display = 'none'; if (solved.size < NC) cu.insertAdjacentHTML('afterbegin', `<p class="hint">You named the culprit with ${solved.size} of ${NC} clues. Collect the rest to complete the chain of evidence.</p>`); setTimeout(() => cu.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }), 60); });
+}
+function nav() {
+  const prog = $('#progress'); const onScroll = () => { const h = document.documentElement; prog.style.width = (h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight) * 100) + '%'; };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('#rail a').forEach(a => a.classList.toggle('active', a.dataset.sec === e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  $$('#rail a').map(a => document.getElementById(a.dataset.sec)).filter(Boolean).forEach(s => io.observe(s));
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  $$('.reveal').forEach(el => rio.observe(el));
+}
+
+/* =========================================================
+   ENGINES: particle box, plotter, 3D molecule viewer
+   ========================================================= */
+function ParticleBox(canvas, o) {
+  const S = { P: [], T: o.T || 1, wall: 1, partition: !!o.partition, imp: 0, pressure: 0, t: 0, hits: 0, events: 0, paused: false };
+  const sp = o.species;
+  function vel(k) { const s = (o.speed || 60) * Math.sqrt(S.T / (sp[k].m || 1)); return [gauss() * s, gauss() * s]; }
+  let W = 0, H = 0;
+  function add(k, n, region) { for (let i = 0; i < n; i++) { const [vx, vy] = vel(k), r = sp[k].r || 6; const x0 = region ? region[0] : 0, x1 = region ? region[1] : 1; S.P.push({ k, x: r + (x0 + Math.random() * (x1 - x0)) * Math.max(10, (W || 400) * S.wall - 2 * r), y: r + Math.random() * Math.max(10, (H || 300) - 2 * r), vx, vy, r }); } }
+  function reset(counts) { S.P = []; S.t = 0; S.events = 0; for (const k in counts) add(k, counts[k], o.regions && o.regions[k]); }
+  function setT(T) { const f = Math.sqrt(T / S.T); S.T = T; S.P.forEach(p => { p.vx *= f; p.vy *= f; }); }
+  function count(k) { return S.P.filter(p => p.k === k).length; }
+  function remove(k, n) { for (let i = S.P.length - 1; i >= 0 && n > 0; i--) if (S.P[i].k === k) { S.P.splice(i, 1); n--; } }
+  function spawn(list, x, y) { list.forEach((k, j) => { const [vx, vy] = vel(k); S.P.push({ k, x: x + (j - (list.length - 1) / 2) * 6, y, vx, vy, r: sp[k].r || 6 }); }); }
+  const flashes = [];
+  function step(dt) {
+    const xmax = W * S.wall, mid = W * S.wall / 2;
+    for (const p of S.P) {
+      if (o.gravity) p.vy += o.gravity * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; const m = sp[p.k].m || 1;
+      if (p.x < p.r) { p.x = p.r; S.imp += 2 * m * Math.abs(p.vx); p.vx = Math.abs(p.vx); }
+      if (p.x > xmax - p.r) { p.x = xmax - p.r; S.imp += 2 * m * Math.abs(p.vx); p.vx = -Math.abs(p.vx); }
+      if (p.y < p.r) { p.y = p.r; S.imp += 2 * m * Math.abs(p.vy); p.vy = Math.abs(p.vy); }
+      if (p.y > H - p.r) { p.y = H - p.r; S.imp += 2 * m * Math.abs(p.vy); p.vy = -Math.abs(p.vy); }
+      if (S.partition) { if (p.x < mid && p.x > mid - p.r - 2 && p.vx > 0) { p.x = mid - p.r - 2; p.vx = -p.vx; } else if (p.x > mid && p.x < mid + p.r + 2 && p.vx < 0) { p.x = mid + p.r + 2; p.vx = -p.vx; } }
+    }
+    if (o.uni) for (let i = S.P.length - 1; i >= 0; i--) { const p = S.P[i], u = o.uni.find(r => r.a === p.k); if (u && Math.random() < u.k() * dt) { S.P.splice(i, 1); spawn(u.products, p.x, p.y); S.events++; if (u.flash) flashes.push({ x: p.x, y: p.y, life: 1, c: u.flash }); } }
+    if (o.collide !== false) {
+      const N = S.P.length;
+      for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+        const a = S.P[i], b = S.P[j]; if (a.dead || b.dead) continue; const dx = b.x - a.x, dy = b.y - a.y, rr = a.r + b.r, d2 = dx * dx + dy * dy; if (d2 >= rr * rr) continue;
+        const d = Math.sqrt(d2) || .01, nx = dx / d, ny = dy / d, vr = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny; if (vr <= 0) continue;
+        S.hits++;
+        const rx = o.reactions && o.reactions.find(r => (r.a === a.k && r.b === b.k) || (r.a === b.k && r.b === a.k));
+        if (rx && vr > (typeof rx.Ea === 'function' ? rx.Ea() : (rx.Ea || 0)) && Math.random() < (rx.p == null ? 1 : (typeof rx.p === 'function' ? rx.p() : rx.p))) { a.dead = b.dead = true; spawn(rx.products, (a.x + b.x) / 2, (a.y + b.y) / 2); S.events++; if (rx.flash) flashes.push({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, life: 1, c: rx.flash }); continue; }
+        const m1 = sp[a.k].m || 1, m2 = sp[b.k].m || 1, J = 2 * vr / (m1 + m2);
+        a.vx -= J * m2 * nx; a.vy -= J * m2 * ny; b.vx += J * m1 * nx; b.vy += J * m1 * ny; const ov = (rr - d) / 2; a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov;
+      }
+      S.P = S.P.filter(p => !p.dead);
+    }
+    S.t += dt;
+  }
+  let pAcc = 0, pT = 0;
+  const api = { S, reset, setT, count, add, remove, flashes, get W() { return W; }, get H() { return H; } };
+  animate(canvas, (dt, t) => {
+    const { ctx, w, h } = fit(canvas); const first = !W; W = w; H = h; if (first) { reset(o.counts || {}); o.onInit && o.onInit(api); }
+    if (!S.paused) { const n = o.substeps || 2; for (let i = 0; i < n; i++) step(dt / n); }
+    pAcc += S.imp; S.imp = 0; pT += dt; if (pT > .5) { const per = 2 * (W * S.wall + H); S.pressure = lerp(S.pressure || pAcc / pT / per, pAcc / pT / per, .5); pAcc = 0; pT = 0; }
+    ctx.clearRect(0, 0, w, h);
+    if (o.bg) o.bg(ctx, w, h, api);
+    if (S.wall < 1) { ctx.fillStyle = 'rgba(255,255,255,.04)'; ctx.fillRect(W * S.wall, 0, W, H); ctx.fillStyle = 'rgba(200,210,255,.55)'; ctx.fillRect(W * S.wall, 0, 4, H); }
+    if (S.partition) { ctx.fillStyle = 'rgba(244,195,90,.7)'; ctx.fillRect(W * S.wall / 2 - 2, 0, 4, H); }
+    for (const f of flashes) { f.life -= dt * 1.5; glow(ctx, f.x, f.y, 40 * (1.2 - f.life), f.c, Math.max(0, f.life)); }
+    for (let i = flashes.length - 1; i >= 0; i--) if (flashes[i].life <= 0) flashes.splice(i, 1);
+    for (const p of S.P) { const s = sp[p.k]; if (s.draw) s.draw(ctx, p, t); else { if (s.glow) glow(ctx, p.x, p.y, p.r * 2.6, s.color, .5); ball(ctx, s.color, p.x, p.y, p.r); if (s.label) label(ctx, s.label, p.x, p.y + 3, { align: 'center', color: '#0b0d19', font: `700 ${Math.round(p.r)}px Inter,sans-serif` }); } }
+    if (o.after) o.after(ctx, w, h, api, dt);
+    o.onTick && o.onTick(api, dt);
+  });
+  return api;
+}
+function plot(c, o) {
+  const { ctx, w, h } = fit(c); ctx.clearRect(0, 0, w, h);
+  const L = o.padL || 46, R = 14, T = 12, Bm = o.padB || 34, pw = w - L - R, ph = h - T - Bm;
+  const X = x => L + (o.xlog ? (Math.log10(x) - Math.log10(o.x[0])) / (Math.log10(o.x[1]) - Math.log10(o.x[0])) : (x - o.x[0]) / (o.x[1] - o.x[0])) * pw;
+  const Y = y => T + (1 - (y - o.y[0]) / (o.y[1] - o.y[0])) * ph;
+  ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = 1;
+  (o.yt || []).forEach(v => { ctx.beginPath(); ctx.moveTo(L, Y(v)); ctx.lineTo(L + pw, Y(v)); ctx.stroke(); label(ctx, o.yf ? o.yf(v) : v, L - 6, Y(v) + 3, { align: 'right', size: 10, color: '#8f8eab' }); });
+  (o.xt || []).forEach(v => { ctx.beginPath(); ctx.moveTo(X(v), T); ctx.lineTo(X(v), T + ph); ctx.stroke(); label(ctx, o.xf ? o.xf(v) : v, X(v), T + ph + 14, { align: 'center', size: 10, color: '#8f8eab' }); });
+  ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.beginPath(); ctx.moveTo(L, T); ctx.lineTo(L, T + ph); ctx.lineTo(L + pw, T + ph); ctx.stroke();
+  if (o.xl) label(ctx, o.xl, L + pw / 2, h - 4, { align: 'center', size: 10.5, color: '#c9c8dc' });
+  if (o.yl) { ctx.save(); ctx.translate(11, T + ph / 2); ctx.rotate(-Math.PI / 2); label(ctx, o.yl, 0, 0, { align: 'center', size: 10.5, color: '#c9c8dc' }); ctx.restore(); }
+  ctx.save(); ctx.beginPath(); ctx.rect(L, T - 2, pw, ph + 4); ctx.clip();
+  (o.areas || []).forEach(a => { ctx.fillStyle = a.color; ctx.beginPath(); ctx.moveTo(X(a.pts[0][0]), Y(a.base || o.y[0])); a.pts.forEach(p => ctx.lineTo(X(p[0]), Y(p[1]))); ctx.lineTo(X(a.pts[a.pts.length - 1][0]), Y(a.base || o.y[0])); ctx.fill(); });
+  (o.series || []).forEach(s => { if (!s.pts.length) return; ctx.strokeStyle = s.color; ctx.lineWidth = s.width || 2.2; ctx.setLineDash(s.dash || []); ctx.beginPath(); s.pts.forEach((p, i) => i ? ctx.lineTo(X(p[0]), Y(p[1])) : ctx.moveTo(X(p[0]), Y(p[1]))); ctx.stroke(); ctx.setLineDash([]); if (s.dots) s.pts.forEach(p => ball(ctx, s.color, X(p[0]), Y(p[1]), 4)); });
+  ctx.restore();
+  (o.vlines || []).forEach(v => { ctx.strokeStyle = v.color || '#f4c35a'; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(X(v.x), T); ctx.lineTo(X(v.x), T + ph); ctx.stroke(); ctx.setLineDash([]); if (v.label) label(ctx, v.label, X(v.x) + 4, T + 12, { color: v.color || '#f4c35a', size: 10 }); });
+  (o.hlines || []).forEach(v => { ctx.strokeStyle = v.color || '#f4c35a'; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(L, Y(v.y)); ctx.lineTo(L + pw, Y(v.y)); ctx.stroke(); ctx.setLineDash([]); if (v.label) label(ctx, v.label, L + pw - 4, Y(v.y) - 5, { color: v.color || '#f4c35a', size: 10, align: 'right' }); });
+  (o.marks || []).forEach(m => { glow(ctx, X(m.x), Y(m.y), 16, m.color || '#f4c35a', 1); ball(ctx, m.color || '#f4c35a', X(m.x), Y(m.y), m.r || 5); if (m.label) label(ctx, m.label, X(m.x) + 9, Y(m.y) - 8, { color: '#fff', size: 11 }); });
+  return { X, Y, L, T, pw, ph, ctx, w, h };
+}
+const ATOMC = { H: ['#eef3ff', .31], C: ['#8d95ab', .55], N: ['#6b8cff', .52], O: ['#ff5d5d', .5], F: ['#c6f36b', .45], Cl: ['#6fe3a0', .7], Br: ['#c46a3a', .78], S: ['#f4d35a', .7], P: ['#ff9f5a', .7], Na: ['#b38cff', .5], X: ['#a78bfa', .55], B: ['#ffb38a', .55], Cu: ['#e08a5a', .6], Fe: ['#e8925a', .6], Li: ['#ff8fc8', .5] };
+function molViewer(canvas, stage, getMol, o = {}) {
+  let rx = o.spinX ? .3 : -.35, ry = o.spinX ? .18 : .5, vx = o.spinX ? .35 : 0, vy = o.spinX ? 0 : .35, drag = null, idle = 0;
+  stage.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag = { x: e.clientX, y: e.clientY }; ry += dx * .01; rx += dy * .01; vy = dx * .6; vx = dy * .6; idle = 0; });
+  const up = () => { drag = null; }; stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+  animate(canvas, (dt, t) => {
+    idle += dt; if (!drag) { ry += vy * dt; rx += vx * dt; if (o.spinX) { vy *= .95; vx = lerp(vx, idle > 1.5 && !reduceMotion ? .4 : vx * .95, .03); } else { vx *= .95; vy = lerp(vy, idle > 1.5 && !reduceMotion ? .4 : vy * .95, .03); } }
+    const { ctx, w, h } = fit(canvas); ctx.clearRect(0, 0, w, h); const m = getMol(); if (!m) return;
+    const rad = a => (ATOMC[a[0]] || ATOMC.X)[1] * (m.scaleAtoms || 1);
+    const maxR = Math.max(...m.atoms.map(a => Math.hypot(a[1], a[2], a[3]) + rad(a)), ...(m.lobes || []).map(l => Math.hypot(l[0], l[1], l[2]) + .4));
+    const sc = Math.min(w, h) * (o.zoom || .38) / maxR, cx = w / 2, cy = h / 2;
+    const cX = Math.cos(rx), sX = Math.sin(rx), cY = Math.cos(ry), sY = Math.sin(ry);
+    const proj = (x, y, z) => { const x1 = x * cY + z * sY, z1 = -x * sY + z * cY, y1 = y * cX - z1 * sX, z2 = y * sX + z1 * cX, p = 9 / (9 + z2); return { x: cx + x1 * sc * p, y: cy + y1 * sc * p, z: z2, p }; };
+    const Pp = m.atoms.map(a => ({ e: a[0], ...proj(a[1], a[2], a[3]), r: rad(a), hl: a[4] }));
+    const items = [];
+    (m.bonds || []).forEach(b => items.push({ t: 'b', b, z: (Pp[b[0]].z + Pp[b[1]].z) / 2 + .001 }));
+    Pp.forEach((p, i) => items.push({ t: 'a', i, z: p.z }));
+    (m.lobes || []).forEach(l => { const q = proj(l[0], l[1], l[2]); items.push({ t: 'l', q, z: q.z, from: Pp[l[3] || 0] }); });
+    items.sort((a, b) => b.z - a.z);
+    glow(ctx, cx, cy, Math.min(w, h) * .45, o.glow || '#5ce1e6', .22);
+    for (const it of items) {
+      if (it.t === 'b') {
+        const [i, j, ord] = it.b, A = Pp[i], B = Pp[j], lw = Math.max(1.5, sc * .12 * A.p), dx = B.x - A.x, dy = B.y - A.y, Ln = Math.hypot(dx, dy) || 1, nx = -dy / Ln, ny = dx / Ln;
+        const offs = ord === 2 ? [-lw * .8, lw * .8] : ord === 3 ? [-lw * 1.3, 0, lw * 1.3] : [0]; ctx.lineCap = 'round';
+        for (const of of offs) { const g = ctx.createLinearGradient(A.x, A.y, B.x, B.y); g.addColorStop(0, shade((ATOMC[A.e] || ATOMC.X)[0], -.15)); g.addColorStop(.5, '#cfd5e6'); g.addColorStop(1, shade((ATOMC[B.e] || ATOMC.X)[0], -.15)); ctx.strokeStyle = ord === 0 ? 'rgba(255,255,255,.2)' : ord === 4 ? 'rgba(244,195,90,.6)' : g; ctx.setLineDash(ord === 4 ? [4, 4] : []); ctx.lineWidth = ord === 0 || ord === 4 ? 1.5 : (ord > 1 ? lw * .6 : lw); ctx.beginPath(); ctx.moveTo(A.x + nx * of, A.y + ny * of); ctx.lineTo(B.x + nx * of, B.y + ny * of); ctx.stroke(); ctx.setLineDash([]); }
+      } else if (it.t === 'l') { const q = it.q, f = it.from; const g = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, sc * .45 * q.p); g.addColorStop(0, 'rgba(255,214,110,.55)'); g.addColorStop(1, 'rgba(255,214,110,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(q.x, q.y, sc * .42 * q.p, sc * .42 * q.p, 0, 0, TAU); ctx.fill(); ctx.fillStyle = '#ffd36e'; ctx.beginPath(); ctx.arc(q.x - 4, q.y, 2.4, 0, TAU); ctx.arc(q.x + 4, q.y, 2.4, 0, TAU); ctx.fill(); }
+      else { const p = Pp[it.i]; ctx.globalAlpha = clamp(.6 + (1 - p.z / 3) * .4, .5, 1); if (p.hl) glow(ctx, p.x, p.y, p.r * sc * 2.2, '#f4c35a', 1); ball(ctx, (ATOMC[p.e] || ATOMC.X)[0], p.x, p.y, p.r * sc * p.p); ctx.globalAlpha = 1; if (m.labels) label(ctx, p.e, p.x, p.y + 4, { align: 'center', color: '#0b0d19', font: `700 ${Math.max(9, p.r * sc * p.p * .7)}px Inter,sans-serif` }); }
+    }
+    o.after && o.after(ctx, w, h, t);
+  });
+}
+function legendFor(m) { const els = [...new Set(m.atoms.map(a => a[0]))]; const N = { H: 'Hydrogen', C: 'Carbon', N: 'Nitrogen', O: 'Oxygen', F: 'Fluorine', Cl: 'Chlorine', Br: 'Bromine', S: 'Sulfur', P: 'Phosphorus', Na: 'Sodium', X: 'Atom', B: 'Boron', Cu: 'Copper', Fe: 'Iron', Li: 'Lithium' }; return els.map(e => `<span><i style="background:${(ATOMC[e] || ATOMC.X)[0]}"></i>${N[e] || e}</span>`).join(''); }
+
+/* =========================================================
+   INIT
+   ========================================================= */
+function init() {
+  buildPage(); buildBoard(); buildMysteries(); buildQuizzes(); buildFeynman(); buildVerdicts(); buildColdCases(); renderAvatars(); updateEvidence(); nav();
+  [hero, finale, flashcards, interrogation].forEach(fn => { try { fn(); } catch (err) { console.error(fn.name, err); } });
+  CASES.forEach((c, i) => { try { c.lab.init($('#lab' + (i + 1))); } catch (err) { console.error('lab' + (i + 1), err); } });
+  renderAvatars();
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+
+})();
+</script>
+</body>
+</html>

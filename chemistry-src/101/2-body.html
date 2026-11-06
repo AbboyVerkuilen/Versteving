@@ -1,0 +1,776 @@
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="The Invisible World, back to top">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="6" fill="#f4c35a"/><g fill="none" stroke="#5ce1e6" stroke-width="2.5"><ellipse cx="32" cy="32" rx="28" ry="10"/><ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(120 32 32)"/></g></svg>
+    <span>The <i>Invisible</i> World</span>
+  </a>
+  <div class="spacer"></div>
+  <details class="courses"><summary class="tb-btn">Chem 101 <span class="tb-hide">· courses</span> ▾</summary><nav class="menu" aria-label="All courses"><a href="../chemistry-101/index.html" class="cur"><b>101</b><span>The Invisible World<small>Atoms, bonds &amp; reactions</small></span></a><a href="../chemistry-102/index.html" class=""><b>102</b><span>The Counting Problem<small>The mole &amp; quantities</small></span></a><a href="../chemistry-103/index.html" class=""><b>103</b><span>Ghost Light<small>Light, orbitals &amp; the nucleus</small></span></a><a href="../chemistry-104/index.html" class=""><b>104</b><span>The Shape of Things<small>Bonding, shape &amp; forces</small></span></a><a href="../chemistry-105/index.html" class=""><b>105</b><span>Under Pressure<small>Gases, phases &amp; solutions</small></span></a><a href="../chemistry-106/index.html" class=""><b>106</b><span>The Energy Ledger<small>Thermochemistry &amp; entropy</small></span></a><a href="../chemistry-107/index.html" class=""><b>107</b><span>The Balance<small>Kinetics &amp; equilibrium</small></span></a><a href="../chemistry-108/index.html" class=""><b>108</b><span>Proton Wars<small>Acids, bases &amp; buffers</small></span></a><a href="../chemistry-109/index.html" class=""><b>109</b><span>The Electron Market<small>Redox &amp; electrochemistry</small></span></a><a href="../chemistry-110/index.html" class=""><b>110</b><span>The Carbon Code<small>Organic &amp; biochemistry</small></span></a></nav></details>
+  <a class="evidence-pill" href="#prologue" title="Clues collected"><span class="dots" id="ev-dots"></span><span><b id="ev-count">0</b>/9 <span class="tb-hide">clues</span></span></a>
+  <a class="tb-btn" href="#training"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg><span class="tb-hide">Flashcards</span><span class="badge" id="due-badge">0</span></a>
+</header>
+
+<nav class="rail" id="rail" aria-label="Case files">
+  <a href="#prologue" data-sec="prologue"><b>★</b><span>The Ordinary Morning</span></a>
+  <a href="#zoom" data-sec="zoom"><b>⌕</b><span>From Melon to Atom</span></a>
+  <a href="#case1" data-sec="case1"><b>1</b><span>The Restless Crowd</span></a>
+  <a href="#case2" data-sec="case2"><b>2</b><span>The Empty Room</span></a>
+  <a href="#case3" data-sec="case3"><b>3</b><span>The Family Album</span></a>
+  <a href="#case4" data-sec="case4"><b>4</b><span>The Deal</span></a>
+  <a href="#case5" data-sec="case5"><b>5</b><span>The Bent One</span></a>
+  <a href="#case6" data-sec="case6"><b>6</b><span>The Great Rearrangement</span></a>
+  <a href="#case7" data-sec="case7"><b>7</b><span>The Race Against Time</span></a>
+  <a href="#case8" data-sec="case8"><b>8</b><span>Sour &amp; Slippery</span></a>
+  <a href="#case9" data-sec="case9"><b>9</b><span>The Carbon Odyssey</span></a>
+  <a href="#finale" data-sec="finale"><b>!</b><span>The Reveal</span></a>
+  <a href="#training" data-sec="training"><b>✎</b><span>Training Room</span></a>
+</nav>
+
+<section class="hero" id="top">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">Chemistry 101 · A mystery in nine case files</div>
+    <h1>The <em>Invisible</em> World</h1>
+    <p class="lede">Everything you have ever touched, tasted or breathed is the work of a hidden culprit. No prior knowledge needed: just curiosity, and a detective's eye.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#prologue">Open the first file <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+      <a class="btn" href="#zoom">Zoom from melon to atom</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL<i></i></div>
+</section>
+
+<main>
+<!-- ======================= PROLOGUE ======================= -->
+<section class="chapter" id="prologue">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Prologue</span><b>00</b></div>
+      <div><p class="kicker">The case begins</p><h2>The Case of the <em>Ordinary</em> Morning</h2></div>
+    </header>
+    <div class="story reveal">
+      <p>It is 7:02 a.m. You wake up. Your breath fogs the cold bedroom window. In the kitchen the kettle begins to sing. An ice cube bobs in your orange juice: <strong>floating</strong>, when by rights it should sink. A pinch of salt vanishes into the pan. The milk in the fridge is still fresh after a week, though it would have spoiled in a day on the counter.</p>
+      <p>You think nothing of it. You should. Each of these small events is a <strong>clue</strong>, and they all point to one hidden culprit. It has been at work in every object you have ever held, every meal you have eaten and every breath you have taken. It is too small to see, and you will meet it in disguise many times before you recognise it.</p>
+      <p>This is <strong>chemistry</strong>: the study of what things are made of and how they change. Your job, detective, is to work through nine case files, collect nine clues, and name the culprit at the end.</p>
+    </div>
+    <div class="board reveal" id="board"></div>
+    <p class="hint reveal" style="text-align:center">Each clue unlocks when you pass the <b>“Check your deductions”</b> questions in its case file. Your progress is saved in this browser.</p>
+
+    <div class="cast reveal" id="cast-intro"></div>
+  </div>
+</section>
+
+<!-- ======================= ZOOM ======================= -->
+<section class="chapter" id="zoom">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Briefing</span><b>×10⁹</b></div>
+      <div><p class="kicker">Three levels of seeing</p><h2>From <em>Melon</em> to Atom</h2></div>
+    </header>
+    <div class="story reveal">
+      <p>Every detective needs a magnifying glass. Ours zooms a billion times. Chemists look at the world on <strong>three levels</strong>, and the trick of this whole subject is learning to jump between them. The <strong>macro</strong> level is the melon in your hands: colour, taste, coldness. The <strong>micro</strong> level is what the melon is really made of: cells, then molecules, then atoms. The <strong>symbolic</strong> level is the shorthand chemists write it in, like H₂O.</p>
+      <p>Drag the slider, or click the picture, to zoom.</p>
+    </div>
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 0 · Powers of ten</span><h3>Zoom into a watermelon</h3></div>
+        <div class="controls" style="margin:0">
+          <button class="btn small" id="zoom-out" aria-label="Zoom out">−</button>
+          <button class="btn small" id="zoom-in" aria-label="Zoom in">+</button>
+          <button class="btn small" id="zoom-tour">▶ Take the tour</button>
+        </div>
+      </div>
+      <div class="lab-body">
+        <div class="stage zoom-stage" id="zoom-stage">
+          <canvas id="zoom-canvas" aria-label="Animated zoom from a watermelon down to an atomic nucleus"></canvas>
+          <div class="zoom-hud"><span class="lvl" id="zoom-lvl">Macro · Melon level</span><span class="scale" id="zoom-scale">≈ 30 cm</span></div>
+          <div class="zoom-cap"><h4 id="zoom-name">A watermelon</h4><p id="zoom-text">Sweet and cold, and 92% water. Something you can hold in two hands. Let's go inside.</p></div>
+        </div>
+        <input type="range" id="zoom-range" min="0" max="600" value="0" step="1" aria-label="Zoom level" style="--track:linear-gradient(90deg,var(--green),var(--pink),var(--cyan),var(--violet));margin-top:14px">
+        <div class="ticks" id="zoom-ticks"><span>melon</span><span>flesh</span><span>cell</span><span>juice</span><span>molecule</span><span>atom</span><span>nucleus</span></div>
+      </div>
+    </div>
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro · what you see</div><p>A red, juicy, sweet melon. You can weigh it, taste it, cut it. Everything you sense lives at this level.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro · what's really there</div><p>Trillions of cells, each a bag holding about 10<sup>15</sup> molecules of water and sugar, which are in turn made of atoms.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic · how we write it</div><span class="formula">H₂O &nbsp;·&nbsp; C₆H₁₂O₆</span><p>Water and glucose (sugar). Letters for atoms, little numbers for how many.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CASE 1 ======================= -->
+<section class="chapter case" id="case1" data-case="1">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>01</b></div>
+      <div><p class="kicker">Particles · states of matter</p><h2>The <em>Restless</em> Crowd</h2></div>
+    </header>
+    <div class="mystery reveal" data-mystery="1"></div>
+    <div class="story reveal">
+      <p>Around 400 BCE, a Greek thinker named <strong>Democritus</strong> picked up a piece of cheese (or so the story goes) and asked a strange question: <em>if I keep cutting this in half, forever, what happens?</em> He decided you must eventually reach a piece so small it cannot be cut. He called it <strong>atomos</strong>: “uncuttable.”</p>
+      <p>For two thousand years almost nobody believed him. You can't see atoms, after all. Then, in 1827, the botanist <strong>Robert Brown</strong> looked through a microscope at pollen grains floating in water and saw them <strong>jiggling</strong>, nervously and endlessly, for no visible reason. In 1905 a young patent clerk named <strong>Albert Einstein</strong> worked out why. The grains were being battered from every side by invisible water molecules, like a beach ball pushed around by an unseen crowd. He even calculated how big the molecules had to be. The jiggle was the first fingerprint of the culprit's world.</p>
+      <p>Here is the first great idea of chemistry: <strong>everything is made of tiny particles, and they never stop moving.</strong> What we call <em>temperature</em> is simply how fast they move. What decides whether something is a solid, a liquid or a gas is a tug-of-war: motion pulls the particles apart, and attraction holds them together.</p>
+      <p class="aside">How small? A single drop of water contains about 1,700,000,000,000,000,000,000 molecules. If each one were a grain of sand, the drop would make enough sand to bury the whole of the Netherlands about 40 metres deep.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 1 · Particle simulator</span><h3>Heat the crowd</h3></div>
+        <span class="chip" id="state-chip">Solid</span>
+      </div>
+      <div class="lab-body lab-grid">
+        <div>
+          <div class="stage" style="height:380px"><canvas id="states-canvas" aria-label="Simulation of particles in a box changing between solid, liquid and gas"></canvas></div>
+          <div class="slider-row" style="margin-top:16px">
+            <label for="temp">Temperature</label>
+            <input type="range" id="temp" min="0" max="1000" value="80">
+            <span class="readout"><b id="temp-out">−16 °C</b></span>
+          </div>
+          <p class="hint">Each ball is a water molecule. Colour shows speed: blue is slow, red is fast. The faint lines are attractions between neighbours. Drag the slider slowly and watch for the moment the crystal breaks.</p>
+        </div>
+        <div class="side-panel">
+          <div class="info-card" style="text-align:center">
+            <svg id="macro-svg" viewBox="0 0 200 160" style="width:100%;max-width:240px;margin:0 auto" aria-hidden="true">
+              <defs>
+                <linearGradient id="iceG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8fbff"/><stop offset=".5" stop-color="#9fdcf5"/><stop offset="1" stop-color="#5aa9d6"/></linearGradient>
+                <linearGradient id="watG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd3f5" stop-opacity=".85"/><stop offset="1" stop-color="#2b7fc4"/></linearGradient>
+              </defs>
+              <g id="m-ice" style="transition:opacity .6s">
+                <path d="M60 60 L120 45 L150 70 L150 125 L90 140 L60 115 Z" fill="url(#iceG)" opacity=".95"/>
+                <path d="M60 60 L120 45 L150 70 L90 85 Z" fill="#fff" opacity=".55"/>
+                <path d="M90 85 L90 140" stroke="#fff" stroke-opacity=".6"/>
+                <path d="M72 70 L82 68" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g id="m-water" style="transition:opacity .6s;opacity:0">
+                <path d="M62 40 L138 40 L130 140 Q100 148 70 140 Z" fill="none" stroke="#cfe9ff" stroke-opacity=".6" stroke-width="2"/>
+                <path d="M65 75 Q100 82 135 75 L130 138 Q100 146 70 138 Z" fill="url(#watG)"/>
+                <ellipse cx="100" cy="75" rx="35" ry="5" fill="#bfe9ff" opacity=".7"/>
+              </g>
+              <g id="m-steam" style="transition:opacity .6s;opacity:0" fill="#dfe8f5">
+                <path d="M55 140 h90 v-12 q-45 -14 -90 0 z" fill="#9aa8bd"/>
+                <path d="M90 128 q-14 -16 0 -30 q14 -14 0 -30" fill="none" stroke="#dfe8f5" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+                <path d="M110 128 q14 -18 0 -36 q-12 -14 2 -34" fill="none" stroke="#dfe8f5" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+                <circle cx="75" cy="40" r="14" opacity=".35"/><circle cx="96" cy="30" r="18" opacity=".3"/><circle cx="122" cy="40" r="14" opacity=".35"/>
+              </g>
+            </svg>
+            <div class="meta" style="margin-top:8px">WHAT YOU WOULD SEE</div>
+            <h4 id="state-name" style="margin-top:4px">Ice</h4>
+            <div class="formula mono" id="state-sym" style="font-size:18px;color:var(--pink)">H₂O(s)</div>
+          </div>
+          <div class="info-card"><p id="state-text" style="margin:0;font-size:14.5px;color:var(--soft)">Too cold to escape. Each molecule vibrates in place, locked to its neighbours in a neat pattern. That is why a solid keeps its shape.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue reveal">
+      <div class="line"><span class="avatar" data-el="H" data-mood="happy"></span><div class="bubble"><b>HAL · hydrogen</b>“Cold makes us sluggish, so we huddle and hold hands. Warm us up and we start dancing, then pushing. Heat us enough and we're off, flying at 500 metres per second. That's faster than a jet airliner.”</div></div>
+      <div class="line right"><span class="avatar" data-el="O" data-mood="sly"></span><div class="bubble"><b>OLA · oxygen</b>“And even on a cold day a few of us are fast enough to break away from the surface of a puddle. That's how puddles vanish without boiling.”</div></div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Ice is hard and keeps its shape. Water flows and takes the shape of its cup. Steam spreads out to fill the whole room.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>The same H₂O molecules in all three. Solid: locked in place, vibrating. Liquid: touching, but sliding past each other. Gas: far apart, flying freely.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">H₂O(s) → H₂O(l) → H₂O(g)</span><p>(s) solid, (l) liquid, (g) gas. The formula doesn't change. Only the arrangement does.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="sweat"></div>
+      <div><span class="tag">Everyday miracle</span><h3>Why sweating keeps you alive</h3>
+      <p>When you sweat, the <strong>fastest</strong> water molecules on your skin escape into the air first. The ones left behind are the slower, cooler ones. Your skin cools down every time a molecule leaves.</p>
+      <p>Evaporating just one litre of sweat removes about as much heat as it takes to bring a litre of cold water to the boil and then boil every drop of it away. Every hot day, you are being kept alive by a crowd of escaping molecules.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="1"></div>
+      <div class="block quiz" data-case="1"></div>
+    </div>
+    <div class="verdict" data-case="1"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 2 ======================= -->
+<section class="chapter case" id="case2" data-case="2">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>02</b></div>
+      <div><p class="kicker">Inside the atom</p><h2>The <em>Empty</em> Room</h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="1"></div>
+    <div class="mystery reveal" data-mystery="2"></div>
+    <div class="story reveal">
+      <p>Democritus said atoms couldn't be cut. In 1897 the physicist <strong>J.J. Thomson</strong> proved him wrong. Out of ordinary atoms he pulled tiny, negatively charged particles, nearly two thousand times lighter than the lightest atom. He called them <strong>electrons</strong>. Atoms had parts.</p>
+      <p>Thomson imagined the atom as a <strong>plum pudding</strong>: a soft ball of positive charge with electrons dotted through it like raisins. It was a cosy picture, and everyone liked it.</p>
+      <p>Then in 1909, in a darkened lab in Manchester, <strong>Ernest Rutherford</strong> and his students Geiger and Marsden fired tiny, fast, positively charged bullets (<em>alpha particles</em>) at a sheet of gold foil only a few hundred atoms thick. If atoms were soft puddings, every bullet should punch straight through. <strong>Make your prediction below before you fire.</strong></p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 2a · Famous experiment</span><h3>Rutherford's gold foil</h3></div>
+        <div class="seg" id="ruth-mode"><button data-m="pudding" class="on">Plum-pudding atom</button><button data-m="nuclear">What really happened</button></div>
+      </div>
+      <div class="lab-body">
+        <div class="info-card" id="ruth-predict" style="margin-bottom:16px">
+          <p style="margin:0 0 10px;font-weight:500">Your prediction: if atoms are soft, spread-out puddings, what will the alpha bullets do?</p>
+          <div class="hunches">
+            <button class="hunch" data-p="0">Nearly all fly straight through</button>
+            <button class="hunch" data-p="1">Many bounce straight back</button>
+            <button class="hunch" data-p="2">They all get stuck in the foil</button>
+          </div>
+        </div>
+        <div class="stage" style="height:360px"><canvas id="ruth-canvas" aria-label="Simulation of alpha particles fired at gold foil"></canvas></div>
+        <div class="controls">
+          <button class="btn primary small" id="ruth-fire">● Fire alpha particles</button>
+          <button class="btn small ghost" id="ruth-reset">Reset</button>
+          <span class="readout">Straight through <b id="r-s">0</b> · Deflected <b id="r-d">0</b> · Bounced back <b id="r-b" style="color:var(--pink)">0</b></span>
+        </div>
+        <p class="hint" id="ruth-msg">Choose a prediction, then fire.</p>
+      </div>
+    </div>
+
+    <div class="story reveal">
+      <p>In the real experiment almost every particle sailed straight through, but about <strong>one in eight thousand bounced back</strong>. Rutherford was stunned: <em>“It was quite the most incredible event that has ever happened to me in my life. It was almost as incredible as if you fired a 15-inch shell at a piece of tissue paper and it came back and hit you.”</em></p>
+      <p>The only explanation was that all of the atom's positive charge, and nearly all its mass, is crammed into a tiny core: the <strong>nucleus</strong>. The rest is almost completely empty, with electrons whirling far out. If an atom were the size of a football stadium, the nucleus would be a pea on the centre spot.</p>
+      <p>Inside the nucleus are <strong>protons</strong> (positive charge) and <strong>neutrons</strong> (no charge). The number of protons is the atom's identity card. One proton is always hydrogen. Six is always carbon. Seventy-nine is always gold. Change the proton count and you have a different element.</p>
+    </div>
+
+    <div class="cast reveal">
+      <div class="cast-card"><span class="avatar" data-el="p" data-mood="happy" data-size="48"></span><div><b>Proton · p⁺</b><small>Positive. Lives in the nucleus.<br>Decides who the atom is.</small></div></div>
+      <div class="cast-card"><span class="avatar" data-el="n" data-mood="sleepy" data-size="48"></span><div><b>Neutron · n⁰</b><small>No charge. Lives in the nucleus.<br>Adds mass and glues it together.</small></div></div>
+      <div class="cast-card"><span class="avatar" data-el="e" data-mood="sly" data-size="48"></span><div><b>Electron · e⁻</b><small>Negative, nearly weightless.<br>Roams far out. Remember this one.</small></div></div>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 2b · Atom builder</span><h3>Build your own atom</h3></div>
+        <span class="chip" id="b-chip">Neutral atom</span>
+      </div>
+      <div class="lab-body lab-grid">
+        <div class="stage" style="height:400px"><svg id="builder-svg" viewBox="-200 -200 400 400" style="width:100%;height:100%" aria-label="Diagram of the atom you have built"></svg></div>
+        <div class="side-panel">
+          <div class="info-card">
+            <div class="meta" id="b-meta">ATOMIC NUMBER 1 · MASS NUMBER 1</div>
+            <h4 id="b-name">Hydrogen</h4>
+            <p id="b-desc" style="margin:0;font-size:14.5px;color:var(--soft)">The lightest and most common element in the universe.</p>
+          </div>
+          <div class="builder-ctrl">
+            <div class="stepper"><div class="nm"><i style="background:var(--red)"></i>Protons</div><div class="v" id="b-p">1</div><div class="bt"><button data-k="p" data-d="-1" aria-label="Remove proton">−</button><button data-k="p" data-d="1" aria-label="Add proton">+</button></div></div>
+            <div class="stepper"><div class="nm"><i style="background:#9aa3b8"></i>Neutrons</div><div class="v" id="b-n">0</div><div class="bt"><button data-k="n" data-d="-1" aria-label="Remove neutron">−</button><button data-k="n" data-d="1" aria-label="Add neutron">+</button></div></div>
+            <div class="stepper"><div class="nm"><i style="background:var(--cyan)"></i>Electrons</div><div class="v" id="b-e">1</div><div class="bt"><button data-k="e" data-d="-1" aria-label="Remove electron">−</button><button data-k="e" data-d="1" aria-label="Add electron">+</button></div></div>
+          </div>
+          <div class="info-card">
+            <div class="meta" style="margin-bottom:8px">MISSIONS</div>
+            <div class="missions" id="missions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>A gold ring: heavy, shiny, yellow. It feels perfectly solid and smooth.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Gold atoms, each 99.9999999999% empty: a dense nucleus of 79 protons and 118 neutrons, surrounded by a cloud of 79 electrons.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">¹⁹⁷₇₉Au</span><p>Bottom number: protons (the atomic number). Top number: protons + neutrons (the mass number).</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="hand"></div>
+      <div><span class="tag">Everyday miracle</span><h3>You have never touched anything</h3>
+      <p>When you rest your hand on a table, the outer electrons of your skin and the table come close, and because like charges repel, they push each other away. What you feel as <strong>touch</strong> is electric repulsion across a tiny gap.</p>
+      <p>You are, in a very real sense, always hovering a whisker above your chair.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="2"></div>
+      <div class="block quiz" data-case="2"></div>
+    </div>
+    <div class="verdict" data-case="2"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 3 ======================= -->
+<section class="chapter case" id="case3" data-case="3">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>03</b></div>
+      <div><p class="kicker">The periodic table</p><h2>The <em>Family</em> Album</h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="2"></div>
+    <div class="mystery reveal" data-mystery="3"></div>
+    <div class="story reveal">
+      <p>By the 1860s, chemists had found more than sixty elements and had no idea how they fitted together. In St Petersburg, a wild-bearded professor named <strong>Dmitri Mendeleev</strong> wrote each element on a card, with its weight and its habits, and played a kind of chemical solitaire, laying the cards out over and over.</p>
+      <p>In 1869 he saw the pattern. When he lined the elements up by weight, their personalities <strong>repeated</strong>, like the days of a week. He arranged them in rows so that elements with similar behaviour fell into the same column. His boldest move was to leave <strong>gaps</strong>. <em>“These elements exist,”</em> he declared, <em>“we just haven't found them yet.”</em> He even predicted their weights and colours.</p>
+      <p>Six years later a French chemist discovered gallium, and it filled one of Mendeleev's gaps almost exactly. Mendeleev wrote to tell him that his measured density was wrong. He was right: the discoverer re-measured and got Mendeleev's number.</p>
+      <p>Today we know <em>why</em> the pattern repeats. Elements in the same column have the same number of electrons in their <strong>outermost shell</strong>, and those outer electrons decide almost everything about how an atom behaves. The table is a family album. Each column is a family with a shared temperament.</p>
+    </div>
+
+    <div class="cast reveal">
+      <div class="cast-card"><span class="avatar" data-el="Na" data-mood="happy" data-size="48"></span><div><b>Sid · sodium</b><small>Alkali metal family. One lonely outer electron<br>and desperate to give it away.</small></div></div>
+      <div class="cast-card"><span class="avatar" data-el="Cl" data-mood="sly" data-size="48"></span><div><b>Clo · chlorine</b><small>Halogen family. Seven outer electrons,<br>one short of a full set. Grabs.</small></div></div>
+      <div class="cast-card"><span class="avatar" data-el="He" data-mood="sleepy" data-size="48"></span><div><b>Helia · helium</b><small>Noble gas. Full outer shell.<br>Talks to no one. Ever.</small></div></div>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 3 · Explore</span><h3>The periodic table of characters</h3></div>
+        <button class="btn small" id="gaps-btn">Show Mendeleev's gaps</button>
+      </div>
+      <div class="lab-body">
+        <div class="fam-btns" id="fam-btns"></div>
+        <div class="ptable" id="ptable" role="grid" aria-label="Periodic table"></div>
+        <div class="pt-card" id="pt-card"></div>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Sodium is a soft metal you can cut with a knife and it fizzes violently in water. Potassium, one row down, does the same thing even more violently.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Both have exactly <strong>one</strong> outer electron. Potassium's sits farther from its nucleus, so it is held more loosely and given away even more easily.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">Na: 2, 8, 1 &nbsp; K: 2, 8, 8, 1</span><p>Electrons per shell, from the inside out. The last number is the one that matters.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="neon"></div>
+      <div><span class="tag">Everyday miracle</span><h3>Fireworks are a periodic table in the sky</h3>
+      <p>Heat an atom and its electrons jump to higher shells, then fall back and give off light of one exact colour. Each element has its own colour: <strong>strontium</strong> red, <strong>sodium</strong> yellow (like old street lamps), <strong>copper</strong> blue-green, <strong>barium</strong> green.</p>
+      <p>The same trick tells us what distant stars are made of. We read their light like a barcode.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="3"></div>
+      <div class="block quiz" data-case="3"></div>
+    </div>
+    <div class="verdict" data-case="3"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 4 ======================= -->
+<section class="chapter case" id="case4" data-case="4">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>04</b></div>
+      <div><p class="kicker">Chemical bonds</p><h2>The <em>Deal</em></h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="3"></div>
+    <div class="mystery reveal" data-mystery="4"></div>
+    <div class="story reveal">
+      <p>Every atom envies the noble gases. Helium, neon and argon have perfectly full outer shells, and a full shell is a calm, low-energy state. For most atoms a full outer shell means <strong>eight</strong> electrons (the <em>octet rule</em>; for tiny hydrogen and helium it's two). Atoms will make deals to get there, and those deals are what we call <strong>chemical bonds</strong>.</p>
+      <p>Meet two of the most dangerous characters in the album. <strong>Sid</strong> (sodium) is a soft silver metal that bursts into flame in water. <strong>Clo</strong> (chlorine) is a choking green gas. Sid has one electron too many; Clo is one short. You can probably guess the deal.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 4a · Ionic bond</span><h3>Sid meets Clo</h3></div>
+        <div class="controls" style="margin:0"><button class="btn primary small" id="ionic-go">Introduce them</button><button class="btn small ghost" id="ionic-reset">Reset</button></div>
+      </div>
+      <div class="lab-body">
+        <div class="stage" style="height:300px"><svg id="ionic-svg" viewBox="0 0 640 300" style="width:100%;height:100%" aria-label="Animation of sodium giving an electron to chlorine"></svg></div>
+        <p class="hint" id="ionic-msg" style="margin-top:12px">Sodium (2, 8, <b>1</b>) and chlorine (2, 8, <b>7</b>). Only the outer shells are drawn in full.</p>
+      </div>
+    </div>
+
+    <div class="dialogue reveal">
+      <div class="line"><span class="avatar" data-el="Na" data-mood="happy"></span><div class="bubble"><b>SID · sodium</b>“Take it! Please. This lonely electron has been nothing but trouble.”</div></div>
+      <div class="line right"><span class="avatar" data-el="Cl" data-mood="sly"></span><div class="bubble"><b>CLO · chlorine</b>“Don't mind if I do. Eight at last. And now you're positive and I'm negative… so I suppose we're stuck together.”</div></div>
+      <p class="narrator">That stickiness between a positive ion and a negative ion is an <b>ionic bond</b>. Billions upon billions of Sids and Clos stack into a perfect cube: a grain of table salt.</p>
+    </div>
+
+    <div class="story reveal">
+      <p>Not every deal is a handover. When two atoms are <em>both</em> hungry for electrons, neither will give one up, so they <strong>share</strong>. Two hydrogens share a pair of electrons and become H₂. Oxygen shares with two hydrogens and becomes water. A shared pair of electrons is a <strong>covalent bond</strong>, and it's what holds together almost every molecule in your body.</p>
+      <p>Carbon, with four outer electrons, can share in four directions at once. That makes it the master builder: chains, rings and branches, millions of different molecules. Arrangement matters enormously. <strong>Diamond</strong> and the <strong>graphite</strong> in your pencil are both pure carbon, joined in different patterns.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 4b · 3D molecule viewer</span><h3>Drag to spin a molecule</h3></div>
+        <div class="seg" id="mol-pick"></div>
+      </div>
+      <div class="lab-body lab-grid">
+        <div class="stage mol-stage" id="mol-stage"><canvas id="mol-canvas" aria-label="Rotating 3D molecule"></canvas></div>
+        <div class="side-panel">
+          <div class="info-card"><div class="meta" id="mol-formula">H₂O</div><h4 id="mol-name">Water</h4><p id="mol-desc" style="margin:0;font-size:14.5px;color:var(--soft)"></p></div>
+          <div class="legend" id="mol-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>White, cube-shaped crystals that taste salty and dissolve in water. Look at salt under a magnifying glass and you'll see tiny cubes.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Na⁺ and Cl⁻ ions alternating in a 3D grid, every positive ion surrounded by six negative ones, and the other way round.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">Na + Cl → Na⁺ Cl⁻ = NaCl</span><p>The superscript + or − shows an ion's charge: an electron lost or gained.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="salt"></div>
+      <div><span class="tag">Everyday miracle</span><h3>You season your food with an explosive and a poison</h3>
+      <p>Sodium metal explodes in water. Chlorine gas was used as a weapon in the First World War. Yet once Sid hands over his electron, both become calm, stable ions, and together they're something your nerves need to fire every single thought.</p>
+      <p>The lesson is a huge one: <strong>the properties of a substance come from how its atoms are bonded, not just from which atoms are present.</strong></p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="4"></div>
+      <div class="block quiz" data-case="4"></div>
+    </div>
+    <div class="verdict" data-case="4"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 5 ======================= -->
+<section class="chapter case" id="case5" data-case="5">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>05</b></div>
+      <div><p class="kicker">Polarity · water</p><h2>The <em>Bent</em> One</h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="4"></div>
+    <div class="mystery reveal" data-mystery="5"></div>
+    <div class="story reveal">
+      <p>Ola (oxygen) shares electrons with her two hydrogens, but she doesn't share <em>fairly</em>. Oxygen's nucleus has eight protons pulling on the shared electrons, and hydrogen's has one. The electrons spend more of their time near Ola. So the oxygen end of the molecule becomes slightly <strong>negative</strong> (δ−), and the hydrogen ends become slightly <strong>positive</strong> (δ+).</p>
+      <p>There's a twist. Water isn't a straight line. It's <strong>bent</strong>, at an angle of about 104.5°, like a boomerang or Mickey Mouse's head. That bend means one side of the molecule is negative and the other positive: a tiny magnet. We call such molecules <strong>polar</strong>.</p>
+      <p>The positive hydrogens of one water molecule are attracted to the negative oxygen of the next. These attractions are called <strong>hydrogen bonds</strong>. They are much weaker than real bonds, but there are astronomically many of them. They make water sticky, help it climb up trees, let insects walk on it, and pull salt crystals apart ion by ion.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 5 · Side by side</span><h3>Liquid water vs. ice</h3></div>
+        <div class="seg" id="water-mode"><button data-m="both" class="on">Compare</button><button data-m="freeze">Freeze it</button></div>
+      </div>
+      <div class="lab-body">
+        <div class="stage" style="height:360px"><canvas id="water-canvas" aria-label="Water molecules in liquid and ice arrangements"></canvas></div>
+        <p class="hint" style="margin-top:12px">Red is oxygen (δ−), white is hydrogen (δ+). Dashed lines are hydrogen bonds. When water freezes, the hydrogen bonds lock the molecules into open hexagons, which take up about <b>9% more space</b> than the jumbled liquid. (We've exaggerated the difference in the boxes above so it's easy to see.)</p>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Ice cubes float. Water pipes burst in winter. Snowflakes always have six arms.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>In ice, each molecule hydrogen-bonds to four neighbours in a rigid, roomy six-sided lattice. More space for the same mass means lower density.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">Hδ+ — Oδ− ··· Hδ+</span><p>δ (“delta”) means “slightly.” The dotted line is a hydrogen bond between two molecules.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="lake"></div>
+      <div><span class="tag">Everyday miracle</span><h3>Why fish survive the winter</h3>
+      <p>When a lake freezes, the ice floats to the top and forms a lid that insulates the water below. The bottom stays at about 4 °C, the temperature at which liquid water is densest, and life carries on beneath the ice.</p>
+      <p>If ice sank, like nearly every other solid does in its own liquid, lakes and oceans would freeze from the bottom up, layer after layer. Life on Earth may owe its existence to one bent molecule.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="5"></div>
+      <div class="block quiz" data-case="5"></div>
+    </div>
+    <div class="verdict" data-case="5"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 6 ======================= -->
+<section class="chapter case" id="case6" data-case="6">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>06</b></div>
+      <div><p class="kicker">Chemical reactions</p><h2>The Great <em>Rearrangement</em></h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="5"></div>
+    <div class="mystery reveal" data-mystery="6"></div>
+    <div class="story reveal">
+      <p>Paris, the 1770s. <strong>Antoine Lavoisier</strong> was rich, brilliant and obsessed with weighing things. While others watched what happened in their flasks, Lavoisier sealed his reactions in closed glass vessels and weighed everything, before and after, on the most precise balances in Europe.</p>
+      <p>Wood burned to ash. Metals turned to powder. Water boiled to vapour. But when nothing could escape, the total weight <strong>never changed</strong>. He summed it up in a sentence that still runs all of chemistry: <em>“Nothing is lost, nothing is created, everything is transformed.”</em></p>
+      <p>A <strong>chemical reaction</strong> is a rearrangement. Bonds break, atoms swap partners, and new bonds form, but every atom that goes in comes out. A chemical equation is the recipe, and it must <strong>balance</strong>: the same number of each kind of atom on both sides.</p>
+      <p class="aside">Lavoisier's story ends darkly. He was also a tax collector, and during the French Revolution he was sent to the guillotine in 1794. The mathematician Lagrange said: “It took them only an instant to cut off that head, and a hundred years may not produce another like it.”</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 6 · Equation balancer</span><h3>Make the atoms add up</h3></div>
+        <div class="seg" id="bal-pick"></div>
+      </div>
+      <div class="lab-body">
+        <p class="hint" id="bal-story" style="margin:0 0 6px;text-align:center"></p>
+        <div class="eq" id="bal-eq"></div>
+        <div class="tally" id="bal-tally"></div>
+        <div class="balanced-banner" id="bal-banner"></div>
+        <p class="hint" style="text-align:center">Use the + and − buttons to change how many of each molecule take part. You may only change the big numbers in front, never the small ones inside a formula. Changing those would make a different substance.</p>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>A blue gas flame on the stove. The gas seems to disappear and the air above it gets hot.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Each methane molecule collides with two oxygen molecules. Their atoms rearrange into one carbon dioxide and two water molecules, releasing energy.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">CH₄ + 2 O₂ → CO₂ + 2 H₂O</span><p>Reactants on the left, products on the right. Count them: 1 C, 4 H and 4 O on each side.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="tree"></div>
+      <div><span class="tag">Everyday miracle</span><h3>Trees are made of air</h3>
+      <p>In the 1600s, Jan Baptist van Helmont planted a 2 kg willow in a pot of carefully weighed soil and gave it nothing but water. Five years later the tree weighed 76 kg, and the soil had lost only about 60 grams.</p>
+      <p>Where did the tree come from? Mostly from <strong>carbon dioxide in the air</strong>, rearranged with water using sunlight. A tree's trunk is air, rebuilt atom by atom. When you burn a log, those atoms simply return to the sky.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="6"></div>
+      <div class="block quiz" data-case="6"></div>
+    </div>
+    <div class="verdict" data-case="6"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 7 ======================= -->
+<section class="chapter case" id="case7" data-case="7">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>07</b></div>
+      <div><p class="kicker">Reaction rates</p><h2>The Race Against <em>Time</em></h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="6"></div>
+    <div class="mystery reveal" data-mystery="7"></div>
+    <div class="story reveal">
+      <p>Knowing that a reaction <em>can</em> happen is only half the story. A diamond can turn into graphite, but it would take longer than the age of the universe. A firework explodes in a fraction of a second. So what controls the speed?</p>
+      <p>The answer is <strong>collision theory</strong>. Particles can only react if they <strong>bump into each other</strong>, and only if they hit <strong>hard enough</strong> to break old bonds. That minimum energy is called the <strong>activation energy</strong>: a hill every reaction must climb before it can roll down the other side.</p>
+      <p>So there are four ways to speed a reaction up. <strong>Heat it</strong>, so particles move faster and hit harder. <strong>Crowd it</strong> (raise the concentration), so they collide more often. <strong>Grind it</strong> (more surface area), so more particles are exposed. Or add a <strong>catalyst</strong>, a helper that offers a lower hill and isn't used up itself.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 7 · Collision chamber</span><h3>A + B → AB</h3></div>
+        <div class="controls" style="margin:0"><button class="btn small" id="cat-btn">Add catalyst</button><button class="btn small ghost" id="rate-reset">Restart</button></div>
+      </div>
+      <div class="lab-body lab-grid">
+        <div>
+          <div class="stage" style="height:340px"><canvas id="rate-canvas" aria-label="Particles colliding and reacting"></canvas></div>
+          <div class="slider-row" style="margin-top:14px"><label for="rate-T">Temperature</label><input type="range" id="rate-T" min="0" max="100" value="35"><span class="readout"><b id="rate-T-out">Cool</b></span></div>
+          <div class="slider-row"><label for="rate-C">Crowding</label><input type="range" id="rate-C" min="6" max="40" value="18" style="--track:linear-gradient(90deg,#3a3f66,var(--violet))"><span class="readout"><b id="rate-C-out">18 + 18</b></span></div>
+        </div>
+        <div class="side-panel">
+          <div class="info-card">
+            <div class="meta">PRODUCT MADE OVER TIME</div>
+            <canvas id="rate-chart" style="width:100%;height:150px;margin-top:8px" aria-label="Graph of product formed over time"></canvas>
+            <div class="legend"><span><i style="background:#6b8cff"></i>A</span><span><i style="background:#ff9f5a"></i>B</span><span><i style="background:#6fe3a0"></i>AB product</span><span><i style="background:#fff;opacity:.6"></i>bounce (too soft)</span></div>
+          </div>
+          <div class="info-card"><p id="rate-text" style="margin:0;font-size:14.5px;color:var(--soft)">Most collisions just bounce: they aren't hard enough to climb the activation-energy hill. Heat things up and watch the flashes multiply.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Milk sours slowly in the fridge and quickly on a warm counter. A glow stick shines brighter in hot water and dimmer in ice.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Colder particles move more slowly, so fewer collisions have enough energy to react. As a rule of thumb, every 10 °C cooler roughly halves the rate of many reactions.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">A + B —(catalyst)→ AB</span><p>A catalyst is written over the arrow. It takes part but comes out unchanged.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="enzyme"></div>
+      <div><span class="tag">Everyday miracle</span><h3>You are a factory of a trillion catalysts</h3>
+      <p>Digesting a sandwich at body temperature without help would take decades. Your body uses <strong>enzymes</strong>: protein catalysts shaped like perfectly fitted locks. Some speed up their reaction more than a million billion times.</p>
+      <p>Right now, thousands of different enzyme-driven reactions are running in every one of your cells. It is the busiest chemistry lab in the known universe.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="7"></div>
+      <div class="block quiz" data-case="7"></div>
+    </div>
+    <div class="verdict" data-case="7"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 8 ======================= -->
+<section class="chapter case" id="case8" data-case="8">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>08</b></div>
+      <div><p class="kicker">Acids &amp; bases</p><h2>Sour &amp; <em>Slippery</em></h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="7"></div>
+    <div class="mystery reveal" data-mystery="8"></div>
+    <div class="story reveal">
+      <p>Remember Hal, the hydrogen atom: one proton, one electron. Strip away his electron and what's left is a <strong>bare proton</strong>, H⁺. It's the smallest, most restless character in chemistry, and it is passed from molecule to molecule like a hot potato.</p>
+      <p>In 1884, a Swedish student named <strong>Svante Arrhenius</strong> suggested that some substances, when dissolved in water, break apart into charged pieces. His examiners were so unimpressed they gave his thesis the lowest passing grade. Nineteen years later the same idea won him the <strong>Nobel Prize</strong>.</p>
+      <p>Here's the modern version. An <strong>acid</strong> is a substance that <em>gives away</em> H⁺. Acids taste sour, like lemon, vinegar or cola. A <strong>base</strong> is a substance that <em>takes</em> H⁺, often using hydroxide ions (OH⁻). Bases taste bitter and feel slippery, like soap. Mix an acid and a base and they cancel: H⁺ + OH⁻ → H₂O. That's called <strong>neutralisation</strong>.</p>
+      <p>Chemists measure acidity with the <strong>pH scale</strong>, from 0 to 14. Pure water sits in the middle at 7. Below 7 is acidic, above 7 is basic. The catch is that each step is <strong>ten times</strong> stronger than the one before. Lemon juice, at pH 2, has 100,000 times more H⁺ than pure water.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 8 · Red-cabbage detective kit</span><h3>Test the kitchen</h3></div>
+        <span class="chip" id="ph-chip">Neutral</span>
+      </div>
+      <div class="lab-body">
+        <div class="ph-wrap">
+          <div style="text-align:center">
+            <svg id="beaker" viewBox="0 0 200 230" style="width:200px;margin:0 auto" aria-hidden="true">
+              <defs><clipPath id="bk-clip"><path d="M45 40 L45 190 Q45 210 65 210 L135 210 Q155 210 155 190 L155 40 Z"/></clipPath>
+              <linearGradient id="bk-shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient></defs>
+              <g clip-path="url(#bk-clip)"><rect id="bk-liquid" x="40" y="80" width="120" height="140" fill="#7d55d8" style="transition:fill .4s"/><g id="bk-bubbles"></g><rect x="40" y="80" width="120" height="140" fill="url(#bk-shine)"/></g>
+              <path d="M38 34 L45 40 L45 190 Q45 210 65 210 L135 210 Q155 210 155 190 L155 40 L162 34" fill="none" stroke="#dfe7ff" stroke-opacity=".7" stroke-width="3" stroke-linejoin="round"/>
+              <g stroke="#dfe7ff" stroke-opacity=".4" stroke-width="2"><path d="M45 100h14M45 130h20M45 160h14"/></g>
+            </svg>
+            <div class="ph-big" id="ph-num">7.0</div>
+            <div class="meta mono" style="color:var(--muted);font-size:12px" id="ph-name">Pure water</div>
+          </div>
+          <div>
+            <div class="ph-scale"></div>
+            <input type="range" id="ph-range" min="0" max="140" value="70" aria-label="pH" style="--track:transparent;margin-top:-22px;position:relative">
+            <div class="ph-items" id="ph-items"></div>
+            <div class="stage" style="height:150px;margin-top:6px"><canvas id="ph-canvas" aria-label="Hydrogen and hydroxide ions in solution"></canvas></div>
+            <p class="readout" id="ph-text" style="margin-top:10px">Equal numbers of H⁺ and OH⁻. Perfectly balanced.</p>
+          </div>
+        </div>
+        <p class="hint" style="margin-top:14px">Try this at home: boil chopped red cabbage, keep the purple water, and add lemon juice or baking soda. A pigment in the cabbage changes shape, and colour, depending on how many H⁺ ions are around it.</p>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Vinegar poured onto baking soda fizzes into a foam. Lemon makes your mouth pucker. Soap is slippery.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Acetic acid molecules in vinegar hand H⁺ ions to the bicarbonate in baking soda. The products include carbon dioxide gas, which makes the bubbles.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">H⁺ + HCO₃⁻ → H₂O + CO₂↑</span><p>The ↑ arrow means a gas is escaping. pH = how many H⁺ ions, counted in powers of ten.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="stomach"></div>
+      <div><span class="tag">Everyday miracle</span><h3>An acid bath inside you, and the knife-edge of your blood</h3>
+      <p>Your stomach holds acid at about pH 1.5 to 2, strong enough to dissolve some metals. It survives because its lining constantly makes protective mucus and replaces its cells every few days.</p>
+      <p>Your blood, by contrast, must stay between pH 7.35 and 7.45. Even a small drift outside that range can be fatal. Chemical <strong>buffers</strong> in your blood soak up spare H⁺ or release it, second by second, for your whole life.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="8"></div>
+      <div class="block quiz" data-case="8"></div>
+    </div>
+    <div class="verdict" data-case="8"></div>
+  </div>
+</section>
+
+<!-- ======================= CASE 9 ======================= -->
+<section class="chapter case" id="case9" data-case="9">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Case File</span><b>09</b></div>
+      <div><p class="kicker">Energy · the chemistry of life</p><h2>The <em>Carbon</em> Odyssey</h2></div>
+    </header>
+    <div class="coldcase reveal" data-from="8"></div>
+    <div class="mystery reveal" data-mystery="9"></div>
+    <div class="story reveal">
+      <p>The last case follows one character on the longest journey in this whole file: <strong>Cass</strong>, a single carbon atom. Cass is billions of years old. She has been part of a star, a dinosaur's breath, a fern, and an ocean. And right now, quite possibly, she's part of <em>you</em>.</p>
+      <p>Her story is a story about <strong>energy</strong>. Breaking a bond always <em>costs</em> energy; forming a bond always <em>releases</em> it. When the new bonds in the products are stronger than the old bonds, the reaction gives out energy, usually as heat or light. We call that <strong>exothermic</strong>, like fire. When it's the other way round, the reaction soaks energy up. That's <strong>endothermic</strong>, like an instant cold pack.</p>
+      <p>Life runs on a beautiful pair of these. Plants use sunlight to drive an endothermic reaction, <strong>photosynthesis</strong>, and store the energy in sugar. You run the same reaction in reverse, <strong>respiration</strong>, which releases that energy to power your heartbeat and your thoughts. Follow Cass to see the whole cycle.</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Lab 9 · Follow one atom</span><h3>Cass's journey</h3></div>
+        <div class="controls" style="margin:0"><button class="btn small" id="j-prev">← Back</button><button class="btn primary small" id="j-next">Next stop →</button></div>
+      </div>
+      <div class="lab-body">
+        <div class="stage" style="aspect-ratio:900/380;background:#0f1a3d"><svg id="journey-svg" viewBox="0 0 900 380" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%" aria-label="Journey of a carbon atom through the carbon cycle"></svg></div>
+        <div class="journey-steps" id="j-steps"></div>
+        <div class="info-card" style="margin-top:14px"><div class="meta" id="j-eq"></div><h4 id="j-title" style="margin-top:4px"></h4><p id="j-text" style="margin:0;color:var(--soft);font-size:15px"></p></div>
+      </div>
+    </div>
+
+    <div class="lenses reveal">
+      <div class="lens macro"><div class="lt" data-ico="eye">Macro</div><p>Leaves grow in the sun. You eat an apple, climb the stairs, and breathe out a fog on a cold morning.</p></div>
+      <div class="lens micro"><div class="lt" data-ico="atom">Micro</div><p>Carbon, hydrogen and oxygen atoms are shuffled back and forth between CO₂, water and sugar. Energy from sunlight is stored in sugar's bonds and released in your cells.</p></div>
+      <div class="lens symbol"><div class="lt" data-ico="pen">Symbolic</div><span class="formula">6 CO₂ + 6 H₂O ⇄ C₆H₁₂O₆ + 6 O₂</span><p>Read it forwards (with light) for photosynthesis, and backwards for respiration.</p></div>
+    </div>
+
+    <aside class="miracle reveal">
+      <div class="art" data-art="breath"></div>
+      <div><span class="tag">Everyday miracle</span><h3>You breathe out your breakfast</h3>
+      <p>When you burn fat, where do its atoms go? A 2014 study worked it out: about <strong>84%</strong> leaves your body as carbon dioxide <em>through your lungs</em>. The rest leaves as water.</p>
+      <p>That fog on the cold window this morning? Water and carbon dioxide made from food you ate yesterday, assembled by a plant from air and sunshine some months before.</p></div>
+    </aside>
+
+    <div class="practice">
+      <div class="block feynman" data-case="9"></div>
+      <div class="block quiz" data-case="9"></div>
+    </div>
+    <div class="verdict" data-case="9"></div>
+  </div>
+</section>
+
+<!-- ======================= FINALE ======================= -->
+<section class="finale" id="finale">
+  <canvas id="finale-canvas" style="position:absolute;inset:0;width:100%;height:100%;opacity:.7" aria-hidden="true"></canvas>
+  <div class="wrap narrow" style="position:relative">
+    <div class="eyebrow">The reveal</div>
+    <h2 style="margin-top:18px">Who did it?</h2>
+    <p class="story" style="margin:24px auto 0;text-align:center">Nine clues. Nine everyday mysteries. Lay them side by side, and ask the question every detective asks: <em>who was present at every scene?</em></p>
+    <div class="clue-chain" id="clue-chain"></div>
+    <button class="btn primary" id="reveal-btn">Name the culprit</button>
+    <div class="culprit" id="culprit">
+      <div class="big"><span class="avatar" data-el="e" data-mood="sly" data-size="150"></span></div>
+      <div class="eyebrow">The culprit is</div>
+      <h3>The <em>electron</em></h3>
+      <div class="story" style="margin:0 auto;text-align:left">
+        <p>And its accomplice: the simple fact that <strong>opposite charges attract and like charges repel</strong>.</p>
+        <p>Electrons hold the crowd of molecules together, and their attractions decide whether something is solid, liquid or gas. Electron clouds stop your hand going through the table. The outer electrons give every family in the periodic table its personality. Bonds are electrons given or shared. Water is sticky because Ola hogs the electrons. Reactions are electrons rearranging, and they only happen when collisions are hard enough to shift them. Acids work by handing over a proton left behind when an electron is gone. And the energy of life is stored in, and released from, the arrangement of electrons in sugar.</p>
+        <p>The nucleus decides <em>what</em> an atom is. The electrons decide <em>what it does</em>. Almost everything you will ever learn in chemistry is a new chapter in the electron's story. Case closed… for now.</p>
+      </div>
+      <a class="btn primary" style="margin-top:30px" href="../chemistry-102/index.html">Next: Chemistry 102 · The Counting Problem →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TRAINING ======================= -->
+<section class="chapter training" id="training">
+  <div class="wrap">
+    <header class="case-head reveal">
+      <div class="case-num"><span>Training room</span><b>✎</b></div>
+      <div><p class="kicker">Make it stick</p><h2>The Detective's <em>Training</em> Room</h2></div>
+    </header>
+    <div class="story reveal"><p>Reading feels like learning, but most of it fades within days. What makes knowledge stay is <strong>pulling it back out of your memory</strong>, again and again, with gaps in between. The cards below use a spaced-repetition system: cards you know come back less often, and cards you struggle with come back soon.</p></div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Spaced repetition · Leitner boxes</span><h3>Flashcards</h3></div>
+        <span class="readout" id="fc-status"></span>
+      </div>
+      <div class="lab-body fc-wrap">
+        <div>
+          <div class="fc" id="fc" tabindex="0" role="button" aria-label="Flashcard: press to flip">
+            <div class="fc-inner">
+              <div class="fc-face fc-front"><span class="tag" id="fc-tag"></span><span class="box" id="fc-box"></span><div class="txt" id="fc-q"></div><span class="flip-hint">click or press space to flip</span></div>
+              <div class="fc-face fc-back"><span class="tag">Answer</span><div class="txt" id="fc-a"></div></div>
+            </div>
+          </div>
+          <div class="fc-rate" id="fc-rate">
+            <button class="btn small r1" data-r="1">✗ Didn't know <span class="mono" style="opacity:.5">1</span></button>
+            <button class="btn small r2" data-r="2">~ Shaky <span class="mono" style="opacity:.5">2</span></button>
+            <button class="btn small r3" data-r="3">✓ Knew it <span class="mono" style="opacity:.5">3</span></button>
+          </div>
+        </div>
+        <div class="side-panel">
+          <div class="info-card">
+            <div class="meta">DECK</div>
+            <select id="fc-filter" aria-label="Choose which case file to practise" style="margin-top:8px"></select>
+            <div class="meta" style="margin-top:16px">YOUR BOXES</div>
+            <div class="boxes" id="fc-boxes"></div>
+            <p class="hint" style="margin:6px 0 0;font-size:12.5px">Box 1 cards come back today. Box 5 cards come back in about a month.</p>
+          </div>
+          <button class="btn small ghost" id="fc-cram">Practise all now (cram mode)</button>
+          <button class="btn small ghost" id="fc-resetdeck" style="opacity:.7">Reset deck</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-head">
+        <div><span class="label">Interleaved practice · confidence check</span><h3>The Final Interrogation</h3></div>
+        <button class="btn small" id="fi-start">New interrogation</button>
+      </div>
+      <div class="lab-body"><div class="final-q" id="fi"></div></div>
+    </div>
+
+    <h3 class="reveal" style="font-size:26px;margin-top:60px">How this page teaches you</h3>
+    <div class="strategies reveal">
+      <div><b>Retrieval practice</b><small>Every case ends with questions. Recalling an answer strengthens memory far more than re-reading it.</small></div>
+      <div><b>Spaced repetition</b><small>Flashcards return just as you're about to forget them, which is when recall does the most good.</small></div>
+      <div><b>Interleaving</b><small>The Final Interrogation mixes topics, so you practise choosing which idea to use, not just using it.</small></div>
+      <div><b>Pre-testing</b><small>Each mystery asks for your hunch first. Guessing before you learn, even wrongly, primes your memory.</small></div>
+      <div><b>Dual coding</b><small>Every idea comes with words and a picture, and the two together are easier to remember than either alone.</small></div>
+      <div><b>Elaboration</b><small>“Explain it to a friend” prompts make you connect ideas in your own words: the Feynman technique.</small></div>
+      <div><b>Concrete examples</b><small>Each abstract idea is tied to something you meet every day: sweat, salt, ice, breath.</small></div>
+      <div><b>Metacognition</b><small>Rating your confidence shows you whether you know it, or only think you do.</small></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">The Invisible World · Chemistry 101 · Made as a single page, with every visual drawn live in your browser.<br>Your progress, notes and flashcard boxes are stored only on this device. · <a href="../chemistry-102/index.html">Next course →</a></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
