@@ -1,0 +1,6 @@
+# Voorbeeldonderwerp om Study Buddy te testen zonder eigen documenten.
+naam: "Voorbeeld: spanning en rek"
+beschrijving: Basisbegrippen uit de sterkteleer over spanning, rek en het spanning-rekdiagram.
+actief: true
+titels:
+  spanning-en-rek.md: "Voorbeeldreader: spanning en rek"

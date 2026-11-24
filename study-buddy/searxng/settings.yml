@@ -1,0 +1,14 @@
+# Minimale SearXNG-configuratie voor Study Buddy (alleen intern bereikbaar via docker compose).
+use_default_settings: true
+general:
+  instance_name: "Study Buddy zoeken"
+server:
+  secret_key: "wordt-overschreven-door-SEARXNG_SECRET"
+  limiter: false
+  image_proxy: false
+search:
+  safe_search: 1
+  default_lang: "nl"
+  formats:
+    - html
+    - json

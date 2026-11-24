@@ -1,0 +1,15 @@
+# Onderwerp: Ontwerpen van Technische Innovaties
+naam: Ontwerpen van Technische Innovaties
+beschrijving: >
+  Het onderwerp volgt het boek "Ontwerpen van Technische Innovaties": het ontwerpproces,
+  van probleemanalyse en programma van eisen tot concepten, keuzes en uitwerking.
+actief: true
+
+# Optioneel: nette titels voor bestanden in documenten/ (bestandsnaam: titel)
+titels: {}
+#  ontwerpen-van-technische-innovaties.pdf: "Boek: Ontwerpen van Technische Innovaties"
+
+# Optioneel: webpagina's die als lesstof meetellen
+webpaginas: []
+#  - url: https://voorbeeld.nl/artikel
+#    titel: Artikel over ...

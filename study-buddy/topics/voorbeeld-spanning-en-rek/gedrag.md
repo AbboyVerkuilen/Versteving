@@ -1,0 +1,2 @@
+- Laat de student bij rekenvragen eerst de gegeven grootheden en eenheden opschrijven.
+- Let op eenheden: N/mm² en MPa zijn gelijk; studenten verwarren dit vaak.
